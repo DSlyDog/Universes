@@ -27,9 +27,11 @@ public class TeleportCommand implements CommandExecutor {
                     World world = Bukkit.getWorld(args[0]);
                     if (world != null) {
                         player.sendMessage(ChatColor.GREEN + "Teleporting...");
-                        Location loc = (Location) worldSettings.get().get("worlds."+args[0]+".spawn");
-                        loc.setYaw(player.getLocation().getYaw());
-                        loc.setPitch(player.getLocation().getPitch());
+                        String name = worldSettings.get().getString("worlds."+args[0]+".spawn.world");
+                        double x = worldSettings.get().getDouble("worlds."+args[0]+".spawn.x");
+                        double y = worldSettings.get().getDouble("worlds."+args[0]+".spawn.y");
+                        double z = worldSettings.get().getDouble("worlds."+args[0]+".spawn.z");
+                        Location loc = new Location(world, x, y, z, player.getLocation().getYaw(), player.getLocation().getPitch());
                         player.teleport(loc);
                         return true;
                     } else {

@@ -9,6 +9,7 @@ import net.whispwriting.universes.files.WorldListFile;
 import net.whispwriting.universes.files.WorldSettingsFile;
 import net.whispwriting.universes.tasks.WorldGenTask;
 import org.bukkit.Bukkit;
+import org.bukkit.Location;
 import org.bukkit.World;
 import org.bukkit.plugin.java.JavaPlugin;
 import org.bukkit.scheduler.BukkitTask;
@@ -19,16 +20,16 @@ import java.util.List;
 
 public final class Universes extends JavaPlugin {
 
-    public WorldSettingsFile worlds;
-    public WorldListFile worldListFile;
+    public static WorldSettingsFile worlds;
+    public static WorldListFile worldListFile;
     public PlayerSettingsFile playerSettings;
     public List<PlayersWhoCanConfirm> players = new ArrayList<>();
 
     @Override
     public void onEnable() {
         worldListFile = new WorldListFile(this);
-        loadWorlds();
         worlds = new WorldSettingsFile(this);
+        loadWorlds();
         createWorldConfig();
 
         this.getCommand("universecreate").setExecutor(new CreateCommand(this));
@@ -42,6 +43,7 @@ public final class Universes extends JavaPlugin {
         this.getCommand("confirm").setExecutor(new ConfirmCommand(this, worldListFile, worlds));
         this.getCommand("cancel").setExecutor(new CancelCommand(this));
         this.getCommand("universehelp").setExecutor(new HelpCommand());
+        this.getCommand("ur").setExecutor(new ReloadCommand(this));
 
         Bukkit.getPluginManager().registerEvents(new TeleportEvent(worlds, playerSettings, this), this);
         Bukkit.getPluginManager().registerEvents(new DeathEvent(worlds), this);
@@ -64,47 +66,76 @@ public final class Universes extends JavaPlugin {
             if (file.exists()){
                 if (Bukkit.getWorld(world) == null){
                     Generator generator = new Generator(this, world);
+                    String type = worlds.get().getString("worlds."+world+".type");
+                    World.Environment env = getTypeFromString(type);
+                    generator.setEnvironment(env);
                     generator.createWorld();
                 }
             }
         }
+        worlds.reload();
     }
 
     private void createWorldConfig(){
-        worlds.get().addDefault("worlds.world.name", "world");
-        worlds.get().addDefault("worlds.world.type", "normal");
-        worlds.get().addDefault("worlds.world.pvp", true);
-        worlds.get().addDefault("worlds.world.spawn", Bukkit.getWorld("world").getSpawnLocation());
-        worlds.get().addDefault("worlds.world.allowMonsters", true);
-        worlds.get().addDefault("worlds.world.allowAnimals", true);
-        worlds.get().addDefault("worlds.world.gameMode", "survival");
-        worlds.get().addDefault("worlds.world.respawnWorld", "world");
-        worlds.get().addDefault("worlds.world.playerLimit", -1);
-        worlds.get().addDefault("worlds.world.allowFlight", true);
+        List<World> loadedWorlds = Bukkit.getWorlds();
+        for (World loadedWorld : loadedWorlds) {
+            System.out.println(loadedWorld.getName());
+            Location worldSpawn = loadedWorld.getSpawnLocation();
+            String world = loadedWorld.getName();
+            String name = worlds.get().getString("worlds."+world+".name");
+            System.out.println(name==null);
+            if (name == null) {
+                System.out.println("name was null. Setting defaults.");
+                double x = worldSpawn.getX();
+                double y = worldSpawn.getY();
+                double z = worldSpawn.getZ();
+                worlds.get().set("worlds." + world + ".name", world);
+                worlds.get().set("worlds." + world + ".type", getStringFromType(loadedWorld));
+                worlds.get().set("worlds." + world + ".pvp", true);
+                worlds.get().set("worlds." + world + ".spawn.world", world);
+                worlds.get().set("worlds." + world + ".spawn.x", x);
+                worlds.get().set("worlds." + world + ".spawn.y", y);
+                worlds.get().set("worlds." + world + ".spawn.z", z);
+                worlds.get().set("worlds." + world + ".allowMonsters", true);
+                worlds.get().set("worlds." + world + ".allowAnimals", true);
+                worlds.get().set("worlds." + world + ".gameMode", "survival");
+                worlds.get().set("worlds." + world + ".respawnWorld", world);
+                worlds.get().set("worlds." + world + ".playerLimit", -1);
+                worlds.get().set("worlds." + world + ".allowFlight", true);
 
-        worlds.get().addDefault("worlds.world_nether.name", "world_nether");
-        worlds.get().addDefault("worlds.world_nether.type", "nether");
-        worlds.get().addDefault("worlds.world_nether.pvp", true);
-        worlds.get().addDefault("worlds.world_nether.spawn", Bukkit.getWorld("world_nether").getSpawnLocation());
-        worlds.get().addDefault("worlds.world_nether.allowMonsters", true);
-        worlds.get().addDefault("worlds.world_nether.allowAnimals", true);
-        worlds.get().addDefault("worlds.world_nether.gameMode", "survival");
-        worlds.get().addDefault("worlds.world_nether.respawnWorld", "world");
-        worlds.get().addDefault("worlds.world_nether.playerLimit", -1);
-        worlds.get().addDefault("worlds.world_nether.allowFlight", true);
+                worlds.save();
+                worldListFile.save();
+            }
+        }
+    }
 
-        worlds.get().addDefault("worlds.world_the_end.name", "world_the_end");
-        worlds.get().addDefault("worlds.world_the_end.type", "end");
-        worlds.get().addDefault("worlds.world_the_end.pvp", true);
-        worlds.get().addDefault("worlds.world_the_end.spawn", Bukkit.getWorld("world_the_end").getSpawnLocation());
-        worlds.get().addDefault("worlds.world_the_end.allowMonsters", true);
-        worlds.get().addDefault("worlds.world_the_end.allowAnimals", true);
-        worlds.get().addDefault("worlds.world_the_end.gameMode", "survival");
-        worlds.get().addDefault("worlds.world_the_end.respawnWorld", "world");
-        worlds.get().addDefault("worlds.world_the_end.playerLimit", -1);
-        worlds.get().addDefault("worlds.world_the_end.allowFlight", true);
-
-        worlds.save();
+    public static void reload(){
+        worlds.reload();
+        worldListFile.reload();
         worldListFile.save();
+        worlds.save();
+    }
+
+    private World.Environment getTypeFromString(String type){
+        switch (type){
+            case "normal":
+                return World.Environment.NORMAL;
+            case "nether":
+                return World.Environment.NETHER;
+            case "end":
+                return World.Environment.THE_END;
+            default:
+                return World.Environment.NORMAL;
+        }
+    }
+
+    private String getStringFromType(World world){
+        if (world.getEnvironment() == World.Environment.NORMAL){
+            return "normal";
+        }else if (world.getEnvironment() == World.Environment.NETHER){
+            return "nether";
+        }else{
+            return "end";
+        }
     }
 }

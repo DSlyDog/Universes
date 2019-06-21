@@ -51,6 +51,9 @@ commands:
     description: shows help page
     usage: /universehelp
     aliases: uh
+  ur:
+    description: reload the server
+    usage: /ur
 
   permissions:
     Universes.override.gamemode:

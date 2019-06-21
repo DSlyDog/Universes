@@ -2,10 +2,19 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="33d8838a-e100-4abf-aa05-075e03262673" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/net/whispwriting/universes/commands/ReloadCommand.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/net/whispwriting/universes/commands/HelpCommand.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/net/whispwriting/universes/commands/HelpCommand.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/net/whispwriting/universes/Universes.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/net/whispwriting/universes/Universes.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/net/whispwriting/universes/commands/CreateCommand.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/net/whispwriting/universes/commands/CreateCommand.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/net/whispwriting/universes/commands/TeleportCommand.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/net/whispwriting/universes/commands/TeleportCommand.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/resources/plugin.yml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/plugin.yml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/net/whispwriting/universes/Universes.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/net/whispwriting/universes/Universes.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/net/whispwriting/universes/commands/CreateCommand.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/net/whispwriting/universes/commands/CreateCommand.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/net/whispwriting/universes/commands/ImportCommand.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/net/whispwriting/universes/commands/ImportCommand.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/net/whispwriting/universes/commands/TeleportCommand.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/net/whispwriting/universes/commands/TeleportCommand.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/net/whispwriting/universes/tasks/WorldGenTask.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/net/whispwriting/universes/tasks/WorldGenTask.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/plugin.yml" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/plugin.yml" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
     <ignored path="$PROJECT_DIR$/target/" />
@@ -23,8 +32,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/java/net/whispwriting/universes/Universes.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="119">
-              <caret line="25" selection-start-line="25" selection-end-line="25" />
+            <state relative-caret-position="210">
+              <caret line="106" column="37" selection-start-line="106" selection-start-column="37" selection-end-line="106" selection-end-column="37" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -33,19 +42,10 @@
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/resources/plugin.yml">
+        <entry file="file://$PROJECT_DIR$/src/main/java/net/whispwriting/universes/commands/DeleteCommand.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="413">
-              <caret line="103" column="32" selection-start-line="103" selection-start-column="32" selection-end-line="103" selection-end-column="32" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/net/whispwriting/universes/commands/TeleportCommand.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="204">
-              <caret line="12" column="13" selection-start-line="12" selection-start-column="13" selection-end-line="12" selection-end-column="13" />
+            <state relative-caret-position="-73">
+              <caret line="29" column="56" selection-start-line="29" selection-start-column="56" selection-end-line="29" selection-end-column="56" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -54,10 +54,10 @@
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/net/whispwriting/universes/commands/HelpCommand.java">
+        <entry file="file://$PROJECT_DIR$/src/main/java/net/whispwriting/universes/commands/ConfirmCommand.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-136">
-              <caret line="16" column="115" selection-start-line="16" selection-start-column="115" selection-end-line="16" selection-end-column="115" />
+            <state relative-caret-position="165">
+              <caret line="39" column="48" selection-start-line="39" selection-start-column="48" selection-end-line="39" selection-end-column="48" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -66,27 +66,25 @@
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/net/whispwriting/universes/commands/ListWorldsCommand.java">
+        <entry file="file://$PROJECT_DIR$/src/main/java/net/whispwriting/universes/Utils/PlayersWhoCanConfirm.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="102">
-              <caret line="13" column="98" selection-start-line="13" selection-start-column="98" selection-end-line="13" selection-end-column="98" />
+            <state relative-caret-position="153">
+              <caret line="15" column="34" selection-start-line="15" selection-start-column="34" selection-end-line="15" selection-end-column="34" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
             </state>
           </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/Universes.iml">
-          <provider selected="true" editor-type-id="text-editor" />
         </entry>
       </file>
       <file pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/pom.xml">
+        <entry file="file://$PROJECT_DIR$/src/main/java/net/whispwriting/universes/commands/ImportCommand.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="425">
-              <caret line="25" column="29" selection-start-line="25" selection-start-column="29" selection-end-line="25" selection-end-column="29" />
+            <state relative-caret-position="833">
+              <caret line="51" column="52" selection-start-line="51" selection-start-column="52" selection-end-line="51" selection-end-column="52" />
+              <folding>
+                <element signature="imports" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -149,23 +147,24 @@
         <option value="$PROJECT_DIR$/src/main/java/net/whispwriting/universes/events/TeleportEvent.java" />
         <option value="$PROJECT_DIR$/src/main/java/net/whispwriting/universes/commands/ListWorldsCommand.java" />
         <option value="$PROJECT_DIR$/src/main/java/net/whispwriting/universes/files/PlayerSettingsFile.java" />
-        <option value="$PROJECT_DIR$/src/main/java/net/whispwriting/universes/commands/CreateCommand.java" />
-        <option value="$PROJECT_DIR$/src/main/java/net/whispwriting/universes/commands/TeleportCommand.java" />
         <option value="$PROJECT_DIR$/src/main/java/net/whispwriting/universes/events/PVPEvent.java" />
         <option value="$PROJECT_DIR$/src/main/java/net/whispwriting/universes/events/FlyEvent.java" />
         <option value="$PROJECT_DIR$/src/main/java/net/whispwriting/universes/commands/ModifyCommand.java" />
         <option value="$PROJECT_DIR$/src/main/java/net/whispwriting/universes/events/DeleteWorldConfirm.java" />
         <option value="$PROJECT_DIR$/src/main/java/net/whispwriting/universes/commands/UnloadCommand.java" />
-        <option value="$PROJECT_DIR$/src/main/java/net/whispwriting/universes/commands/ImportCommand.java" />
         <option value="$PROJECT_DIR$/src/main/java/net/whispwriting/universes/events/DeleteWorldConfirmEvent.java" />
         <option value="$PROJECT_DIR$/src/main/java/net/whispwriting/universes/Utils/PlayersWhoCanConfirm.java" />
         <option value="$PROJECT_DIR$/src/main/java/net/whispwriting/universes/commands/DeleteCommand.java" />
         <option value="$PROJECT_DIR$/src/main/java/net/whispwriting/universes/commands/CancelCommand.java" />
         <option value="$PROJECT_DIR$/src/main/java/net/whispwriting/universes/commands/ConfirmCommand.java" />
         <option value="$PROJECT_DIR$/src/main/java/net/whispwriting/universes/commands/OverrideCommand.java" />
-        <option value="$PROJECT_DIR$/src/main/java/net/whispwriting/universes/Universes.java" />
-        <option value="$PROJECT_DIR$/src/main/resources/plugin.yml" />
         <option value="$PROJECT_DIR$/src/main/java/net/whispwriting/universes/commands/HelpCommand.java" />
+        <option value="$PROJECT_DIR$/src/main/java/net/whispwriting/universes/commands/ReloadCommand.java" />
+        <option value="$PROJECT_DIR$/src/main/resources/plugin.yml" />
+        <option value="$PROJECT_DIR$/src/main/java/net/whispwriting/universes/commands/CreateCommand.java" />
+        <option value="$PROJECT_DIR$/src/main/java/net/whispwriting/universes/commands/TeleportCommand.java" />
+        <option value="$PROJECT_DIR$/src/main/java/net/whispwriting/universes/commands/ImportCommand.java" />
+        <option value="$PROJECT_DIR$/src/main/java/net/whispwriting/universes/Universes.java" />
         <option value="$PROJECT_DIR$/pom.xml" />
       </list>
     </option>
@@ -179,13 +178,6 @@
       </MavenImportingSettings>
     </option>
   </component>
-  <component name="ProjectConfigurationFiles">
-    <option name="files">
-      <list>
-        <option value="$PROJECT_DIR$/.idea/vcs.xml" />
-      </list>
-    </option>
-  </component>
   <component name="ProjectFrameBounds" extendedState="6">
     <option name="x" value="-9" />
     <option name="width" value="816" />
@@ -197,7 +189,6 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
-      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -292,11 +283,12 @@
         </subPane>
       </pane>
       <pane id="PackagesPane" />
+      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
-    <property name="last_opened_file_path" value="D:/WhispServer/plugins/Multiverse-Core-2.5.0.jar!/" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/../TimTheEnchanter" />
     <property name="project.structure.last.edited" value="Libraries" />
     <property name="project.structure.proportion" value="0.15" />
     <property name="project.structure.side.proportion" value="0.37816092" />
@@ -376,8 +368,9 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="-7" y="-7" width="1295" height="695" extended-state="6" />
+    <editor active="true" />
     <layout>
-      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.254251" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.28502023" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Image Layers" order="2" />
       <window_info id="Designer" order="3" />
@@ -387,14 +380,14 @@
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" />
       <window_info anchor="bottom" id="Run" order="2" />
-      <window_info anchor="bottom" id="Debug" order="3" weight="0.39253998" />
+      <window_info anchor="bottom" id="Debug" order="3" visible="true" weight="0.39076376" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
       <window_info anchor="bottom" id="TODO" order="6" weight="0.32974428" />
       <window_info anchor="bottom" id="Terminal" order="7" weight="0.32974428" />
       <window_info anchor="bottom" id="Event Log" order="8" side_tool="true" />
       <window_info anchor="bottom" id="Version Control" order="9" />
-      <window_info anchor="bottom" id="Messages" order="10" weight="0.3268206" />
+      <window_info anchor="bottom" id="Messages" order="10" weight="0.3250444" />
       <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
       <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
       <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
@@ -541,36 +534,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/net/whispwriting/universes/Utils/PlayersWhoCanConfirm.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="238">
-          <caret line="15" column="34" selection-start-line="15" selection-start-column="34" selection-end-line="15" selection-end-column="34" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/net/whispwriting/universes/commands/ConfirmCommand.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="884">
-          <caret line="52" column="37" lean-forward="true" selection-start-line="52" selection-start-column="37" selection-end-line="52" selection-end-column="37" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/net/whispwriting/universes/commands/CreateCommand.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="161">
-          <caret line="23" column="16" selection-start-line="23" selection-start-column="16" selection-end-line="23" selection-end-column="142" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/net/whispwriting/universes/commands/UnloadCommand.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="208">
@@ -581,30 +544,28 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/net/whispwriting/universes/commands/ImportCommand.java">
+    <entry file="file://$PROJECT_DIR$/src/main/java/net/whispwriting/universes/commands/HelpCommand.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="34">
-          <caret line="22" column="8" selection-start-line="22" selection-start-column="8" selection-end-line="22" selection-end-column="60" />
+        <state relative-caret-position="272">
+          <caret line="19" column="110" selection-start-line="19" selection-start-column="110" selection-end-line="19" selection-end-column="110" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/net/whispwriting/universes/commands/DeleteCommand.java">
+    <entry file="file://$PROJECT_DIR$/src/main/java/net/whispwriting/universes/commands/ReloadCommand.java" />
+    <entry file="file://$PROJECT_DIR$/src/main/resources/plugin.yml">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="306">
-          <caret line="29" column="8" selection-start-line="29" selection-start-column="8" selection-end-line="29" selection-end-column="56" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
+        <state relative-caret-position="986">
+          <caret line="58" column="14" selection-start-line="58" selection-start-column="14" selection-end-line="58" selection-end-column="14" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/net/whispwriting/universes/Universes.java">
+    <entry file="file://$PROJECT_DIR$/src/main/java/net/whispwriting/universes/commands/TeleportCommand.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="119">
-          <caret line="25" selection-start-line="25" selection-end-line="25" />
+        <state relative-caret-position="425">
+          <caret line="35" column="36" selection-start-line="35" selection-start-column="36" selection-end-line="35" selection-end-column="36" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
@@ -620,9 +581,6 @@
           </folding>
         </state>
       </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Universes.iml">
-      <provider selected="true" editor-type-id="text-editor" />
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/net/whispwriting/universes/commands/ModifyCommand.java">
       <provider selected="true" editor-type-id="text-editor">
@@ -644,27 +602,50 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/resources/plugin.yml">
+    <entry file="file://$PROJECT_DIR$/src/main/java/net/whispwriting/universes/Universes.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="413">
-          <caret line="103" column="32" selection-start-line="103" selection-start-column="32" selection-end-line="103" selection-end-column="32" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/net/whispwriting/universes/commands/TeleportCommand.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="204">
-          <caret line="12" column="13" selection-start-line="12" selection-start-column="13" selection-end-line="12" selection-end-column="13" />
+        <state relative-caret-position="210">
+          <caret line="106" column="37" selection-start-line="106" selection-start-column="37" selection-end-line="106" selection-end-column="37" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/net/whispwriting/universes/commands/HelpCommand.java">
+    <entry file="file://$PROJECT_DIR$/src/main/java/net/whispwriting/universes/commands/ConfirmCommand.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-136">
-          <caret line="16" column="115" selection-start-line="16" selection-start-column="115" selection-end-line="16" selection-end-column="115" />
+        <state relative-caret-position="165">
+          <caret line="39" column="48" selection-start-line="39" selection-start-column="48" selection-end-line="39" selection-end-column="48" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/net/whispwriting/universes/Utils/PlayersWhoCanConfirm.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="153">
+          <caret line="15" column="34" selection-start-line="15" selection-start-column="34" selection-end-line="15" selection-end-column="34" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/net/whispwriting/universes/commands/CreateCommand.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="136">
+          <caret line="56" column="44" lean-forward="true" selection-start-line="56" selection-start-column="44" selection-end-line="56" selection-end-column="44" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/net/whispwriting/universes/commands/DeleteCommand.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-73">
+          <caret line="29" column="56" selection-start-line="29" selection-start-column="56" selection-end-line="29" selection-end-column="56" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
@@ -673,8 +654,21 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/pom.xml">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="425">
-          <caret line="25" column="29" selection-start-line="25" selection-start-column="29" selection-end-line="25" selection-end-column="29" />
+        <state relative-caret-position="-136">
+          <caret line="7" column="38" lean-forward="true" selection-start-line="7" selection-start-column="38" selection-end-line="7" selection-end-column="38" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Universes.iml">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/net/whispwriting/universes/commands/ImportCommand.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="833">
+          <caret line="51" column="52" selection-start-line="51" selection-start-column="52" selection-end-line="51" selection-end-column="52" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
