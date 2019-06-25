@@ -21,6 +21,10 @@ public class ImportCommand implements CommandExecutor {
     @Override
     public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
         if (sender.hasPermission("Universes.importworld")) {
+            if (args.length != 4){
+                sender.sendMessage(ChatColor.GOLD + "/universeimport " + ChatColor.YELLOW + "<name> <environment> <world type> <difficulty>");
+                return true;
+            }
             File worldDirectory = new File(Bukkit.getWorldContainer()+"/"+args[0]);
             if (worldDirectory.isDirectory()){
                 File datFile = new File(worldDirectory + "/level.dat");
@@ -61,10 +65,6 @@ public class ImportCommand implements CommandExecutor {
                 }
             }else{
                 sender.sendMessage(ChatColor.RED + "No world could be found by that name.");
-                return true;
-            }
-            if (args.length != 4){
-                sender.sendMessage(ChatColor.GOLD + "/universeimport " + ChatColor.YELLOW + "<name> <environment> <world type> <difficulty>");
                 return true;
             }
         }else{
