@@ -339,6 +339,6 @@ public class ModifyCommand implements CommandExecutor {
         }else{
             sender.sendMessage(ChatColor.DARK_RED + "You do not have access to that command.");
         }
-        return false;
+        return true;
     }
 }

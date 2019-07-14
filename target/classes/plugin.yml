@@ -1,5 +1,5 @@
 name: Universes
-version: 1.2
+version: 1.2.2
 main: net.whispwriting.universes.Universes
 api-version: 1.13
 prefix: Universes
@@ -92,6 +92,9 @@ commands:
       default: op
     Universes.teleport:
       description: allows teleporting between worlds
+      default: op
+    Universes.reload:
+      description: allows using /universes reload
       default: op
     Universes.*:
       description: Wildcard Permission

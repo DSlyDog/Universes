@@ -93,6 +93,9 @@ commands:
     Universes.teleport:
       description: allows teleporting between worlds
       default: op
+    Universes.reload:
+      description: allows using /universes reload
+      default: op
     Universes.*:
       description: Wildcard Permission
       default: op

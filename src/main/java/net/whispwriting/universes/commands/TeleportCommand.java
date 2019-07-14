@@ -22,15 +22,15 @@ public class TeleportCommand implements CommandExecutor {
     public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
         if (sender instanceof Player) {
             Player player = (Player) sender;
-            if (args.length == 1) {
-                if (player.hasPermission("Universes.teleport")) {
+            if (player.hasPermission("Universes.teleport")) {
+                if (args.length == 1) {
                     World world = Bukkit.getWorld(args[0]);
                     if (world != null) {
                         player.sendMessage(ChatColor.GREEN + "Teleporting...");
-                        String name = worldSettings.get().getString("worlds."+args[0]+".spawn.world");
-                        double x = worldSettings.get().getDouble("worlds."+args[0]+".spawn.x");
-                        double y = worldSettings.get().getDouble("worlds."+args[0]+".spawn.y");
-                        double z = worldSettings.get().getDouble("worlds."+args[0]+".spawn.z");
+                        String name = worldSettings.get().getString("worlds." + args[0] + ".spawn.world");
+                        double x = worldSettings.get().getDouble("worlds." + args[0] + ".spawn.x");
+                        double y = worldSettings.get().getDouble("worlds." + args[0] + ".spawn.y");
+                        double z = worldSettings.get().getDouble("worlds." + args[0] + ".spawn.z");
                         Location loc = new Location(world, x, y, z, player.getLocation().getYaw(), player.getLocation().getPitch());
                         player.teleport(loc);
                         return true;
@@ -42,13 +42,13 @@ public class TeleportCommand implements CommandExecutor {
                     player.sendMessage(ChatColor.DARK_RED + "You do not have access to that command.");
                     return true;
                 }
-            }else{
-                player.sendMessage(ChatColor.GOLD + "/universeteleport " + ChatColor.YELLOW + "<world>");
+            } else {
+                sender.sendMessage(ChatColor.RED + "Only players may use that command.");
                 return true;
             }
         }else{
-            sender.sendMessage(ChatColor.RED + "Only players may use that command.");
-            return true;
-        }
+                sender.sendMessage(ChatColor.GOLD + "/universeteleport " + ChatColor.YELLOW + "<world>");
+                return true;
+            }
     }
 }

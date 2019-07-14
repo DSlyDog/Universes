@@ -15,6 +15,10 @@ public class ReloadCommand implements CommandExecutor {
 
     @Override
     public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
+        if (!sender.hasPermission("Universes.reload")){
+            sender.sendMessage(ChatColor.DARK_RED + "You do not have access to that command.");
+            return true;
+        }
         plugin.worlds.reload();
         plugin.worldListFile.reload();
         sender.sendMessage(ChatColor.GREEN + "reloaded config.");
