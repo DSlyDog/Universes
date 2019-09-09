@@ -1,7 +1,7 @@
 name: Universes
 version: ${project.version}
 main: net.whispwriting.universes.Universes
-api-version: 1.13
+api-version: "1.14"
 prefix: Universes
 authors: [WhispTheFox]
 description: A plugin to allow for making more worlds in the server
@@ -54,6 +54,10 @@ commands:
   ur:
     description: reload the server
     usage: /ur
+  universekits:
+    description: show the available kits in your current world
+    usage: /universekits
+    aliases: uk
 
   permissions:
     Universes.override.gamemode:
@@ -65,6 +69,9 @@ commands:
     Universes.override.flight:
       description: allows overriding allowFlight
       default: op
+    Universes.override.perworldinv:
+      description: allows override per world inventories
+      default: op
     Universes.override.*:
       description: allows players to change all overrides
       default: op
@@ -72,6 +79,7 @@ commands:
         Universes.override.gamemode: true
         Universes.override.fullworld: true
         Universes.override.flight: true
+        Universes.override.perworldinv: true
     Universes.createworld:
       description: allows for creating worlds
       defult: op
