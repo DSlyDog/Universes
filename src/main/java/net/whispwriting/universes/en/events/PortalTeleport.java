@@ -9,6 +9,7 @@ import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.player.PlayerPortalEvent;
+import org.bukkit.event.player.PlayerTeleportEvent;
 import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemFlag;
 import org.bukkit.inventory.ItemStack;
@@ -31,7 +32,7 @@ public class PortalTeleport implements Listener {
     }
 
     @EventHandler
-    public void portalTeleport(PlayerPortalEvent event){
+    public void playerTeleport(PlayerPortalEvent event){
         WorldSettingsFile worldSettings = new WorldSettingsFile(plugin);
         Location from = event.getFrom();
         Location to = event.getTo();
@@ -94,6 +95,11 @@ public class PortalTeleport implements Listener {
                     fromGroup = groupFile.get().getString(fromWorld + ".group");
                     toWorld = event.getTo().getWorld().getName();
                     toGroup = groupFile.get().getString(toWorld + ".group");
+                    if (toGroup == null){
+                        groupFile.get().set(toWorld + ".group", toWorld);
+                        groupFile.save();
+                        toGroup = toWorld;
+                    }
                     if (!fromGroup.equals(toGroup)) {
                         saveInventoryGroup(event.getPlayer(), fromGroup);
                         boolean perWorldInvOverride = playerSettings.get().getBoolean("perWorldInvOverride");

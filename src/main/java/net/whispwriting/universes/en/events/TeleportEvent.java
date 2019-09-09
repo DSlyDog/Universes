@@ -95,6 +95,11 @@ public class TeleportEvent implements Listener {
                     fromGroup = groupFile.get().getString(fromWorld + ".group");
                     toWorld = event.getTo().getWorld().getName();
                     toGroup = groupFile.get().getString(toWorld + ".group");
+                    if (toGroup == null){
+                        groupFile.get().set(toWorld + ".group", toWorld);
+                        groupFile.save();
+                        toGroup = toWorld;
+                    }
                     if (!fromGroup.equals(toGroup)) {
                         saveInventoryGroup(event.getPlayer(), fromGroup);
                         boolean perWorldInvOverride = playerSettings.get().getBoolean("perWorldInvOverride");

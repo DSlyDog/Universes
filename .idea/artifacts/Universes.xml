@@ -1,0 +1,8 @@
+<component name="ArtifactManager">
+  <artifact type="jar" build-on-make="true" name="Universes">
+    <output-path>$PROJECT_DIR$/../../Testing Servers/1.14/plugins</output-path>
+    <root id="archive" name="Universes.jar">
+      <element id="module-output" name="Universes" />
+    </root>
+  </artifact>
+</component>

@@ -2,91 +2,11 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="38ba52f2-7247-4a49-adc0-5d10dd507a8a" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/src/main/java/net/whispwriting/universes/en/commands/KitCommand.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/net/whispwriting/universes/en/events/ChangePlayerLimit.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/net/whispwriting/universes/en/events/ChangeRespawnWorld.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/net/whispwriting/universes/en/events/KitsInventoryClick.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/net/whispwriting/universes/en/events/ModifyInventoryClick.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/net/whispwriting/universes/en/events/OverridesInventoryClick.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/net/whispwriting/universes/en/events/PortalTeleport.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/net/whispwriting/universes/en/files/ConfigFile.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/net/whispwriting/universes/en/files/EnderChestInventoryFile.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/net/whispwriting/universes/en/files/KitsFile.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/net/whispwriting/universes/en/files/LangFile.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/net/whispwriting/universes/en/files/PerWorldInventoryGroupsFile.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/net/whispwriting/universes/en/files/PlayerInventoryFile.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/net/whispwriting/universes/en/guis/KitUI.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/net/whispwriting/universes/en/guis/OverrideUI.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/net/whispwriting/universes/en/guis/UIItemData.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/net/whispwriting/universes/en/guis/Utils.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/net/whispwriting/universes/en/guis/WorldSettingsUI.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/net/whispwriting/universes/en/tasks/GiveItemTask.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/net/whispwriting/universes/en/tasks/RespawnTask.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/net/whispwriting/universes/en/utils/Inventories.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/net/whispwriting/universes/es/commands/CancelCommand.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/net/whispwriting/universes/es/commands/ConfirmCommand.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/net/whispwriting/universes/es/commands/CreateCommand.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/net/whispwriting/universes/es/commands/DeleteCommand.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/net/whispwriting/universes/es/commands/HelpCommand.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/net/whispwriting/universes/es/commands/ImportCommand.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/net/whispwriting/universes/es/commands/ListWorldsCommand.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/net/whispwriting/universes/es/commands/ModifyCommand.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/net/whispwriting/universes/es/commands/OverrideCommand.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/net/whispwriting/universes/es/commands/ReloadCommand.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/net/whispwriting/universes/es/commands/TeleportCommand.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/net/whispwriting/universes/es/commands/UnloadCommand.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/net/whispwriting/universes/es/events/DeathEvent.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/net/whispwriting/universes/es/events/FlyEvent.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/net/whispwriting/universes/es/events/JoinEvent.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/net/whispwriting/universes/es/events/PVPEvent.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/net/whispwriting/universes/es/events/TeleportEvent.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/net/whispwriting/universes/es/files/AbstractFile.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/net/whispwriting/universes/es/files/ConfigFile.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/net/whispwriting/universes/es/files/PlayerSettingsFile.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/net/whispwriting/universes/es/files/WorldListFile.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/net/whispwriting/universes/es/files/WorldSettingsFile.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/net/whispwriting/universes/es/tasks/WorldGenTask.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/net/whispwriting/universes/es/utils/Generator.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/net/whispwriting/universes/es/utils/PlayersWhoCanConfirm.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/net/whispwriting/universes/lang/LangSwap.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/net/whispwriting/universes/lang/Switches.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/net/whispwriting/universes/lang/utils/WorldConfiguration.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/artifacts/Universes.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_spigotmc_spigot_api_1_14_1_R0_1_SNAPSHOT.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Multiverse_Core_2_5_0.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/uiDesigner.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/vcs.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/artifacts/Universes.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/artifacts/Universes_jar.xml" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Universes.iml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/net/whispwriting/universes/Universes.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/net/whispwriting/universes/Universes.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/net/whispwriting/universes/Utils/Generator.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/net/whispwriting/universes/en/utils/Generator.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/net/whispwriting/universes/Utils/PlayersWhoCanConfirm.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/net/whispwriting/universes/en/utils/PlayersWhoCanConfirm.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/net/whispwriting/universes/commands/CancelCommand.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/net/whispwriting/universes/en/commands/CancelCommand.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/net/whispwriting/universes/commands/ConfirmCommand.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/net/whispwriting/universes/en/commands/ConfirmCommand.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/net/whispwriting/universes/commands/CreateCommand.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/net/whispwriting/universes/en/commands/CreateCommand.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/net/whispwriting/universes/commands/DeleteCommand.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/net/whispwriting/universes/en/commands/DeleteCommand.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/net/whispwriting/universes/commands/HelpCommand.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/net/whispwriting/universes/en/commands/HelpCommand.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/net/whispwriting/universes/commands/ImportCommand.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/net/whispwriting/universes/en/commands/ImportCommand.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/net/whispwriting/universes/commands/ListWorldsCommand.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/net/whispwriting/universes/en/commands/ListWorldsCommand.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/net/whispwriting/universes/commands/ModifyCommand.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/net/whispwriting/universes/en/commands/ModifyCommand.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/net/whispwriting/universes/commands/OverrideCommand.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/net/whispwriting/universes/en/commands/OverrideCommand.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/net/whispwriting/universes/commands/ReloadCommand.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/net/whispwriting/universes/en/commands/ReloadCommand.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/net/whispwriting/universes/commands/TeleportCommand.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/net/whispwriting/universes/en/commands/TeleportCommand.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/net/whispwriting/universes/commands/UnloadCommand.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/net/whispwriting/universes/en/commands/UnloadCommand.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/net/whispwriting/universes/events/DeathEvent.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/net/whispwriting/universes/en/events/DeathEvent.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/net/whispwriting/universes/events/DeleteWorldConfirmEvent.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/net/whispwriting/universes/events/FlyEvent.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/net/whispwriting/universes/en/events/FlyEvent.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/net/whispwriting/universes/events/JoinEvent.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/net/whispwriting/universes/en/events/JoinEvent.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/net/whispwriting/universes/events/PVPEvent.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/net/whispwriting/universes/en/events/PVPEvent.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/net/whispwriting/universes/events/TeleportEvent.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/net/whispwriting/universes/en/events/TeleportEvent.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/net/whispwriting/universes/files/AbstractFile.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/net/whispwriting/universes/en/files/AbstractFile.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/net/whispwriting/universes/files/PlayerSettingsFile.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/net/whispwriting/universes/en/files/PlayerSettingsFile.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/net/whispwriting/universes/files/WorldListFile.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/net/whispwriting/universes/en/files/WorldListFile.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/net/whispwriting/universes/files/WorldSettingsFile.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/net/whispwriting/universes/en/files/WorldSettingsFile.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/net/whispwriting/universes/tasks/WorldGenTask.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/net/whispwriting/universes/en/tasks/WorldGenTask.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/plugin.yml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/plugin.yml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/plugin.yml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/net/whispwriting/universes/en/events/PortalTeleport.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/net/whispwriting/universes/en/events/PortalTeleport.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/net/whispwriting/universes/en/events/TeleportEvent.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/net/whispwriting/universes/en/events/TeleportEvent.java" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
     <ignored path="$PROJECT_DIR$/target/" />
@@ -103,11 +23,23 @@
           <provider selected="true" editor-type-id="text-editor" />
         </entry>
       </file>
-      <file pinned="false" current-in-tab="true">
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/java/net/whispwriting/universes/en/events/TeleportEvent.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="34">
-              <caret line="2" column="7" lean-forward="true" selection-start-line="2" selection-start-column="7" selection-end-line="2" selection-end-column="7" />
+            <state relative-caret-position="836">
+              <caret line="127" column="44" lean-forward="true" selection-start-line="127" selection-start-column="44" selection-end-line="127" selection-end-column="44" />
+              <folding>
+                <element signature="imports" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/src/main/java/net/whispwriting/universes/en/events/PortalTeleport.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="510">
+              <caret line="34" column="56" lean-forward="true" selection-start-line="34" selection-start-column="56" selection-end-line="34" selection-end-column="56" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -124,6 +56,7 @@
     <option name="CHANGED_PATHS">
       <list>
         <option value="$PROJECT_DIR$/src/main/java/net/whispwriting/universes/en/events/TeleportEvent.java" />
+        <option value="$PROJECT_DIR$/src/main/java/net/whispwriting/universes/en/events/PortalTeleport.java" />
       </list>
     </option>
   </component>
@@ -204,15 +137,15 @@
           <select />
         </subPane>
       </pane>
-      <pane id="PackagesPane" />
       <pane id="Scope" />
+      <pane id="PackagesPane" />
     </panes>
   </component>
   <component name="PropertiesComponent">
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/../../Testing Servers/1.14/plugins" />
     <property name="project.structure.last.edited" value="Artifacts" />
-    <property name="project.structure.proportion" value="0.0" />
+    <property name="project.structure.proportion" value="0.15" />
     <property name="project.structure.side.proportion" value="0.2" />
   </component>
   <component name="RunDashboard">
@@ -269,15 +202,17 @@
     <servers />
   </component>
   <component name="ToolWindowManager">
-    <frame x="-7" y="-7" width="1295" height="695" extended-state="6" />
+    <frame x="67" y="25" width="3773" height="2135" extended-state="6" />
+    <editor active="true" />
     <layout>
-      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.2574899" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.25892138" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Image Layers" order="2" />
       <window_info id="Designer" order="3" />
       <window_info id="UI Designer" order="4" />
       <window_info id="Capture Tool" order="5" />
       <window_info id="Favorites" order="6" side_tool="true" />
+      <window_info anchor="bottom" id="Messages" visible="true" weight="0.32951146" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" />
       <window_info anchor="bottom" id="Run" order="2" />
@@ -304,8 +239,18 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/net/whispwriting/universes/en/events/TeleportEvent.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="34">
-          <caret line="2" column="7" lean-forward="true" selection-start-line="2" selection-start-column="7" selection-end-line="2" selection-end-column="7" />
+        <state relative-caret-position="836">
+          <caret line="127" column="44" lean-forward="true" selection-start-line="127" selection-start-column="44" selection-end-line="127" selection-end-column="44" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/net/whispwriting/universes/en/events/PortalTeleport.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="510">
+          <caret line="34" column="56" lean-forward="true" selection-start-line="34" selection-start-column="56" selection-end-line="34" selection-end-column="56" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
@@ -318,7 +263,7 @@
       <state key="ArtifactsStructureConfigurable.UI">
         <settings>
           <artifact-editor />
-          <last-edited>Universes.jar</last-edited>
+          <last-edited>Universes</last-edited>
           <splitter-proportions>
             <option name="proportions">
               <list>
