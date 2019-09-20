@@ -4,8 +4,10 @@ import net.whispwriting.universes.Universes;
 import net.whispwriting.universes.en.files.*;
 import net.whispwriting.universes.en.tasks.GiveItemTask;
 import org.bukkit.*;
+import org.bukkit.block.ShulkerBox;
 import org.bukkit.enchantments.Enchantment;
 import org.bukkit.entity.Player;
+import org.bukkit.entity.ShulkerBullet;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.player.PlayerPortalEvent;
@@ -13,8 +15,15 @@ import org.bukkit.event.player.PlayerTeleportEvent;
 import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemFlag;
 import org.bukkit.inventory.ItemStack;
+import org.bukkit.inventory.meta.BlockStateMeta;
 import org.bukkit.inventory.meta.ItemMeta;
+import org.bukkit.util.io.BukkitObjectInputStream;
+import org.bukkit.util.io.BukkitObjectOutputStream;
+import org.yaml.snakeyaml.external.biz.base64Coder.Base64Coder;
 
+import java.io.ByteArrayInputStream;
+import java.io.ByteArrayOutputStream;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
@@ -33,6 +42,7 @@ public class PortalTeleport implements Listener {
 
     @EventHandler
     public void playerTeleport(PlayerPortalEvent event){
+        Bukkit.getScheduler().runTask(plugin, new PortalFired());
         WorldSettingsFile worldSettings = new WorldSettingsFile(plugin);
         Location from = event.getFrom();
         Location to = event.getTo();
@@ -49,6 +59,7 @@ public class PortalTeleport implements Listener {
             PlayerInventoryFile playerInventoryFile = new PlayerInventoryFile(plugin, event.getPlayer().getUniqueId().toString(), to.getWorld().getName());
             boolean inventoryGrouping = config.get().getBoolean("per-world-inventory-grouping");
             boolean visited = playerInventoryFile.get().getBoolean("visited");
+            boolean perWorldStatsEnabled = config.get().getBoolean(("per-world-stats"));
             PerWorldInventoryGroupsFile groupFile;
             String kitName;
             String fromWorld;
@@ -60,22 +71,34 @@ public class PortalTeleport implements Listener {
                     saveInventory(event.getPlayer(), from.getWorld().getName());
                     boolean perWorldInvOverride = playerSettings.get().getBoolean("perWorldInvOverride");
                     if (!perWorldInvOverride) {
-                        getInventory(event.getPlayer(), to.getWorld().getName());
+                        if (visited) {
+                            getInventory(event.getPlayer(), to.getWorld().getName());
+                        }else{
+                            event.getPlayer().getInventory().clear();
+                            if (perWorldStatsEnabled){
+                                event.getPlayer().setHealth(20);
+                                event.getPlayer().setFoodLevel(20);
+                                event.getPlayer().setExp(0);
+                                event.getPlayer().setLevel(0);
+                            }
+                        }
                     }
                 }
-                boolean perWorldStatsEnabled = config.get().getBoolean(("per-world-stats"));
                 if (perWorldStatsEnabled) {
                     float xp = event.getPlayer().getExp();
+                    int level = event.getPlayer().getLevel();
                     double health = event.getPlayer().getHealth();
                     int hunger = event.getPlayer().getFoodLevel();
                     playerInventoryFile = new PlayerInventoryFile(plugin, event.getPlayer().getUniqueId().toString(), from.getWorld().getName());
                     playerInventoryFile.get().set("xp", xp);
+                    playerInventoryFile.get().set("level", level);
                     playerInventoryFile.get().set("health", health);
                     playerInventoryFile.get().set("hunger", hunger);
                     playerInventoryFile.save();
 
                     playerInventoryFile = new PlayerInventoryFile(plugin, event.getPlayer().getUniqueId().toString(), to.getWorld().getName());
                     xp = (float) playerInventoryFile.get().getDouble("xp");
+                    level = playerInventoryFile.get().getInt("level");
                     health = playerInventoryFile.get().getDouble("health");
                     if (!visited || health == 0) {
                         health = 20;
@@ -85,6 +108,7 @@ public class PortalTeleport implements Listener {
                         hunger = 20;
                     }
                     event.getPlayer().setExp(xp);
+                    event.getPlayer().setLevel(level);
                     event.getPlayer().setHealth(health);
                     event.getPlayer().setFoodLevel(hunger);
                 }
@@ -100,25 +124,37 @@ public class PortalTeleport implements Listener {
                         groupFile.save();
                         toGroup = toWorld;
                     }
+                    saveInventoryGroup(event.getPlayer(), fromGroup);
                     if (!fromGroup.equals(toGroup)) {
-                        saveInventoryGroup(event.getPlayer(), fromGroup);
                         boolean perWorldInvOverride = playerSettings.get().getBoolean("perWorldInvOverride");
                         if (!perWorldInvOverride) {
-                            getInventoryGroup(event.getPlayer(), toGroup);
+                            if (visited) {
+                                getInventory(event.getPlayer(), toGroup);
+                            }else{
+                                event.getPlayer().getInventory().clear();
+                                if (perWorldStatsEnabled){
+                                    event.getPlayer().setHealth(20);
+                                    event.getPlayer().setFoodLevel(20);
+                                    event.getPlayer().setExp(0);
+                                    event.getPlayer().setLevel(0);
+                                }
+                            }
                         }
-                        boolean perWorldStatsEnabled = config.get().getBoolean(("per-world-stats"));
                         if (perWorldStatsEnabled) {
                             float xp = event.getPlayer().getExp();
+                            int level = event.getPlayer().getLevel();
                             double health = event.getPlayer().getHealth();
                             int hunger = event.getPlayer().getFoodLevel();
                             playerInventoryFile = new PlayerInventoryFile(plugin, event.getPlayer().getUniqueId().toString(), fromGroup);
                             playerInventoryFile.get().set("xp", xp);
+                            playerInventoryFile.get().set("level", level);
                             playerInventoryFile.get().set("health", health);
                             playerInventoryFile.get().set("hunger", hunger);
                             playerInventoryFile.save();
 
                             playerInventoryFile = new PlayerInventoryFile(plugin, event.getPlayer().getUniqueId().toString(), toGroup);
                             xp = (float) playerInventoryFile.get().getDouble("xp");
+                            level = playerInventoryFile.get().getInt("level");
                             health = playerInventoryFile.get().getDouble("health");
                             if (!visited || health == 0) {
                                 health = 20;
@@ -128,6 +164,7 @@ public class PortalTeleport implements Listener {
                                 hunger = 20;
                             }
                             event.getPlayer().setExp(xp);
+                            event.getPlayer().setLevel(level);
                             event.getPlayer().setHealth(health);
                             event.getPlayer().setFoodLevel(hunger);
                         }
@@ -185,230 +222,26 @@ public class PortalTeleport implements Listener {
         String uuid = player.getUniqueId().toString();
         PlayerInventoryFile playerInventory = new PlayerInventoryFile(plugin, uuid, world);
         EnderChestInventoryFile enderChestInventory = new EnderChestInventoryFile(plugin, uuid, world);
-        ItemStack[] ecItems = new ItemStack[27];
         player.getEnderChest().clear();
-        int x = 0;
-        while (x < 27){
-            String mat = enderChestInventory.get().getString("slot" + x + ".type");
-            int amount = enderChestInventory.get().getInt("slot" + x + ".amount");
-            short durability = (short) enderChestInventory.get().getInt("slot" + x + ".durability");
-            String displayName = enderChestInventory.get().getString("slot" + x + ".name");
-            List<String> enchantments = enderChestInventory.get().getStringList("slot" + x + ".enchantments");
-            List<String> lore = enderChestInventory.get().getStringList("slot" + x + ".lore");
-            boolean unbreakable = enderChestInventory.get().getBoolean("slot" + x + ".unbreakable");
-            boolean allowPlayerEnchant = enderChestInventory.get().getBoolean("slot" + x + ".allowPlayerEnchant");
-            Material m = Material.getMaterial(mat);
-            if (m != null) {
-                ItemStack item = new ItemStack(m, amount);
-                ItemMeta meta = item.getItemMeta();
-                if (meta != null) {
-                    List<String> metaLore = new ArrayList<>();
-                    for (String ench : enchantments) {
-                        String[] enchSplit = ench.split(" ");
-                        int level = Integer.parseInt(enchSplit[1]);
-                        enchSplit[1] = romanNumeral(enchSplit[1]);
-                        Enchantment enchantment = Enchantment.getByKey(NamespacedKey.minecraft(enchSplit[0]));
-                        meta.addEnchant(enchantment, level, true);
-                    }
-                    for (String loreString : lore) {
-                        loreString = loreString.replace("&", "§");
-                        metaLore.add(loreString);
-                    }
-                    if (!allowPlayerEnchant) {
-                        meta.addItemFlags(ItemFlag.HIDE_ENCHANTS);
-                        meta.setLore(metaLore);
-                    }
-                    try
-                    {
-                        if (!displayName.equals(""))
-                        {
-                            meta.setDisplayName(displayName);
-                        }
-                    }catch(NullPointerException e){
-                        //do nothing
-                    }
-                    if (unbreakable)
-                    {
-                        meta.setUnbreakable(unbreakable);
-                    }
-                    item.setItemMeta(meta);
-                    item.setDurability(durability);
-                }
-                ecItems[x] = item;
-            }
-            x++;
-        }
-        player.getEnderChest().setContents(ecItems);
-        if (playerInventory.get().getString("item_slot0.type") == null){
-            player.getInventory().clear();
-            return;
-        }
-        ItemStack[] items = player.getInventory().getContents();
-        ItemStack[] inventoryItems = new ItemStack[36];
-        ItemStack[] armorItems = new ItemStack[4];
         player.getInventory().clear();
-        int count = 0;
-        for (int i=0; i<items.length; i++){
-            try {
-                if (i < 36) {
-                    String type = playerInventory.get().getString("item_slot" + i + ".type");
-                    int amount = playerInventory.get().getInt("item_slot" + i + ".amount");
-                    short durability = (short) playerInventory.get().getInt("item_slot" + i + ".durability");
-                    String displayName = playerInventory.get().getString("item_slot" + i + ".name");
-                    List<String> enchantments = playerInventory.get().getStringList("item_slot" + i + ".enchantments");
-                    List<String> lore = playerInventory.get().getStringList("item_slot" + i + ".lore");
-                    boolean unbreakable = playerInventory.get().getBoolean("item_slot" + i + ".unbreakable");
-                    boolean allowPlayerEnchant = playerInventory.get().getBoolean("item_slot" + i + ".allowPlayerEnchant");
-                    Material material = Material.getMaterial(type);
-                    ItemStack item = new ItemStack(material, amount);
-                    ItemMeta meta = item.getItemMeta();
-                    if (meta != null) {
-                        List<String> metaLore = new ArrayList<>();
-                        for (String ench : enchantments) {
-                            String[] enchSplit = ench.split(" ");
-                            int level = Integer.parseInt(enchSplit[1]);
-                            enchSplit[1] = romanNumeral(enchSplit[1]);
-                            Enchantment enchantment = Enchantment.getByKey(NamespacedKey.minecraft(enchSplit[0]));
-                            meta.addEnchant(enchantment, level, true);
-                        }
-                        for (String loreString : lore) {
-                            loreString = loreString.replace("&", "§");
-                            metaLore.add(loreString);
-                        }
-                        if (!allowPlayerEnchant) {
-                            meta.addItemFlags(ItemFlag.HIDE_ENCHANTS);
-                            meta.setLore(metaLore);
-                        }
-                        try
-                        {
-                            if (!displayName.equals(""))
-                            {
-                                meta.setDisplayName(displayName);
-                            }
-                        }catch(NullPointerException e){
-                            //do nothing
-                        }
-                        if (unbreakable)
-                        {
-                            meta.setUnbreakable(unbreakable);
-                        }
-                        item.setItemMeta(meta);
-                        item.setDurability(durability);
-                    }
-                    inventoryItems[i] = item;
-                } else {
-                    String type = playerInventory.get().getString("armor_slot" + count + ".type");
-                    String displayName = playerInventory.get().getString("armor_slot" + count + ".name");
-                    short durability = (short) playerInventory.get().getInt("armor_slot" + count + ".durability");
-                    List<String> enchantments = playerInventory.get().getStringList("armor_slot" + count + ".enchantments");
-                    List<String> lore = playerInventory.get().getStringList("armor_slot" + count + ".lore");
-                    boolean unbreakable = playerInventory.get().getBoolean("armor_slot" + count + ".unbreakable");
-                    boolean allowPlayerEnchant = playerInventory.get().getBoolean("armor_slot" + count + ".allowPlayerEnchant");
-                    Material material = Material.getMaterial(type);
-                    ItemStack item = new ItemStack(material, 1);
-                    ItemMeta meta = item.getItemMeta();
-                    if (meta != null) {
-                        List<String> metaLore = new ArrayList<>();
-                        for (String ench : enchantments) {
-                            String[] enchSplit = ench.split(" ");
-                            int level = Integer.parseInt(enchSplit[1]);
-                            enchSplit[1] = romanNumeral(enchSplit[1]);
-                            Enchantment enchantment = Enchantment.getByKey(NamespacedKey.minecraft(enchSplit[0]));
-                            meta.addEnchant(enchantment, level, true);
-                        }
-                        for (String loreString : lore) {
-                            loreString = loreString.replace("&", "§");
-                            metaLore.add(loreString);
-                        }
-                        if (!allowPlayerEnchant) {
-                            meta.addItemFlags(ItemFlag.HIDE_ENCHANTS);
-                        }
-                        if (!allowPlayerEnchant) {
-                            meta.addItemFlags(ItemFlag.HIDE_ENCHANTS);
-                            meta.setLore(metaLore);
-                        }
-                        try
-                        {
-                            if (!displayName.equals(""))
-                            {
-                                meta.setDisplayName(displayName);
-                            }
-                        }catch(NullPointerException e){
-                            //do nothing
-                        }
-                        if (unbreakable)
-                        {
-                            meta.setUnbreakable(unbreakable);
-                        }
-                        item.setDurability(durability);
-                        item.setItemMeta(meta);
-                    }
-                    if (count < 4) {
-                        armorItems[count] = item;
-                        count++;
-                    }
-                }
-            }catch(IllegalArgumentException e){
-                if (i < 36) {
-                    ItemStack item = new ItemStack(Material.AIR);
-                    inventoryItems[i] = item;
-                }else if (i < 40){
-                    ItemStack item = new ItemStack(Material.AIR);
-                    armorItems[count] = item;
-                    count++;
-                }
+        for (int x=0; x<player.getInventory().getSize(); x++){
+            String serializedItem = playerInventory.get().getString("item"+x);
+            if (serializedItem != null) {
+                ItemStack item = itemStackFromBase64(serializedItem);
+                player.getInventory().setItem(x, item);
             }
         }
-        player.getInventory().setContents(inventoryItems);
-        player.getInventory().setArmorContents(armorItems);
         player.updateInventory();
-        String type = playerInventory.get().getString("offhand_slot.type");
-        int amount = playerInventory.get().getInt("offhand_slot.amount");
-        String displayName = playerInventory.get().getString("offhand_slot.name");
-        short durability = (short) playerInventory.get().getInt("offhand_slot.durability");
-        List<String> enchantments = playerInventory.get().getStringList("offhand_slot.enchantments");
-        List<String> lore = playerInventory.get().getStringList("offhand_slot.lore");
-        boolean unbreakable = playerInventory.get().getBoolean("offhand_slot.unbreakable");
-        boolean allowPlayerEnchant = playerInventory.get().getBoolean("offhand_slot.allowPlayerEnchant");
-        if (!type.equals("AIR")){
-            ItemStack item = new ItemStack(Material.getMaterial(type), amount);
-            ItemMeta meta = item.getItemMeta();
-            if (meta != null) {
-                List<String> metaLore = new ArrayList<>();
-                for (String ench : enchantments) {
-                    String[] enchSplit = ench.split(" ");
-                    int level = Integer.parseInt(enchSplit[1]);
-                    enchSplit[1] = romanNumeral(enchSplit[1]);
-                    Enchantment enchantment = Enchantment.getByKey(NamespacedKey.minecraft(enchSplit[0]));
-                    meta.addEnchant(enchantment, level, true);
-                }
-                for (String loreString : lore) {
-                    loreString = loreString.replace("&", "§");
-                    metaLore.add(loreString);
-                }
-                if (!allowPlayerEnchant) {
-                    meta.addItemFlags(ItemFlag.HIDE_ENCHANTS);
-                }
-                if (!allowPlayerEnchant) {
-                    meta.addItemFlags(ItemFlag.HIDE_ENCHANTS);
-                    meta.setLore(metaLore);
-                }
-                try
-                {
-                    if (!displayName.equals(""))
-                    {
-                        meta.setDisplayName(displayName);
-                    }
-                }catch(NullPointerException e){
-                    //do nothing
-                }
-                if (unbreakable)
-                {
-                    meta.setUnbreakable(unbreakable);
-                }
-                item.setItemMeta(meta);
-                item.setDurability(durability);
+        for (int i=0; i<player.getEnderChest().getSize(); i++){
+            String serializedItem = enderChestInventory.get().getString("item"+i);
+            if (serializedItem != null) {
+                ItemStack item = itemStackFromBase64(serializedItem);
+                player.getEnderChest().setItem(i, item);
             }
+        }
+        String serializedItem = playerInventory.get().getString("offhand_item");
+        if (serializedItem != null) {
+            ItemStack item = itemStackFromBase64(serializedItem);
             player.getInventory().setItemInOffHand(item);
         }
         player.updateInventory();
@@ -418,237 +251,24 @@ public class PortalTeleport implements Listener {
         String uuid = player.getUniqueId().toString();
         PlayerInventoryFile playerInventory = new PlayerInventoryFile(plugin, uuid, group);
         EnderChestInventoryFile enderChestInventory = new EnderChestInventoryFile(plugin, uuid, group);
-        ItemStack[] ecItems = new ItemStack[27];
         player.getEnderChest().clear();
         player.getInventory().clear();
-        int x = 0;
-        while (x < 27){
-            String mat = playerInventory.get().getString("slot" + x + ".type");
-            int amount = playerInventory.get().getInt("slot" + x + ".amount");
-            short durability = (short) playerInventory.get().getInt("slot" + x + ".durability");
-            String displayName = playerInventory.get().getString("slot" + x + ".name");
-            List<String> enchantments = playerInventory.get().getStringList("slot" + x + ".enchantments");
-            List<String> lore = playerInventory.get().getStringList("slot" + x + ".lore");
-            boolean unbreakable = playerInventory.get().getBoolean("slot" + x + ".unbreakable");
-            boolean allowPlayerEnchant = playerInventory.get().getBoolean("slot" + x + ".allowPlayerEnchant");
-            Material m = Material.getMaterial(mat);
-            if (m != null) {
-                ItemStack item = new ItemStack(m, amount);
-                ItemMeta meta = item.getItemMeta();
-                if (meta != null) {
-                    List<String> metaLore = new ArrayList<>();
-                    for (String ench : enchantments) {
-                        String[] enchSplit = ench.split(" ");
-                        int level = Integer.parseInt(enchSplit[1]);
-                        enchSplit[1] = romanNumeral(enchSplit[1]);
-                        Enchantment enchantment = Enchantment.getByKey(NamespacedKey.minecraft(enchSplit[0]));
-                        meta.addEnchant(enchantment, level, true);
-                    }
-                    for (String loreString : lore) {
-                        loreString = loreString.replace("&", "§");
-                        metaLore.add(loreString);
-                    }
-                    if (!allowPlayerEnchant) {
-                        meta.addItemFlags(ItemFlag.HIDE_ENCHANTS);
-                        meta.setLore(metaLore);
-                    }
-                    try
-                    {
-                        if (!displayName.equals(""))
-                        {
-                            meta.setDisplayName(displayName);
-                        }
-                    }catch(NullPointerException e){
-                        //do nothing
-                    }
-                    if (unbreakable)
-                    {
-                        meta.setUnbreakable(unbreakable);
-                    }
-                    item.setItemMeta(meta);
-                    item.setDurability(durability);
-                }
-                ecItems[x] = item;
-            }
-            x++;
-        }
-        player.getEnderChest().setContents(ecItems);
-        if (playerInventory.get().getString("item_slot0.type") == null){
-            player.getInventory().clear();
-            return;
-        }
-        ItemStack[] items = player.getInventory().getContents();
-        ItemStack[] inventoryItems = new ItemStack[36];
-        ItemStack[] armorItems = new ItemStack[4];
-        player.getInventory().clear();
-        int count = 0;
-        for (int i=0; i<items.length; i++){
-            try {
-                if (i < 36) {
-                    String type = playerInventory.get().getString("item_slot" + i + ".type");
-                    int amount = playerInventory.get().getInt("item_slot" + i + ".amount");
-                    short durability = (short) playerInventory.get().getInt("item_slot" + i + ".durability");
-                    String displayName = playerInventory.get().getString("item_slot" + i + ".name");
-                    List<String> enchantments = playerInventory.get().getStringList("item_slot" + i + ".enchantments");
-                    List<String> lore = playerInventory.get().getStringList("item_slot" + i + ".lore");
-                    boolean unbreakable = playerInventory.get().getBoolean("item_slot" + i + ".unbreakable");
-                    boolean allowPlayerEnchant = playerInventory.get().getBoolean("item_slot" + i + ".allowPlayerEnchant");
-                    Material material = Material.getMaterial(type);
-                    ItemStack item = new ItemStack(material, amount);
-                    ItemMeta meta = item.getItemMeta();
-                    if (meta != null) {
-                        List<String> metaLore = new ArrayList<>();
-                        for (String ench : enchantments) {
-                            String[] enchSplit = ench.split(" ");
-                            int level = Integer.parseInt(enchSplit[1]);
-                            enchSplit[1] = romanNumeral(enchSplit[1]);
-                            Enchantment enchantment = Enchantment.getByKey(NamespacedKey.minecraft(enchSplit[0]));
-                            meta.addEnchant(enchantment, level, true);
-                        }
-                        for (String loreString : lore) {
-                            loreString = loreString.replace("&", "§");
-                            metaLore.add(loreString);
-                        }
-                        if (!allowPlayerEnchant) {
-                            meta.addItemFlags(ItemFlag.HIDE_ENCHANTS);
-                        }
-                        if (!allowPlayerEnchant) {
-                            meta.addItemFlags(ItemFlag.HIDE_ENCHANTS);
-                            meta.setLore(metaLore);
-                        }
-                        try
-                        {
-                            if (!displayName.equals(""))
-                            {
-                                meta.setDisplayName(displayName);
-                            }
-                        }catch(NullPointerException e){
-                            //do nothing
-                        }
-                        if (unbreakable)
-                        {
-                            meta.setUnbreakable(unbreakable);
-                        }
-                        item.setItemMeta(meta);
-                        item.setDurability(durability);
-                    }
-                    inventoryItems[i] = item;
-                } else {
-                    String type = playerInventory.get().getString("armor_slot" + count + ".type");
-                    String displayName = playerInventory.get().getString("armor_slot" + count + ".name");
-                    short durability = (short) playerInventory.get().getInt("armor_slot" + count + ".durability");
-                    List<String> enchantments = playerInventory.get().getStringList("armor_slot" + count + ".enchantments");
-                    List<String> lore = playerInventory.get().getStringList("armor_slot" + count + ".lore");
-                    boolean unbreakable = playerInventory.get().getBoolean("armor_slot" + count + ".unbreakable");
-                    boolean allowPlayerEnchant = playerInventory.get().getBoolean("armor_slot" + count + ".allowPlayerEnchant");
-                    Material material = Material.getMaterial(type);
-                    ItemStack item = new ItemStack(material, 1);
-                    ItemMeta meta = item.getItemMeta();
-                    if (meta != null) {
-                        List<String> metaLore = new ArrayList<>();
-                        for (String ench : enchantments) {
-                            String[] enchSplit = ench.split(" ");
-                            int level = Integer.parseInt(enchSplit[1]);
-                            enchSplit[1] = romanNumeral(enchSplit[1]);
-                            Enchantment enchantment = Enchantment.getByKey(NamespacedKey.minecraft(enchSplit[0]));
-                            meta.addEnchant(enchantment, level, true);
-                        }
-                        for (String loreString : lore) {
-                            loreString = loreString.replace("&", "§");
-                            metaLore.add(loreString);
-                        }
-                        if (!allowPlayerEnchant) {
-                            meta.addItemFlags(ItemFlag.HIDE_ENCHANTS);
-                        }
-                        if (!allowPlayerEnchant) {
-                            meta.addItemFlags(ItemFlag.HIDE_ENCHANTS);
-                            meta.setLore(metaLore);
-                        }
-                        try
-                        {
-                            if (!displayName.equals(""))
-                            {
-                                meta.setDisplayName(displayName);
-                            }
-                        }catch(NullPointerException e){
-                            //do nothing
-                        }
-                        if (unbreakable)
-                        {
-                            meta.setUnbreakable(unbreakable);
-                        }
-                        item.setDurability(durability);
-                        item.setItemMeta(meta);
-                    }
-                    if (count < 4) {
-                        armorItems[count] = item;
-                        count++;
-                    }
-                }
-            }catch(IllegalArgumentException e){
-                if (i < 36) {
-                    ItemStack item = new ItemStack(Material.AIR);
-                    inventoryItems[i] = item;
-                }else if (i < 40){
-                    ItemStack item = new ItemStack(Material.AIR);
-                    armorItems[count] = item;
-                    count++;
-                }
-            }
-        }
-        player.getInventory().setContents(inventoryItems);
-        player.getInventory().setArmorContents(armorItems);
-        player.updateInventory();
-        String type = playerInventory.get().getString("offhand_slot.type");
-        int amount = playerInventory.get().getInt("offhand_slot.amount");
-        String displayName = playerInventory.get().getString("offhand_slot.name");
-        short durability = (short) playerInventory.get().getInt("offhand_slot.durability");
-        List<String> enchantments = playerInventory.get().getStringList("offhand_slot.enchantments");
-        List<String> lore = playerInventory.get().getStringList("offhand_slot.lore");
-        boolean unbreakable = playerInventory.get().getBoolean("offhand_slot.unbreakable");
-        boolean allowPlayerEnchant = playerInventory.get().getBoolean("offhand_slot.allowPlayerEnchant");
-        if (!type.equals("AIR")){
-            ItemStack item = new ItemStack(Material.getMaterial(type), amount);
-            ItemMeta meta = item.getItemMeta();
-            if (meta != null) {
-                List<String> metaLore = new ArrayList<>();
-                for (String ench : enchantments) {
-                    String[] enchSplit = ench.split(" ");
-                    int level = Integer.parseInt(enchSplit[1]);
-                    enchSplit[1] = romanNumeral(enchSplit[1]);
-                    Enchantment enchantment = Enchantment.getByKey(NamespacedKey.minecraft(enchSplit[0]));
-                    meta.addEnchant(enchantment, level, true);
-                }
-                for (String loreString : lore) {
-                    loreString = loreString.replace("&", "§");
-                    metaLore.add(loreString);
-                }
-                if (!allowPlayerEnchant) {
-                    meta.addItemFlags(ItemFlag.HIDE_ENCHANTS);
-                }
-                if (!allowPlayerEnchant) {
-                    meta.addItemFlags(ItemFlag.HIDE_ENCHANTS);
-                    meta.setLore(metaLore);
-                }
-                try
-                {
-                    if (!displayName.equals(""))
-                    {
-                        meta.setDisplayName(displayName);
-                    }
-                }catch(NullPointerException e){
-                    //do nothing
-                }
-                if (unbreakable)
-                {
-                    meta.setUnbreakable(unbreakable);
-                }
-                item.setItemMeta(meta);
-                item.setDurability(durability);
-            }
-            player.getInventory().setItemInOffHand(item);
+        for (int x=0; x<player.getInventory().getSize(); x++){
+            String serializedItem = playerInventory.get().getString("item"+x);
+            ItemStack item = itemStackFromBase64(serializedItem);
+            player.getInventory().setItem(x, item);
         }
         player.updateInventory();
+        for (int i=0; i<player.getEnderChest().getSize(); i++){
+            String serializedItem = enderChestInventory.get().getString("item"+i);
+            ItemStack item = itemStackFromBase64(serializedItem);
+            player.getEnderChest().setItem(i, item);
+        }
+        String serializedItem = playerInventory.get().getString("offhand_item");
+        ItemStack item = itemStackFromBase64(serializedItem);
+        player.getInventory().setItemInOffHand(item);
+        player.updateInventory();
+
     }
 
     private void saveInventoryGroup(Player player, String group) {
@@ -659,230 +279,36 @@ public class PortalTeleport implements Listener {
         PlayerInventoryFile playerInventory = new PlayerInventoryFile(plugin, uuid, group);
         int i=0;
         int x = 0;
-        int count = 0;
-        List<Material> armor = new ArrayList<>();
         while (x < enderChest.getContents().length){
-            ItemStack itemStack = enderChest.getItem(x);
-            String material;
-            int amount;
-            try {
-                material = itemStack.getType().name();
-                amount = itemStack.getAmount();
-            } catch (NullPointerException e) {
-                material = "AIR";
-                amount = 1;
-            }
-            List<String> enchantmentList = new ArrayList<>();
-            try {
-                if (itemStack.getItemMeta().hasEnchants()) {
-                    Map<Enchantment, Integer> enchantments = itemStack.getItemMeta().getEnchants();
-                    for (Map.Entry entry : enchantments.entrySet()) {
-                        Enchantment enchantment = (Enchantment) entry.getKey();
-                        NamespacedKey enchNSK = enchantment.getKey();
-                        String enchString = enchNSK.getKey();
-                        int level = (int) entry.getValue();
-                        enchantmentList.add(enchString + " " + level);
-                    }
-                }
-            } catch (NullPointerException e) {
-                // do nothing
-            }
-            String displayName;
-            try {
-                displayName = itemStack.getItemMeta().getDisplayName();
-            } catch (NullPointerException e) {
-                displayName = "";
-            }
-            List<String> lore;
-            try {
-                lore = itemStack.getItemMeta().getLore();
-            } catch (NullPointerException e) {
-                lore = new ArrayList<>();
-            }
-            List<String> loreAlt = new ArrayList<>();
-            try {
-                if (lore.size() > 0) {
-                    for (int j = 0; j < lore.size(); j++) {
-                        String loreString = lore.get(j);
-                        loreString = loreString.replace("§", "&");
-                        loreAlt.add(loreString);
-                    }
-                }
+            try{
+                ItemStack item = enderChest.getItem(x);
+                String itemAsString = itemStackToBase64(item);
+                enderChestInventory.get().set("item" + x, itemAsString);
             }catch(NullPointerException e){
-                //do nothing
+                enderChestInventory.get().set("item" + x, "");
             }
-            boolean unbreakable;
-            try {
-                unbreakable = itemStack.getItemMeta().isUnbreakable();
-            } catch (NullPointerException e) {
-                unbreakable = false;
-            }
-            enderChestInventory.get().set("slot" + x + ".type", material);
-            enderChestInventory.get().set("slot" + x + ".amount", amount);
-            if (!displayName.equals("")) {
-                enderChestInventory.get().set("slot" + x + ".name", displayName);
-            }
-            try {
-                enderChestInventory.get().set("slot" + x + ".durability", itemStack.getDurability());
-            }catch(NullPointerException e){
-                enderChestInventory.get().set("slot" + x + ".durability", null);
-            }
-            enderChestInventory.get().set("slot" + x + ".unbreakable", unbreakable);
-            if (enchantmentList.size() != 0) {
-                enderChestInventory.get().set("slot" + x + ".enchantments", enchantmentList);
-            } else {
-                enderChestInventory.get().set("slot" + x + ".enchantments", null);
-            }
-            if (loreAlt.size() != 0) {
-                enderChestInventory.get().set("slot" + x + ".lore", loreAlt);
-            }
-            enderChestInventory.save();
             x++;
         }
         enderChestInventory.save();
-        while (i < player.getInventory().getContents().length){
-            ItemStack itemStack = player.getInventory().getItem(i);
-            String material;
-            int amount;
-            try {
-                if (i > 35){
-                    try {
-                        material = itemStack.getType().name();
-                        amount = itemStack.getAmount();
-                        Map<Enchantment, Integer> enchantments = itemStack.getItemMeta().getEnchants();
-                        List<String> enchantmentList = new ArrayList<>();
-                        for (Map.Entry entry : enchantments.entrySet()) {
-                            Enchantment enchantment = (Enchantment) entry.getKey();
-                            NamespacedKey enchNSK = enchantment.getKey();
-                            String enchString = enchNSK.getKey();
-                            int level = (int) entry.getValue();
-                            enchantmentList.add(enchString + " " + level);
-                        }
-                        String displayName = itemStack.getItemMeta().getDisplayName();
-                        List<String> lore = itemStack.getItemMeta().getLore();
-                        List<String> loreAlt = new ArrayList<>();
-                        if (lore != null) {
-                            for (int j = 0; j < lore.size(); j++) {
-                                String loreString = lore.get(j);
-                                loreString = loreString.replace("§", "&");
-                                loreAlt.add(loreString);
-                            }
-                        }
-                        boolean unbreakable = itemStack.getItemMeta().isUnbreakable();
-                        playerInventory.get().set("armor_slot" + count + ".type", material);
-                        playerInventory.get().set("armor_slot" + count + ".name", displayName);
-                        playerInventory.get().set("armor_slot" + count + ".durability", itemStack.getDurability());
-                        playerInventory.get().set("armor_slot" + count + ".unbreakable", unbreakable);
-                        playerInventory.get().set("armor_slot" + count + ".enchantments", enchantmentList);
-                        playerInventory.get().set("armor_slot" + count + ".lore", loreAlt);
-                    }catch(NullPointerException j){
-                        playerInventory.get().set("armor_slot" + count + ".type", "AIR");
-                        playerInventory.get().set("armor_slot" + count + ".name", null);
-                        playerInventory.get().set("armor_slot" + count + ".durability", null);
-                        playerInventory.get().set("armor_slot" + count + ".unbreakable", null);
-                        playerInventory.get().set("armor_slot" + count + ".enchantments", null);
-                        playerInventory.get().set("armor_slot" + count + ".lore", null);
-                    }finally {
-                        count++;
-                        playerInventory.save();
-                    }
-                }else{
-                    material = itemStack.getType().name();
-                    amount = itemStack.getAmount();
-                    Map<Enchantment, Integer> enchantments = itemStack.getItemMeta().getEnchants();
-                    List<String> enchantmentList = new ArrayList<>();
-                    for (Map.Entry entry : enchantments.entrySet()){
-                        Enchantment enchantment = (Enchantment) entry.getKey();
-                        NamespacedKey enchNSK = enchantment.getKey();
-                        String enchString = enchNSK.getKey();
-                        int level = (int) entry.getValue();
-                        enchantmentList.add(enchString + " " + level);
-                    }
-                    String displayName = itemStack.getItemMeta().getDisplayName();
-                    List<String> lore = itemStack.getItemMeta().getLore();
-                    List<String> loreAlt = new ArrayList<>();
-                    if (lore != null) {
-                        for (int j = 0; j < lore.size(); j++) {
-                            String loreString = lore.get(j);
-                            loreString = loreString.replace("§", "&");
-                            loreAlt.add(loreString);
-                        }
-                    }
-                    boolean unbreakable = itemStack.getItemMeta().isUnbreakable();
-                    playerInventory.get().set("item_slot"+i+".type", material);
-                    playerInventory.get().set("item_slot"+i+".amount", amount);
-                    if (!displayName.equals("")) {
-                        playerInventory.get().set("item_slot" + i + ".name", displayName);
-                    }
-                    playerInventory.get().set("item_slot" + i + ".durability", itemStack.getDurability());
-                    playerInventory.get().set("item_slot"+ i +".unbreakable", unbreakable);
-                    if (enchantmentList.size() != 0) {
-                        playerInventory.get().set("item_slot" + i + ".enchantments", enchantmentList);
-                    }else{
-                        playerInventory.get().set("item_slot" + i + ".enchantments", null);
-                    }
-                    if (loreAlt.size() != 0) {
-                        playerInventory.get().set("item_slot" + i + ".lore", loreAlt);
-                    }
-                    playerInventory.save();
-                }
-                i++;
+        while (i < inventory.getContents().length){
+            try{
+                ItemStack item = inventory.getItem(i);
+                String itemAsString = itemStackToBase64(item);
+                playerInventory.get().set("item" + i, itemAsString);
             }catch(NullPointerException e){
-                if (i < 40) {
-                    material = "AIR";
-                    amount = 0;
-                    playerInventory.get().set("item_slot" + i + ".type", "AIR");
-                    playerInventory.get().set("item_slot" + i + ".name", null);
-                    playerInventory.get().set("item_slot" + i + ".durability", null);
-                    playerInventory.get().set("item_slot" + i + ".unbreakable", null);
-                    playerInventory.get().set("item_slot" + i + ".enchantments", null);
-                    playerInventory.get().set("item_slot" + i + ".lore", null);
-                    playerInventory.save();
-                }
-                i++;
+                playerInventory.get().set("item" + i, "");
             }
+            i++;
         }
-        String material = player.getInventory().getItemInOffHand().getType().name();
-        int amount = player.getInventory().getItemInOffHand().getAmount();
-        if (player.getInventory().getItemInOffHand().getItemMeta() != null) {
-            Map<Enchantment, Integer> enchantments = player.getInventory().getItemInOffHand().getItemMeta().getEnchants();
-            List<String> enchantmentList = new ArrayList<>();
-            for (Map.Entry entry : enchantments.entrySet()) {
-                Enchantment enchantment = (Enchantment) entry.getKey();
-                NamespacedKey enchNSK = enchantment.getKey();
-                String enchString = enchNSK.getKey();
-                int level = (int) entry.getValue();
-                enchantmentList.add(enchString + " " + level);
-            }
-            String displayName = player.getInventory().getItemInOffHand().getItemMeta().getDisplayName();
-            List<String> lore = player.getInventory().getItemInOffHand().getItemMeta().getLore();
-            List<String> loreAlt = new ArrayList<>();
-            if (lore != null) {
-                for (int j = 0; j < lore.size(); j++) {
-                    String loreString = lore.get(j);
-                    loreString = loreString.replace("§", "&");
-                    loreAlt.add(loreString);
-                }
-            }
-            boolean unbreakable = player.getInventory().getItemInOffHand().getItemMeta().isUnbreakable();
-            if (!displayName.equals("")) {
-                playerInventory.get().set("offhand_slot.name", displayName);
-            }
-            playerInventory.get().set("offhand_slot.durability", player.getInventory().getItemInOffHand().getDurability());
-            playerInventory.get().set("offhand_slot.unbreakable", unbreakable);
-            if (enchantmentList.size() != 0) {
-                playerInventory.get().set("offhand_slot.enchantments", enchantmentList);
-            }else{
-                playerInventory.get().set("offhand_slot.enchantments", null);
-            }
-            if (loreAlt.size() != 0) {
-                playerInventory.get().set("offhand_slot.lore", loreAlt);
-            }
-        }
-        playerInventory.get().set("offhand_slot.type", material);
-        playerInventory.get().set("offhand_slot.amount", amount);
         playerInventory.save();
-        playerInventory.reload();
+        try{
+            ItemStack item = player.getInventory().getItemInOffHand();
+            String itemAsString = itemStackToBase64(item);
+            playerInventory.get().set("offhand_item", itemAsString);
+        }catch(NullPointerException e){
+            playerInventory.get().set("offhand_item", "");
+        }
+        playerInventory.save();
     }
 
     private void saveInventory(Player player, String world) {
@@ -893,234 +319,57 @@ public class PortalTeleport implements Listener {
         PlayerInventoryFile playerInventory = new PlayerInventoryFile(plugin, uuid, world);
         int i=0;
         int x = 0;
-        int count = 0;
-        List<Material> armor = new ArrayList<>();
         while (x < enderChest.getContents().length){
-            while (x < enderChest.getContents().length){
-                ItemStack itemStack = enderChest.getItem(x);
-                String material;
-                int amount;
-                try {
-                    material = itemStack.getType().name();
-                    amount = itemStack.getAmount();
-                }catch(NullPointerException e){
-                    material = "AIR";
-                    amount = 1;
-                }
-                List<String> enchantmentList = new ArrayList<>();
-                try {
-                    if (itemStack.getItemMeta().hasEnchants()) {
-                        Map<Enchantment, Integer> enchantments = itemStack.getItemMeta().getEnchants();
-                        for (Map.Entry entry : enchantments.entrySet()) {
-                            Enchantment enchantment = (Enchantment) entry.getKey();
-                            NamespacedKey enchNSK = enchantment.getKey();
-                            String enchString = enchNSK.getKey();
-                            int level = (int) entry.getValue();
-                            enchantmentList.add(enchString + " " + level);
-                        }
-                    }
-                }catch(NullPointerException e){
-                    // do nothing
-                }
-                String displayName;
-                try{
-                    displayName = itemStack.getItemMeta().getDisplayName();
-                }catch(NullPointerException e){
-                    displayName = "";
-                }
-                List<String> lore;
-                try {
-                    lore = itemStack.getItemMeta().getLore();
-                }catch(NullPointerException e){
-                    lore = new ArrayList<>();
-                }
-                List<String> loreAlt = new ArrayList<>();
-                try {
-                    if (lore.size() > 0) {
-                        for (int j = 0; j < lore.size(); j++) {
-                            String loreString = lore.get(j);
-                            loreString = loreString.replace("§", "&");
-                            loreAlt.add(loreString);
-                        }
-                    }
-                }catch(NullPointerException e){
-                    // do nothing
-                }
-                boolean unbreakable;
-                try {
-                    unbreakable = itemStack.getItemMeta().isUnbreakable();
-                }catch(NullPointerException e){
-                    unbreakable = false;
-                }
-                enderChestInventory.get().set("slot"+x+".type", material);
-                enderChestInventory.get().set("slot"+x+".amount", amount);
-                if (!displayName.equals("")) {
-                    enderChestInventory.get().set("slot" + x + ".name", displayName);
-                }
-                try {
-                    enderChestInventory.get().set("slot" + x + ".durability", itemStack.getDurability());
-                }catch(NullPointerException e){
-                    enderChestInventory.get().set("slot" + x + ".durability", null);
-                }
-                enderChestInventory.get().set("slot"+ x +".unbreakable", unbreakable);
-                if (enchantmentList.size() != 0) {
-                    enderChestInventory.get().set("slot" + x + ".enchantments", enchantmentList);
-                }else{
-                    enderChestInventory.get().set("slot" + x + ".enchantments", null);
-                }
-                if (loreAlt.size() != 0) {
-                    enderChestInventory.get().set("slot" + x + ".lore", loreAlt);
-                }
-                enderChestInventory.save();
-                x++;
+            try{
+                ItemStack item = enderChest.getItem(x);
+                String itemAsString = itemStackToBase64(item);
+                enderChestInventory.get().set("item" + x, itemAsString);
+            }catch(NullPointerException e){
+                enderChestInventory.get().set("item" + x, "");
             }
-            enderChestInventory.save();
+            x++;
         }
         enderChestInventory.save();
-        while (i < player.getInventory().getContents().length){
-            ItemStack itemStack = player.getInventory().getItem(i);
-            String material;
-            int amount;
-            try {
-                if (i > 35){
-                    try {
-                        material = itemStack.getType().name();
-                        amount = itemStack.getAmount();
-                        Map<Enchantment, Integer> enchantments = itemStack.getItemMeta().getEnchants();
-                        List<String> enchantmentList = new ArrayList<>();
-                        for (Map.Entry entry : enchantments.entrySet()) {
-                            Enchantment enchantment = (Enchantment) entry.getKey();
-                            NamespacedKey enchNSK = enchantment.getKey();
-                            String enchString = enchNSK.getKey();
-                            int level = (int) entry.getValue();
-                            enchantmentList.add(enchString + " " + level);
-                        }
-                        String displayName = itemStack.getItemMeta().getDisplayName();
-                        List<String> lore = itemStack.getItemMeta().getLore();
-                        List<String> loreAlt = new ArrayList<>();
-                        if (lore != null) {
-                            for (int j = 0; j < lore.size(); j++) {
-                                String loreString = lore.get(j);
-                                loreString = loreString.replace("§", "&");
-                                loreAlt.add(loreString);
-                            }
-                        }
-                        boolean unbreakable = itemStack.getItemMeta().isUnbreakable();
-                        playerInventory.get().set("armor_slot" + count + ".type", material);
-                        playerInventory.get().set("armor_slot" + count + ".name", displayName);
-                        playerInventory.get().set("armor_slot" + count + ".durability", itemStack.getDurability());
-                        playerInventory.get().set("armor_slot" + count + ".unbreakable", unbreakable);
-                        playerInventory.get().set("armor_slot" + count + ".enchantments", enchantmentList);
-                        playerInventory.get().set("armor_slot" + count + ".lore", loreAlt);
-                    }catch(NullPointerException j){
-                        playerInventory.get().set("armor_slot" + count + ".type", "AIR");
-                        playerInventory.get().set("armor_slot" + count + ".name", null);
-                        playerInventory.get().set("armor_slot" + count + ".durability", null);
-                        playerInventory.get().set("armor_slot" + count + ".unbreakable", null);
-                        playerInventory.get().set("armor_slot" + count + ".enchantments", null);
-                        playerInventory.get().set("armor_slot" + count + ".lore", null);
-                    }finally {
-                        count++;
-                        playerInventory.save();
-                    }
-                }else{
-                    material = itemStack.getType().name();
-                    amount = itemStack.getAmount();
-                    Map<Enchantment, Integer> enchantments = itemStack.getItemMeta().getEnchants();
-                    List<String> enchantmentList = new ArrayList<>();
-                    for (Map.Entry entry : enchantments.entrySet()){
-                        Enchantment enchantment = (Enchantment) entry.getKey();
-                        NamespacedKey enchNSK = enchantment.getKey();
-                        String enchString = enchNSK.getKey();
-                        int level = (int) entry.getValue();
-                        enchantmentList.add(enchString + " " + level);
-                    }
-                    String displayName = itemStack.getItemMeta().getDisplayName();
-                    List<String> lore = itemStack.getItemMeta().getLore();
-                    List<String> loreAlt = new ArrayList<>();
-                    if (lore != null) {
-                        for (int j = 0; j < lore.size(); j++) {
-                            String loreString = lore.get(j);
-                            loreString = loreString.replace("§", "&");
-                            loreAlt.add(loreString);
-                        }
-                    }
-                    loreAlt.add(itemStack.getItemMeta().getLocalizedName());
-                    boolean unbreakable = itemStack.getItemMeta().isUnbreakable();
-                    playerInventory.get().set("item_slot"+i+".type", material);
-                    playerInventory.get().set("item_slot"+i+".amount", amount);
-                    if (!displayName.equals("")) {
-                        playerInventory.get().set("item_slot" + i + ".name", displayName);
-                    }
-                    playerInventory.get().set("item_slot" + i + ".durability", itemStack.getDurability());
-                    playerInventory.get().set("item_slot"+ i +".unbreakable", unbreakable);
-                    if (enchantmentList.size() != 0) {
-                        playerInventory.get().set("item_slot" + i + ".enchantments", enchantmentList);
-                    }else{
-                        playerInventory.get().set("item_slot" + i + ".enchantments", null);
-                    }
-                    if (loreAlt.size() != 0) {
-                        playerInventory.get().set("item_slot" + i + ".lore", loreAlt);
-                    }
-                    playerInventory.save();
-                }
-                i++;
+        while (i < inventory.getContents().length){
+            try{
+                ItemStack item = inventory.getItem(i);
+                String itemAsString = itemStackToBase64(item);
+                playerInventory.get().set("item" + i, itemAsString);
             }catch(NullPointerException e){
-                if (i < 40) {
-                    material = "AIR";
-                    amount = 0;
-                    playerInventory.get().set("item_slot" + i + ".type", "AIR");
-                    playerInventory.get().set("item_slot" + i + ".name", null);
-                    playerInventory.get().set("item_slot" + i + ".durability", null);
-                    playerInventory.get().set("item_slot" + i + ".unbreakable", null);
-                    playerInventory.get().set("item_slot" + i + ".enchantments", null);
-                    playerInventory.get().set("item_slot" + i + ".lore", null);
-                    playerInventory.save();
-                }
-                i++;
+                playerInventory.get().set("item" + i, "");
             }
+            i++;
         }
-        String material = player.getInventory().getItemInOffHand().getType().name();
-        int amount = player.getInventory().getItemInOffHand().getAmount();
-        if (player.getInventory().getItemInOffHand().getItemMeta() != null) {
-            Map<Enchantment, Integer> enchantments = player.getInventory().getItemInOffHand().getItemMeta().getEnchants();
-            List<String> enchantmentList = new ArrayList<>();
-            for (Map.Entry entry : enchantments.entrySet()) {
-                Enchantment enchantment = (Enchantment) entry.getKey();
-                NamespacedKey enchNSK = enchantment.getKey();
-                String enchString = enchNSK.getKey();
-                int level = (int) entry.getValue();
-                enchantmentList.add(enchString + " " + level);
-            }
-            String displayName = player.getInventory().getItemInOffHand().getItemMeta().getDisplayName();
-            List<String> lore = player.getInventory().getItemInOffHand().getItemMeta().getLore();
-            List<String> loreAlt = new ArrayList<>();
-            if (lore != null) {
-                for (int j = 0; j < lore.size(); j++) {
-                    String loreString = lore.get(j);
-                    loreString = loreString.replace("§", "&");
-                    loreAlt.add(loreString);
-                }
-            }
-            boolean unbreakable = player.getInventory().getItemInOffHand().getItemMeta().isUnbreakable();
-            if (!displayName.equals("")) {
-                playerInventory.get().set("offhand_slot.name", displayName);
-            }
-            playerInventory.get().set("offhand_slot.durability", player.getInventory().getItemInOffHand().getDurability());
-            playerInventory.get().set("offhand_slot.unbreakable", unbreakable);
-            if (enchantmentList.size() != 0) {
-                playerInventory.get().set("offhand_slot.enchantments", enchantmentList);
-            }else{
-                playerInventory.get().set("offhand_slot.enchantments", null);
-            }
-            if (loreAlt.size() != 0) {
-                playerInventory.get().set("offhand_slot.lore", loreAlt);
-            }
-        }
-        playerInventory.get().set("offhand_slot.type", material);
-        playerInventory.get().set("offhand_slot.amount", amount);
         playerInventory.save();
-        playerInventory.reload();
+        try{
+            ItemStack item = player.getInventory().getItemInOffHand();
+            String itemAsString = itemStackToBase64(item);
+            playerInventory.get().set("offhand_item", itemAsString);
+        }catch(NullPointerException e){
+            playerInventory.get().set("offhand_item", "");
+        }
+        playerInventory.save();
+    }
+
+    public String itemStackToBase64(ItemStack item) {
+        try (ByteArrayOutputStream outputStream = new ByteArrayOutputStream(); BukkitObjectOutputStream dataOutput = new BukkitObjectOutputStream(outputStream)) {
+            dataOutput.writeObject(item);
+            return Base64Coder.encodeLines(outputStream.toByteArray());
+        } catch (IOException e) {
+            return null;
+        }
+    }
+
+    public ItemStack itemStackFromBase64(String data) {
+        try (BukkitObjectInputStream dataInput = new BukkitObjectInputStream(new ByteArrayInputStream(Base64Coder.decodeLines(data)));) {
+
+            // Read the serialized item
+            ItemStack item = (ItemStack) dataInput.readObject();
+
+            return item;
+        } catch (IOException | ClassNotFoundException ex) {
+            return null;
+        }
     }
 
     public GameMode getGameModeValue(String gm){
@@ -1136,43 +385,6 @@ public class PortalTeleport implements Listener {
             default:
                 return null;
         }
-    }
-
-    public static String romanNumeral(String level){
-        String rn = level;
-        switch (level){
-            case "1":
-                rn = "I";
-                break;
-            case "2":
-                rn = "II";
-                break;
-            case "3":
-                rn = "III";
-                break;
-            case "4":
-                rn = "IV";
-                break;
-            case "5":
-                rn = "V";
-                break;
-            case "6":
-                rn = "VI";
-                break;
-            case "7":
-                rn = "VII";
-                break;
-            case "8":
-                rn = "VIII";
-                break;
-            case "9":
-                rn = "IX";
-                break;
-            case "10":
-                rn = "X";
-                break;
-        }
-        return rn;
     }
 
 }

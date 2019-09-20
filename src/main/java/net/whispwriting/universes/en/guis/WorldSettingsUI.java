@@ -33,7 +33,7 @@ public class WorldSettingsUI {
     }
 
     public static Inventory GUI(Player player, World world, Universes plugin){
-        Inventory returnInv = Bukkit.createInventory(null, rows);
+        Inventory returnInv = Bukkit.createInventory(null, rows, Utils.chat("&6&l"+world.getName()+"'s Settings"));
         WorldSettingsFile worldSettings = new WorldSettingsFile(plugin);
         String worldName = world.getName();
 

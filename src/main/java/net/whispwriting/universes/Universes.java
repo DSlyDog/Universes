@@ -28,6 +28,7 @@ public final class Universes extends JavaPlugin {
     public static net.whispwriting.universes.es.files.WorldSettingsFile worldSettingsEs;
     public static net.whispwriting.universes.es.files.WorldListFile worldListFileEs;
     private KitsFile kitsFile = new KitsFile(this);
+    private String defaultWorld;
 
     @Override
     public void onEnable() {
@@ -45,6 +46,7 @@ public final class Universes extends JavaPlugin {
             worldListFile = new WorldListFile(this);
             worlds = new WorldSettingsFile(this);
             loadWorlds();
+            //setSpawnFlags();
             createWorldConfig();
             WorldSettingsUI.init();
 
@@ -71,10 +73,12 @@ public final class Universes extends JavaPlugin {
             this.getCommand("universekits").setExecutor(new KitCommand(this));
 
             Bukkit.getPluginManager().registerEvents(new TeleportEvent(playerSettings, this, kitsFile), this);
-            Bukkit.getPluginManager().registerEvents(new DeathEvent(this), this);
+            Bukkit.getPluginManager().registerEvents(new RespawnEvent(this), this);
             Bukkit.getPluginManager().registerEvents(new JoinEvent(this), this);
             Bukkit.getPluginManager().registerEvents(new FlyEvent(this, playerSettings), this);
             Bukkit.getPluginManager().registerEvents(new PVPEvent(this), this);
+            Bukkit.getPluginManager().registerEvents(new PlayerDeath(), this);
+
         /*}else if (lang.equals("es")){
             worldSettingsEs = new net.whispwriting.universes.es.files.WorldSettingsFile(this);
             worldListFileEs = new net.whispwriting.universes.es.files.WorldListFile(this);
@@ -136,13 +140,18 @@ public final class Universes extends JavaPlugin {
                 }
             }
         }
+        Bukkit.getScheduler().runTask(this, new SetSpawnFlagsTask());
+        worlds.reload();
+    }
+
+    private void setSpawnFlags(){
+        List<String> worldList = worldListFile.get().getStringList("worlds");
         for (String world : worldList){
             boolean allowAnimals = worlds.get().getBoolean("worlds."+world+".allowAnimals");
             boolean allowMonsters = worlds.get().getBoolean("worlds."+world+".allowMonsters");
             World worldWorld = Bukkit.getWorld(world);
             worldWorld.setSpawnFlags(allowMonsters, allowAnimals);
         }
-        worlds.reload();
     }
 
     private void loadWorldsEs(){
@@ -165,6 +174,7 @@ public final class Universes extends JavaPlugin {
 
     private void createWorldConfig(){
         List<World> loadedWorlds = Bukkit.getWorlds();
+        defaultWorld = loadedWorlds.get(0).getName();
         for (World loadedWorld : loadedWorlds) {
             System.out.println(loadedWorld.getName());
             Location worldSpawn = loadedWorld.getSpawnLocation();
@@ -186,7 +196,7 @@ public final class Universes extends JavaPlugin {
                 worlds.get().set("worlds." + world + ".allowMonsters", true);
                 worlds.get().set("worlds." + world + ".allowAnimals", true);
                 worlds.get().set("worlds." + world + ".gameMode", "survival");
-                worlds.get().set("worlds." + world + ".respawnWorld", world);
+                worlds.get().set("worlds." + world + ".respawnWorld", defaultWorld);
                 worlds.get().set("worlds." + world + ".playerLimit", -1);
                 worlds.get().set("worlds." + world + ".allowFlight", true);
 

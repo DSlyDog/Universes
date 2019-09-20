@@ -31,7 +31,7 @@ public class KitUI {
     public static List<String> kits;
 
     public static boolean init(String wn){
-        inventoryName = Utils.chat("&6&lAvailable Kits");
+        inventoryName = Utils.chat("&d&lAvailable Kits");
         kitsFile = new KitsFile(plugin);
         worldName = wn;
         kits = kitsFile.get().getStringList(worldName+".kits");

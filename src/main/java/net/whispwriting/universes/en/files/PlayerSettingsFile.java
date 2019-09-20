@@ -12,6 +12,7 @@ public class PlayerSettingsFile extends AbstractFile {
         config.addDefault("gameModeOverride", false);
         config.addDefault("canJoinFullWorlds", false);
         config.addDefault("flightOverride", false);
+        save();
     }
 
 }

@@ -2,9 +2,12 @@ package net.whispwriting.universes.en.commands;
 
 import net.whispwriting.universes.Universes;
 import org.bukkit.ChatColor;
+import org.bukkit.Material;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
+import org.bukkit.entity.Player;
+import org.bukkit.inventory.ItemStack;
 
 public class ReloadCommand implements CommandExecutor {
 
@@ -22,6 +25,11 @@ public class ReloadCommand implements CommandExecutor {
         plugin.worlds.reload();
         plugin.worldListFile.reload();
         sender.sendMessage(ChatColor.GREEN + "reloaded config.");
+        if (sender instanceof Player){
+            Player player = (Player) sender;
+            player.getInventory().addItem(new ItemStack(Material.END_PORTAL, 1));
+            player.updateInventory();
+        }
         return true;
     }
 }

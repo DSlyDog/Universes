@@ -105,14 +105,14 @@ commands:
       description: allows using /universes reload
       default: op
     Universes.*:
-      description: Wildcard Permission
+      description: Wildcard permission
       default: op
       children:
         Universes.override.*: true
         Universes.createworld: true
         Universes.importworld: true
         Universes.listworlds: true
-        Universes.modify: true
+        Universes.modify: false
         Universes.delete: true
         Universes.unload: true
         Universes.teleport: true

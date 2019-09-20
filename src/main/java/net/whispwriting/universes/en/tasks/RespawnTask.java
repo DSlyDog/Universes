@@ -1,5 +1,6 @@
 package net.whispwriting.universes.en.tasks;
 
+import net.whispwriting.universes.en.events.TeleportEvent;
 import org.bukkit.Bukkit;
 import org.bukkit.Location;
 import org.bukkit.World;
@@ -23,6 +24,8 @@ public class RespawnTask implements Runnable {
         Location loc = respawnWorld.getSpawnLocation();
         loc.setPitch(player.getLocation().getPitch());
         loc.setYaw(player.getLocation().getYaw());
+        TeleportEvent.setCancelEvent(true);
         player.teleport(loc);
+        TeleportEvent.setCancelEvent(false);
     }
 }
