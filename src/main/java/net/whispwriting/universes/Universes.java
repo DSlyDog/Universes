@@ -21,6 +21,7 @@ public final class Universes extends JavaPlugin {
     public static WorldSettingsFile worlds;
     public static WorldListFile worldListFile;
     public PlayerSettingsFile playerSettings;
+    public ConfigFile config;
     public net.whispwriting.universes.es.files.PlayerSettingsFile playerSettingsEs;
     public List<PlayersWhoCanConfirm> players = new ArrayList<>();
     public List<net.whispwriting.universes.es.utils.PlayersWhoCanConfirm> playersEs = new ArrayList<>();
@@ -39,7 +40,7 @@ public final class Universes extends JavaPlugin {
         String langStr = lang.get().getString("lang");
 
         //if (langStr.equals("en")) {
-            ConfigFile config = new ConfigFile(this);
+            config = new ConfigFile(this);
             config.createConfig();
             config.get().options().copyDefaults(true);
             config.save();

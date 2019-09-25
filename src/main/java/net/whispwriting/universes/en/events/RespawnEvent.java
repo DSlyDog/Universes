@@ -44,12 +44,21 @@ public class RespawnEvent implements Listener {
         if (perWorldInventoriesEnabled) {
             boolean inventoryGrouping = config.get().getBoolean("per-world-inventory-grouping");
             if (!inventoryGrouping) {
+                String uuid = player.getUniqueId().toString();
+                PlayerInventoryFile playerInventory = new PlayerInventoryFile(plugin, uuid, loc.getWorld().getName());
                 if (world.contains("_the_end")){
+                    float xp = event.getPlayer().getExp();
+                    int level = event.getPlayer().getLevel();
+                    double health = event.getPlayer().getHealth();
+                    int hunger = event.getPlayer().getFoodLevel();
+                    playerInventory.get().set("xp", xp);
+                    playerInventory.get().set("level", level);
+                    playerInventory.get().set("health", health);
+                    playerInventory.get().set("hunger", hunger);
+                    playerInventory.save();
                     saveInventory(player, world);
                 }
                 getInventory(player, respawnWorldString);
-                String uuid = player.getUniqueId().toString();
-                PlayerInventoryFile playerInventory = new PlayerInventoryFile(plugin, uuid, loc.getWorld().getName());
                 if (perWorldStatsEnabled) {
                     float xp = (float) playerInventory.get().getDouble("xp");
                     int level = playerInventory.get().getInt("level");
@@ -65,6 +74,16 @@ public class RespawnEvent implements Listener {
                 String group = groupFile.get().getString(respawnWorldString + ".group");
                 String group2 = groupFile.get().getString(world + ".group");
                 if (world.contains("_the_end")){
+                    float xp = event.getPlayer().getExp();
+                    int level = event.getPlayer().getLevel();
+                    double health = event.getPlayer().getHealth();
+                    int hunger = event.getPlayer().getFoodLevel();
+                    PlayerInventoryFile playerInventory = new PlayerInventoryFile(plugin, event.getPlayer().getUniqueId().toString(), group2);
+                    playerInventory.get().set("xp", xp);
+                    playerInventory.get().set("level", level);
+                    playerInventory.get().set("health", health);
+                    playerInventory.get().set("hunger", hunger);
+                    playerInventory.save();
                     saveInventoryGroup(player, group2);
                 }
                 getInventoryGroup(player, group);
@@ -82,6 +101,7 @@ public class RespawnEvent implements Listener {
                 }
             }
         }
+        boolean useRespawnWorld = config.get().getBoolean(("use-respawnWorld"));
         Bukkit.getScheduler().runTaskLater(plugin, new RespawnTask(world, respawnWorldString, player), 1);
     }
 

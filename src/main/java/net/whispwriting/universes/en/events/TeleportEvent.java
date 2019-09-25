@@ -88,33 +88,49 @@ public class TeleportEvent implements Listener {
                         }
                     }
                 }
+                float xp = event.getPlayer().getExp();
+                int level = event.getPlayer().getLevel();
+                double health = event.getPlayer().getHealth();
+                int hunger = event.getPlayer().getFoodLevel();
+                playerInventoryFile = new PlayerInventoryFile(plugin, event.getPlayer().getUniqueId().toString(), from.getWorld().getName());
+                playerInventoryFile.get().set("xp", xp);
+                playerInventoryFile.get().set("level", level);
+                playerInventoryFile.get().set("health", health);
+                playerInventoryFile.get().set("hunger", hunger);
+                playerInventoryFile.save();
                 if (perWorldStatsEnabled) {
-                    float xp = event.getPlayer().getExp();
-                    int level = event.getPlayer().getLevel();
-                    double health = event.getPlayer().getHealth();
-                    int hunger = event.getPlayer().getFoodLevel();
-                    playerInventoryFile = new PlayerInventoryFile(plugin, event.getPlayer().getUniqueId().toString(), from.getWorld().getName());
-                    playerInventoryFile.get().set("xp", xp);
-                    playerInventoryFile.get().set("level", level);
-                    playerInventoryFile.get().set("health", health);
-                    playerInventoryFile.get().set("hunger", hunger);
-                    playerInventoryFile.save();
-
-                    playerInventoryFile = new PlayerInventoryFile(plugin, event.getPlayer().getUniqueId().toString(), to.getWorld().getName());
-                    xp = (float) playerInventoryFile.get().getDouble("xp");
-                    level = playerInventoryFile.get().getInt("level");
-                    health = playerInventoryFile.get().getDouble("health");
-                    if (!visited || health == 0) {
-                        health = 20;
+                    try {
+                        playerInventoryFile = new PlayerInventoryFile(plugin, event.getPlayer().getUniqueId().toString(), to.getWorld().getName());
+                        String xpStr = playerInventoryFile.get().getString("xp");
+                        String levelStr = playerInventoryFile.get().getString("level");
+                        health = playerInventoryFile.get().getDouble("health");
+                        hunger = playerInventoryFile.get().getInt("hunger");
+                        if (!visited || health == 0) {
+                            hunger = 20;
+                        }
+                        if (!visited || health == 0) {
+                            health = 20;
+                        }
+                        if (!visited || xpStr == null) {
+                            xp = 0;
+                        }else{
+                            xp = Float.parseFloat(xpStr);
+                        }
+                        if (!visited || levelStr == null) {
+                            level = 0;
+                        }else{
+                            level = Integer.parseInt(levelStr);
+                        }
+                        event.getPlayer().setExp(xp);
+                        event.getPlayer().setLevel(level);
+                        event.getPlayer().setHealth(health);
+                        event.getPlayer().setFoodLevel(hunger);
+                    }catch(NullPointerException e){
+                        event.getPlayer().setExp(0);
+                        event.getPlayer().setLevel(0);
+                        event.getPlayer().setHealth(20);
+                        event.getPlayer().setFoodLevel(20);
                     }
-                    hunger = playerInventoryFile.get().getInt("hunger");
-                    if (!visited) {
-                        hunger = 20;
-                    }
-                    event.getPlayer().setExp(xp);
-                    event.getPlayer().setLevel(level);
-                    event.getPlayer().setHealth(health);
-                    event.getPlayer().setFoodLevel(hunger);
                 }
             }else {
                 if (perWorldInventoriesEnabled) {
@@ -133,7 +149,7 @@ public class TeleportEvent implements Listener {
                         boolean perWorldInvOverride = playerSettings.get().getBoolean("perWorldInvOverride");
                         if (!perWorldInvOverride) {
                             if (visited) {
-                                getInventory(event.getPlayer(), toGroup);
+                                getInventoryGroup(event.getPlayer(), toGroup);
                             }else{
                                 event.getPlayer().getInventory().clear();
                                 if (perWorldStatsEnabled){
@@ -144,33 +160,49 @@ public class TeleportEvent implements Listener {
                                 }
                             }
                         }
+                        float xp = event.getPlayer().getExp();
+                        int level = event.getPlayer().getLevel();
+                        double health = event.getPlayer().getHealth();
+                        int hunger = event.getPlayer().getFoodLevel();
+                        playerInventoryFile = new PlayerInventoryFile(plugin, event.getPlayer().getUniqueId().toString(), fromGroup);
+                        playerInventoryFile.get().set("xp", xp);
+                        playerInventoryFile.get().set("level", level);
+                        playerInventoryFile.get().set("health", health);
+                        playerInventoryFile.get().set("hunger", hunger);
+                        playerInventoryFile.save();
                         if (perWorldStatsEnabled) {
-                            float xp = event.getPlayer().getExp();
-                            int level = event.getPlayer().getLevel();
-                            double health = event.getPlayer().getHealth();
-                            int hunger = event.getPlayer().getFoodLevel();
-                            playerInventoryFile = new PlayerInventoryFile(plugin, event.getPlayer().getUniqueId().toString(), fromGroup);
-                            playerInventoryFile.get().set("xp", xp);
-                            playerInventoryFile.get().set("level", level);
-                            playerInventoryFile.get().set("health", health);
-                            playerInventoryFile.get().set("hunger", hunger);
-                            playerInventoryFile.save();
-
                             playerInventoryFile = new PlayerInventoryFile(plugin, event.getPlayer().getUniqueId().toString(), toGroup);
-                            xp = (float) playerInventoryFile.get().getDouble("xp");
-                            level = playerInventoryFile.get().getInt("level");
-                            health = playerInventoryFile.get().getDouble("health");
-                            if (!visited || health == 0) {
-                                health = 20;
+                            try {
+                                String xpStr = playerInventoryFile.get().getString("xp");
+                                String levelStr = playerInventoryFile.get().getString("level");
+                                health = playerInventoryFile.get().getDouble("health");
+                                hunger = playerInventoryFile.get().getInt("hunger");
+                                if (!visited || health == 0) {
+                                    hunger = 20;
+                                }
+                                if (!visited || health == 0) {
+                                    health = 20;
+                                }
+                                if (!visited || xpStr == null) {
+                                    xp = 0;
+                                }else{
+                                    xp = Float.parseFloat(xpStr);
+                                }
+                                if (!visited || levelStr == null) {
+                                    level = 0;
+                                }else{
+                                    level = Integer.parseInt(levelStr);
+                                }
+                                event.getPlayer().setExp(xp);
+                                event.getPlayer().setLevel(level);
+                                event.getPlayer().setHealth(health);
+                                event.getPlayer().setFoodLevel(hunger);
+                            }catch(NullPointerException e){
+                                event.getPlayer().setExp(0);
+                                event.getPlayer().setLevel(0);
+                                event.getPlayer().setHealth(20);
+                                event.getPlayer().setFoodLevel(20);
                             }
-                            hunger = playerInventoryFile.get().getInt("hunger");
-                            if (!visited) {
-                                hunger = 20;
-                            }
-                            event.getPlayer().setExp(xp);
-                            event.getPlayer().setLevel(level);
-                            event.getPlayer().setHealth(health);
-                            event.getPlayer().setFoodLevel(hunger);
                         }
                     }
                 }
@@ -281,6 +313,7 @@ public class TeleportEvent implements Listener {
         Inventory enderChest = player.getEnderChest();
         EnderChestInventoryFile enderChestInventory = new EnderChestInventoryFile(plugin, uuid, group);
         PlayerInventoryFile playerInventory = new PlayerInventoryFile(plugin, uuid, group);
+        playerInventory.get().set("visited", true);
         int i=0;
         int x = 0;
         while (x < enderChest.getContents().length){
@@ -321,6 +354,7 @@ public class TeleportEvent implements Listener {
         Inventory enderChest = player.getEnderChest();
         EnderChestInventoryFile enderChestInventory = new EnderChestInventoryFile(plugin, uuid, world);
         PlayerInventoryFile playerInventory = new PlayerInventoryFile(plugin, uuid, world);
+        playerInventory.get().set("visited", true);
         int i=0;
         int x = 0;
         while (x < enderChest.getContents().length){

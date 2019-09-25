@@ -41,26 +41,22 @@ public class PlayerDeath implements Listener {
                     }
                     playerInventory.get().set("offhand_item", "");
                     playerInventory.save();
-                    if (perWorldStatsEnabled) {
-                        float xp = event.getEntity().getExp();
-                        int level = event.getEntity().getLevel();
-                        playerInventory.get().set("xp", xp);
-                        playerInventory.get().set("level", level/2);
-                        playerInventory.get().set("health", 20);
-                        playerInventory.get().set("hunger", 20);
-                        playerInventory.save();
-                    }
+                    float xp = event.getEntity().getExp();
+                    int level = event.getEntity().getLevel();
+                    playerInventory.get().set("xp", xp);
+                    playerInventory.get().set("level", level/2);
+                    playerInventory.get().set("health", 20);
+                    playerInventory.get().set("hunger", 20);
+                    playerInventory.save();
                     saveECInv(event.getEntity(), event.getEntity().getLocation().getWorld().getName());
                 } else {
-                    if (perWorldStatsEnabled) {
-                        float xp = event.getEntity().getExp();
-                        int level = event.getEntity().getLevel();
-                        playerInventory.get().set("xp", xp);
-                        playerInventory.get().set("level", level);
-                        playerInventory.get().set("health", 20);
-                        playerInventory.get().set("hunger", 20);
-                        playerInventory.save();
-                    }
+                    float xp = event.getEntity().getExp();
+                    int level = event.getEntity().getLevel();
+                    playerInventory.get().set("xp", xp);
+                    playerInventory.get().set("level", level);
+                    playerInventory.get().set("health", 20);
+                    playerInventory.get().set("hunger", 20);
+                    playerInventory.save();
                     saveInventory(event.getEntity(), event.getEntity().getLocation().getWorld().getName());
                     saveECInv(event.getEntity(), event.getEntity().getLocation().getWorld().getName());
                 }
@@ -77,26 +73,22 @@ public class PlayerDeath implements Listener {
                     }
                     playerInventory.get().set("offhand_item", "");
                     playerInventory.save();
-                    if (perWorldStatsEnabled) {
-                        float xp = event.getEntity().getExp();
-                        int level = event.getEntity().getLevel();
-                        playerInventory.get().set("xp", xp);
-                        playerInventory.get().set("level", level/2);
-                        playerInventory.get().set("health", 20);
-                        playerInventory.get().set("hunger", 20);
-                        playerInventory.save();
-                    }
+                    float xp = event.getEntity().getExp();
+                    int level = event.getEntity().getLevel();
+                    playerInventory.get().set("xp", xp);
+                    playerInventory.get().set("level", level/2);
+                    playerInventory.get().set("health", 20);
+                    playerInventory.get().set("hunger", 20);
+                    playerInventory.save();
                     saveECInvGroup(event.getEntity(), group);
                 }else{
-                    if (perWorldStatsEnabled) {
-                        float xp = event.getEntity().getExp();
-                        int level = event.getEntity().getLevel();
-                        playerInventory.get().set("xp", xp);
-                        playerInventory.get().set("level", level);
-                        playerInventory.get().set("health", 20);
-                        playerInventory.get().set("hunger", 20);
-                        playerInventory.save();
-                    }
+                    float xp = event.getEntity().getExp();
+                    int level = event.getEntity().getLevel();
+                    playerInventory.get().set("xp", xp);
+                    playerInventory.get().set("level", level);
+                    playerInventory.get().set("health", 20);
+                    playerInventory.get().set("hunger", 20);
+                    playerInventory.save();
                     System.out.println("saving inventory");
                     saveInventoryGroup(event.getEntity(), group);
                     saveECInvGroup(event.getEntity(), group);

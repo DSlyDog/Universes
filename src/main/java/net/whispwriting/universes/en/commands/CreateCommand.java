@@ -93,7 +93,7 @@ public class CreateCommand implements CommandExecutor {
                                 groupsFile.save();
                                 plugin.worldListFile.get().set("worlds", worlds);
                                 plugin.worlds.get().set("worlds." + args[0] + "_nether" + ".name", args[0] + "_nether");
-                                plugin.worlds.get().set("worlds." + args[0] + "_nether" + ".type", args[1]);
+                                plugin.worlds.get().set("worlds." + args[0] + "_nether" + ".type", "nether");
                                 plugin.worlds.get().set("worlds." + args[0] + "_nether" + ".pvp", true);
                                 plugin.worlds.get().set("worlds." + args[0] + "_nether" + ".spawn.world", name);
                                 plugin.worlds.get().set("worlds." + args[0] + "_nether" + ".spawn.x", x);

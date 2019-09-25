@@ -17,7 +17,7 @@ public class AbstractFile {
         plugin = pl;
         File dir = new File(pl.getDataFolder() + d);
         if (!dir.exists()){
-            dir.mkdir();
+            dir.mkdirs();
         }
         file = new File(dir, filename);
         if (!file.exists()){
