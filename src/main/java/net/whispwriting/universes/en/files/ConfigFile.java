@@ -16,6 +16,7 @@ public class ConfigFile extends AbstractFile{
         config.addDefault("per-world-inventory-grouping", false);
         config.addDefault("per-world-kit-grouping", false);
         config.addDefault("save-inventory-on-death", false);
+        config.addDefault("use-respawnWorld", false);
         Plugin[] plugins = Bukkit.getPluginManager().getPlugins();
         for (Plugin plugin : plugins){
             if (plugin.getName().equals("Universe-Nethers")){

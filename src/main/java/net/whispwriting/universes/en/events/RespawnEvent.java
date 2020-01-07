@@ -38,9 +38,11 @@ public class RespawnEvent implements Listener {
         String world = player.getLocation().getWorld().getName();
         String respawnWorldString = worldSettings.get().getString("worlds."+world+".respawnWorld");
 
+
         ConfigFile config = new ConfigFile(plugin);
         boolean perWorldInventoriesEnabled = config.get().getBoolean("per-world-inventories");
         boolean perWorldStatsEnabled = config.get().getBoolean(("per-world-stats"));
+        boolean saveInvOnDeath = config.get().getBoolean("save-inventory-on-death");
         if (perWorldInventoriesEnabled) {
             boolean inventoryGrouping = config.get().getBoolean("per-world-inventory-grouping");
             if (!inventoryGrouping) {
@@ -58,7 +60,13 @@ public class RespawnEvent implements Listener {
                     playerInventory.save();
                     saveInventory(player, world);
                 }
-                getInventory(player, respawnWorldString);
+                if (saveInvOnDeath)
+                    saveInventory(player, world);
+                boolean useRespawnWorld = config.get().getBoolean(("use-respawnWorld"));
+                if (useRespawnWorld)
+                    getInventory(player, respawnWorldString);
+                else
+                    getInventory(player, loc.getWorld().getName());
                 if (perWorldStatsEnabled) {
                     float xp = (float) playerInventory.get().getDouble("xp");
                     int level = playerInventory.get().getInt("level");
@@ -71,8 +79,14 @@ public class RespawnEvent implements Listener {
                 }
             }else{
                 PerWorldInventoryGroupsFile groupFile = new PerWorldInventoryGroupsFile(plugin);
-                String group = groupFile.get().getString(respawnWorldString + ".group");
+                boolean useRespawnWorld = config.get().getBoolean(("use-respawnWorld"));
+                String group;
                 String group2 = groupFile.get().getString(world + ".group");
+                if (useRespawnWorld) {
+                    group = groupFile.get().getString(respawnWorldString + ".group");
+                }else{
+                    group = groupFile.get().getString(loc.getWorld().getName() + ".group");
+                }
                 if (world.contains("_the_end")){
                     float xp = event.getPlayer().getExp();
                     int level = event.getPlayer().getLevel();
@@ -86,6 +100,8 @@ public class RespawnEvent implements Listener {
                     playerInventory.save();
                     saveInventoryGroup(player, group2);
                 }
+                if (saveInvOnDeath)
+                    saveInventoryGroup(player, world);
                 getInventoryGroup(player, group);
                 String uuid = player.getUniqueId().toString();
                 PlayerInventoryFile playerInventory = new PlayerInventoryFile(plugin, uuid, group);
@@ -102,7 +118,8 @@ public class RespawnEvent implements Listener {
             }
         }
         boolean useRespawnWorld = config.get().getBoolean(("use-respawnWorld"));
-        Bukkit.getScheduler().runTaskLater(plugin, new RespawnTask(world, respawnWorldString, player), 1);
+        if (useRespawnWorld)
+            Bukkit.getScheduler().runTaskLater(plugin, new RespawnTask(world, respawnWorldString, player), 1);
     }
 
     private void getInventory(Player player, String world) {
