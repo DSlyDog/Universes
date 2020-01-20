@@ -2,6 +2,7 @@ package net.whispwriting.universes;
 
 import net.whispwriting.universes.en.files.*;
 import net.whispwriting.universes.en.guis.WorldSettingsUI;
+import net.whispwriting.universes.en.tasks.SetSpawnFlagsTask;
 import net.whispwriting.universes.en.utils.Generator;
 import net.whispwriting.universes.en.utils.PlayersWhoCanConfirm;
 import net.whispwriting.universes.en.commands.*;
@@ -177,11 +178,9 @@ public final class Universes extends JavaPlugin {
         List<World> loadedWorlds = Bukkit.getWorlds();
         defaultWorld = loadedWorlds.get(0).getName();
         for (World loadedWorld : loadedWorlds) {
-            System.out.println(loadedWorld.getName());
             Location worldSpawn = loadedWorld.getSpawnLocation();
             String world = loadedWorld.getName();
             String name = worlds.get().getString("worlds."+world+".name");
-            System.out.println(name==null);
             if (name == null) {
                 System.out.println("name was null. Setting defaults.");
                 double x = worldSpawn.getX();

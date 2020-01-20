@@ -59,60 +59,60 @@ commands:
     usage: /universekits
     aliases: uk
 
-  permissions:
-    Universes.override.gamemode:
-      description: overrides the gamemode update on world change
-      default: op
-    Universes.override.fullworld:
-      description: override the block on joining full worlds
-      default: op
-    Universes.override.flight:
-      description: allows overriding allowFlight
-      default: op
-    Universes.override.perworldinv:
-      description: allows override per world inventories
-      default: op
-    Universes.override.*:
-      description: allows players to change all overrides
-      default: op
-      children:
-        Universes.override.gamemode: true
-        Universes.override.fullworld: true
-        Universes.override.flight: true
-        Universes.override.perworldinv: true
-    Universes.createworld:
-      description: allows for creating worlds
-      defult: op
-    Universes.importworld:
-      description: allows for importing worlds
-      default: op
-    Universes.listworlds:
-      description: allows listing worlds
-      default: op
-    Universes.modify:
-      description: allows modifying world settings
-      default: op
-    Universes.delete:
-      description: allows deleting a world
-      default: op
-    Universes.unload:
-      description: allows unloading a world
-      default: op
-    Universes.teleport:
-      description: allows teleporting between worlds
-      default: op
-    Universes.reload:
-      description: allows using /universes reload
-      default: op
-    Universes.*:
-      description: Wildcard permission
-      default: op
-      children:
-        Universes.override.*: true
-        Universes.createworld: true
-        Universes.importworld: true
-        Universes.listworlds: true
-        Universes.modify: false
-        Universes.delete: true
-        Universes.unload: true
-        Universes.teleport: true
+permissions:
+  Universes.override.gamemode:
+    description: overrides the gamemode update on world change
+    default: op
+  Universes.override.fullworld:
+    description: override the block on joining full worlds
+    default: op
+  Universes.override.flight:
+    description: allows overriding allowFlight
+    default: op
+  Universes.override.perworldinv:
+    description: allows override per world inventories
+    default: op
+  Universes.override.*:
+    description: allows players to change all overrides
+    default: op
+    children:
+      Universes.override.gamemode: true
+      Universes.override.fullworld: true
+      Universes.override.flight: true
+      Universes.override.perworldinv: true
+  Universes.createworld:
+    description: allows for creating worlds
+    defult: op
+  Universes.importworld:
+    description: allows for importing worlds
+    default: op
+  Universes.listworlds:
+    description: allows listing worlds
+    default: op
+  Universes.modify:
+    description: allows modifying world settings
+    default: op
+  Universes.delete:
+    description: allows deleting a world
+    default: op
+  Universes.unload:
+    description: allows unloading a world
+    default: op
+  Universes.teleport:
+    description: allows teleporting between worlds
+    default: op
+  Universes.reload:
+    description: allows using /universes reload
+    default: op
+  Universes.*:
+    description: Wildcard permission
+    default: op
+    children:
+      Universes.override.*: true
+      Universes.createworld: true
+      Universes.importworld: true
+      Universes.listworlds: true
+      Universes.modify: true
+      Universes.delete: true
+      Universes.unload: true
+      Universes.teleport: true

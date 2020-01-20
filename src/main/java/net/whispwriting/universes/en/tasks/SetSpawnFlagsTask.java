@@ -1,4 +1,4 @@
-package net.whispwriting.universes.en.events;
+package net.whispwriting.universes.en.tasks;
 
 import net.whispwriting.universes.Universes;
 import net.whispwriting.universes.en.files.WorldSettingsFile;

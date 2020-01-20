@@ -43,7 +43,6 @@ public class PortalTeleport implements Listener {
 
     @EventHandler
     public void playerTeleport(PlayerPortalEvent event){
-        Bukkit.getScheduler().runTask(plugin, new TeleportFired());
         if (cancelEvent){
             return;
         }
