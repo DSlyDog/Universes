@@ -7,7 +7,7 @@ import org.bukkit.configuration.file.YamlConfiguration;
 import java.io.File;
 import java.io.IOException;
 
-public class AbstractFile {
+abstract class AbstractFile {
 
     protected Universes plugin;
     private File file;

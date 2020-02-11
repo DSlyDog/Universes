@@ -23,8 +23,8 @@ public class CreateCommand implements CommandExecutor {
     @Override
     public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
         if (sender.hasPermission("Universes.createworld")) {
-            if (args.length != 4){
-                sender.sendMessage(ChatColor.GOLD + "/universecreate " + ChatColor.YELLOW + "<name> <environment> <world type> <difficulty>");
+            if (args.length < 4){
+                sender.sendMessage(ChatColor.GOLD + "/universecreate " + ChatColor.YELLOW + "<name> <environment> <world type> <difficulty> <seed>");
                 return true;
             }
             sender.sendMessage(ChatColor.GREEN + "Starting creation of world " + ChatColor.DARK_GREEN + args[0]);
@@ -32,6 +32,8 @@ public class CreateCommand implements CommandExecutor {
             generator.setEnvironment(getEnvironment(args[1], sender));
             generator.generateStructures(true);
             generator.setType(getWorldType(args[2], sender));
+            if (args.length == 5)
+                generator.setSeed(Long.parseLong(args[4]));
             generator.createWorld();
             World world = generator.getWorld();
             if (world != null) {
