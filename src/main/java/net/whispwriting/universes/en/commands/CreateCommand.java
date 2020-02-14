@@ -68,10 +68,12 @@ public class CreateCommand implements CommandExecutor {
                 sender.sendMessage(ChatColor.GREEN + "World successfully created.");
                 Plugin[] plugins = Bukkit.getPluginManager().getPlugins();
                 boolean hasUNehters = false;
+                boolean hasEnds = false;
                 for (Plugin plugin : plugins){
-                    if (plugin.getName().equals("Universe-Nethers")){
+                    if (plugin.getName().equals("Universe-Nethers"))
                         hasUNehters = true;
-                    }
+                    else if (plugin.getName().equals("Universe-Ends"))
+                        hasEnds = true;
                 }
                 if (hasUNehters){
                     if (world.getEnvironment() == World.Environment.NORMAL) {
@@ -107,6 +109,49 @@ public class CreateCommand implements CommandExecutor {
                                 plugin.worlds.get().set("worlds." + args[0] + "_nether" + ".respawnWorld", "world");
                                 plugin.worlds.get().set("worlds." + args[0] + "_nether" + ".playerLimit", -1);
                                 plugin.worlds.get().set("worlds." + args[0] + "_nether" + ".allowFlight", true);
+                                plugin.worlds.save();
+                                plugin.worldListFile.save();
+                                plugin.worlds.reload();
+                                plugin.worldListFile.reload();
+                                sender.sendMessage(ChatColor.GREEN + "World successfully created.");
+                            }
+                        }
+                    }
+                }
+                if (hasEnds){
+                    if (world.getEnvironment() == World.Environment.NORMAL) {
+                        ConfigFile config = new ConfigFile(plugin);
+                        boolean endPerWorld = config.get().getBoolean("Universe-Ends.end-per-overworld");
+                        if (endPerWorld) {
+                            sender.sendMessage(ChatColor.GREEN + "Starting creation of corresponding end");
+                            Generator generatorEnd = new Generator(plugin, args[0] + "_the_end");
+                            generatorEnd.setEnvironment(World.Environment.THE_END);
+                            generatorEnd.generateStructures(true);
+                            generatorEnd.setType(getWorldType(args[2], sender));
+                            generatorEnd.createWorld();
+                            world = generatorEnd.getWorld();
+                            if (world != null) {
+                                world.setDifficulty(getDifficulty(args[3], sender));
+                                worlds.add(world.getName());
+                                x = world.getSpawnLocation().getX();
+                                y = world.getSpawnLocation().getY();
+                                z = world.getSpawnLocation().getZ();
+                                groupsFile.get().set(world.getName()+".group", args[0]);
+                                groupsFile.save();
+                                plugin.worldListFile.get().set("worlds", worlds);
+                                plugin.worlds.get().set("worlds." + args[0] + "_the_end" + ".name", args[0] + "_nether");
+                                plugin.worlds.get().set("worlds." + args[0] + "_the_end" + ".type", "nether");
+                                plugin.worlds.get().set("worlds." + args[0] + "_the_end" + ".pvp", true);
+                                plugin.worlds.get().set("worlds." + args[0] + "_the_end" + ".spawn.world", name);
+                                plugin.worlds.get().set("worlds." + args[0] + "_the_end" + ".spawn.x", x);
+                                plugin.worlds.get().set("worlds." + args[0] + "_the_end" + ".spawn.y", y);
+                                plugin.worlds.get().set("worlds." + args[0] + "_the_end" + ".spawn.z", z);
+                                plugin.worlds.get().set("worlds." + args[0] + "_the_end" + ".allowMonsters", true);
+                                plugin.worlds.get().set("worlds." + args[0] + "_the_end" + ".allowAnimals", true);
+                                plugin.worlds.get().set("worlds." + args[0] + "_the_end" + ".gameMode", "survival");
+                                plugin.worlds.get().set("worlds." + args[0] + "_the_end" + ".respawnWorld", "world");
+                                plugin.worlds.get().set("worlds." + args[0] + "_the_end" + ".playerLimit", -1);
+                                plugin.worlds.get().set("worlds." + args[0] + "_the_end" + ".allowFlight", true);
                                 plugin.worlds.save();
                                 plugin.worldListFile.save();
                                 plugin.worlds.reload();

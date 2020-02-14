@@ -22,6 +22,10 @@ public class ConfigFile extends AbstractFile{
         for (Plugin plugin : plugins){
             if (plugin.getName().equals("Universe-Nethers")){
                 config.addDefault("Universe-Nethers.nether-per-overworld", true);
+                config.addDefault("Universe-Nethers.return-players-to-previous-world", true);
+            }
+            if (plugin.getName().equals("Universe-Ends")){
+                config.addDefault("Universe-Ends.end-per-overworld", true);
             }
         }
     }

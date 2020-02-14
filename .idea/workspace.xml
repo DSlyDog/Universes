@@ -7,68 +7,13 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="38ba52f2-7247-4a49-adc0-5d10dd507a8a" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/src/main/java/net/whispwriting/universes/en/commands/FirstJoinSpawnCommand.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/net/whispwriting/universes/en/files/SpawnFile.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/spigot_1_15_1.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/libraries/spigot_1_15_1.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/uiDesigner.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/uiDesigner.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Universes.iml" beforeDir="false" afterPath="$PROJECT_DIR$/Universes.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/net/whispwriting/universes/Universes.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/net/whispwriting/universes/Universes.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/net/whispwriting/universes/en/commands/CreateCommand.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/net/whispwriting/universes/en/commands/CreateCommand.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/net/whispwriting/universes/en/events/JoinEvent.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/net/whispwriting/universes/en/events/JoinEvent.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/net/whispwriting/universes/en/events/PlayerDeath.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/net/whispwriting/universes/en/events/PlayerDeath.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/net/whispwriting/universes/en/events/PortalFired.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/net/whispwriting/universes/en/events/PortalFired.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/net/whispwriting/universes/en/events/RespawnEvent.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/net/whispwriting/universes/en/events/RespawnEvent.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/net/whispwriting/universes/en/events/ChangePlayerLimit.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/net/whispwriting/universes/en/events/ChangePlayerLimit.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/net/whispwriting/universes/en/files/AbstractFile.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/net/whispwriting/universes/en/files/AbstractFile.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/net/whispwriting/universes/en/files/ConfigFile.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/net/whispwriting/universes/en/files/ConfigFile.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/net/whispwriting/universes/en/files/CreateFolders.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/net/whispwriting/universes/en/files/CreateFolders.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/net/whispwriting/universes/en/tasks/SetSpawnFlagsTask.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/net/whispwriting/universes/en/tasks/SetSpawnFlagsTask.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/net/whispwriting/universes/Universes.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/net/whispwriting/universes/Universes.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/net/whispwriting/universes/en/commands/CancelCommand.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/net/whispwriting/universes/en/commands/CancelCommand.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/net/whispwriting/universes/en/commands/ConfirmCommand.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/net/whispwriting/universes/en/commands/ConfirmCommand.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/net/whispwriting/universes/en/commands/CreateCommand.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/net/whispwriting/universes/en/commands/CreateCommand.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/net/whispwriting/universes/en/commands/ImportCommand.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/net/whispwriting/universes/en/commands/ImportCommand.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/net/whispwriting/universes/en/commands/KitCommand.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/net/whispwriting/universes/en/commands/KitCommand.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/net/whispwriting/universes/en/commands/ListWorldsCommand.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/net/whispwriting/universes/en/commands/ListWorldsCommand.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/net/whispwriting/universes/en/commands/ModifyCommand.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/net/whispwriting/universes/en/commands/ModifyCommand.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/net/whispwriting/universes/en/commands/OverrideCommand.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/net/whispwriting/universes/en/commands/OverrideCommand.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/net/whispwriting/universes/en/commands/TeleportCommand.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/net/whispwriting/universes/en/commands/TeleportCommand.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/net/whispwriting/universes/en/events/ChangePlayerLimit.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/net/whispwriting/universes/en/events/ChangePlayerLimit.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/net/whispwriting/universes/en/events/ChangeRespawnWorld.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/net/whispwriting/universes/en/events/ChangeRespawnWorld.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/net/whispwriting/universes/en/events/FlyEvent.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/net/whispwriting/universes/en/events/FlyEvent.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/net/whispwriting/universes/en/events/KitsInventoryClick.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/net/whispwriting/universes/en/events/KitsInventoryClick.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/net/whispwriting/universes/en/events/ModifyInventoryClick.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/net/whispwriting/universes/en/events/ModifyInventoryClick.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/net/whispwriting/universes/en/events/OverridesInventoryClick.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/net/whispwriting/universes/en/events/OverridesInventoryClick.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/net/whispwriting/universes/en/events/PortalTeleport.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/net/whispwriting/universes/en/events/PortalTeleport.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/net/whispwriting/universes/en/events/TeleportEvent.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/net/whispwriting/universes/en/events/TeleportEvent.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/net/whispwriting/universes/en/files/AbstractFile.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/net/whispwriting/universes/en/files/AbstractFile.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/net/whispwriting/universes/en/files/ConfigFile.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/net/whispwriting/universes/en/files/ConfigFile.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/net/whispwriting/universes/en/guis/KitUI.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/net/whispwriting/universes/en/guis/KitUI.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/net/whispwriting/universes/en/guis/OverrideUI.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/net/whispwriting/universes/en/guis/OverrideUI.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/net/whispwriting/universes/en/guis/Utils.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/net/whispwriting/universes/en/guis/Utils.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/net/whispwriting/universes/en/guis/WorldSettingsUI.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/net/whispwriting/universes/en/guis/WorldSettingsUI.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/net/whispwriting/universes/en/tasks/GiveItemTask.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/net/whispwriting/universes/en/tasks/GiveItemTask.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/net/whispwriting/universes/en/tasks/WorldGenTask.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/net/whispwriting/universes/en/tasks/WorldGenTask.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/net/whispwriting/universes/es/commands/CancelCommand.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/net/whispwriting/universes/es/commands/CancelCommand.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/net/whispwriting/universes/es/commands/ConfirmCommand.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/net/whispwriting/universes/es/commands/ConfirmCommand.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/net/whispwriting/universes/es/commands/CreateCommand.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/net/whispwriting/universes/es/commands/CreateCommand.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/net/whispwriting/universes/es/commands/ImportCommand.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/net/whispwriting/universes/es/commands/ImportCommand.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/net/whispwriting/universes/es/commands/ListWorldsCommand.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/net/whispwriting/universes/es/commands/ListWorldsCommand.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/net/whispwriting/universes/es/commands/ModifyCommand.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/net/whispwriting/universes/es/commands/ModifyCommand.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/net/whispwriting/universes/es/commands/OverrideCommand.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/net/whispwriting/universes/es/commands/OverrideCommand.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/net/whispwriting/universes/es/commands/TeleportCommand.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/net/whispwriting/universes/es/commands/TeleportCommand.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/net/whispwriting/universes/es/events/FlyEvent.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/net/whispwriting/universes/es/events/FlyEvent.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/net/whispwriting/universes/es/events/TeleportEvent.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/net/whispwriting/universes/es/events/TeleportEvent.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/net/whispwriting/universes/es/files/AbstractFile.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/net/whispwriting/universes/es/files/AbstractFile.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/net/whispwriting/universes/es/tasks/WorldGenTask.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/net/whispwriting/universes/es/tasks/WorldGenTask.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/net/whispwriting/universes/lang/LangSwap.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/net/whispwriting/universes/lang/LangSwap.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/net/whispwriting/universes/lang/Switches.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/net/whispwriting/universes/lang/Switches.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/net/whispwriting/universes/lang/utils/WorldConfiguration.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/net/whispwriting/universes/lang/utils/WorldConfiguration.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/plugin.yml" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/plugin.yml" afterDir="false" />
     </list>
-    <ignored path="$PROJECT_DIR$/target/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -77,82 +22,6 @@
   </component>
   <component name="DefaultGradleProjectSettings">
     <option name="isMigrated" value="true" />
-  </component>
-  <component name="FileEditorManager">
-    <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/net/whispwriting/universes/en/commands/CreateCommand.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="2250">
-              <caret line="162" column="31" selection-start-line="162" selection-start-column="31" selection-end-line="162" selection-end-column="31" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/src/main/java/net/whispwriting/universes/en/events/JoinEvent.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="825">
-              <caret line="55" column="1" lean-forward="true" selection-start-line="55" selection-start-column="1" selection-end-line="55" selection-end-column="1" />
-              <folding>
-                <element signature="imports" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/net/whispwriting/universes/en/commands/FirstJoinSpawnCommand.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="450">
-              <caret line="38" column="72" selection-start-line="38" selection-start-column="72" selection-end-line="38" selection-end-column="72" />
-              <folding>
-                <element signature="imports" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/net/whispwriting/universes/Universes.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="495">
-              <caret line="48" column="12" selection-start-line="48" selection-start-column="12" selection-end-line="48" selection-end-column="12" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/net/whispwriting/universes/en/files/SpawnFile.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="90">
-              <caret line="8" column="5" selection-start-line="8" selection-start-column="5" selection-end-line="8" selection-end-column="5" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/net/whispwriting/universes/en/files/ConfigFile.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="225">
-              <caret line="19" column="57" selection-start-line="19" selection-start-column="57" selection-end-line="19" selection-end-column="57" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/net/whispwriting/universes/en/files/AbstractFile.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="30">
-              <caret line="2" column="7" selection-start-line="2" selection-start-column="7" selection-end-line="2" selection-end-column="7" />
-              <folding>
-                <element signature="imports" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-    </leaf>
   </component>
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
@@ -169,19 +38,6 @@
       </map>
     </option>
   </component>
-  <component name="IdeDocumentHistory">
-    <option name="CHANGED_PATHS">
-      <list>
-        <option value="$PROJECT_DIR$/src/main/java/net/whispwriting/universes/en/commands/CreateCommand.java" />
-        <option value="$PROJECT_DIR$/src/main/java/net/whispwriting/universes/en/files/AbstractFile.java" />
-        <option value="$PROJECT_DIR$/src/main/java/net/whispwriting/universes/en/files/SpawnFile.java" />
-        <option value="$PROJECT_DIR$/src/main/java/net/whispwriting/universes/en/files/ConfigFile.java" />
-        <option value="$PROJECT_DIR$/src/main/java/net/whispwriting/universes/en/events/JoinEvent.java" />
-        <option value="$PROJECT_DIR$/src/main/java/net/whispwriting/universes/en/commands/FirstJoinSpawnCommand.java" />
-        <option value="$PROJECT_DIR$/src/main/java/net/whispwriting/universes/Universes.java" />
-      </list>
-    </option>
-  </component>
   <component name="MavenImportPreferences">
     <option name="importingSettings">
       <MavenImportingSettings>
@@ -191,129 +47,8 @@
       </MavenImportingSettings>
     </option>
   </component>
-  <component name="ProjectFrameBounds" extendedState="4">
-    <option name="x" value="67" />
-    <option name="y" value="25" />
-    <option name="width" value="1887" />
-    <option name="height" value="1575" />
-  </component>
   <component name="ProjectId" id="1QoGD2x6lwGNx36gg1CZdzhirw3" />
   <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
-  <component name="ProjectView">
-    <navigator proportions="" version="1">
-      <foldersAlwaysOnTop value="true" />
-    </navigator>
-    <panes>
-      <pane id="Scope" />
-      <pane id="ProjectPane">
-        <subPane>
-          <expand>
-            <path>
-              <item name="Universes" type="b2602c69:ProjectViewProjectNode" />
-              <item name="Universes" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="Universes" type="b2602c69:ProjectViewProjectNode" />
-              <item name="Universes" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="Universes" type="b2602c69:ProjectViewProjectNode" />
-              <item name="Universes" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="main" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="Universes" type="b2602c69:ProjectViewProjectNode" />
-              <item name="Universes" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="main" type="462c0819:PsiDirectoryNode" />
-              <item name="java" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="Universes" type="b2602c69:ProjectViewProjectNode" />
-              <item name="Universes" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="main" type="462c0819:PsiDirectoryNode" />
-              <item name="java" type="462c0819:PsiDirectoryNode" />
-              <item name="universes" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="Universes" type="b2602c69:ProjectViewProjectNode" />
-              <item name="Universes" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="main" type="462c0819:PsiDirectoryNode" />
-              <item name="java" type="462c0819:PsiDirectoryNode" />
-              <item name="universes" type="462c0819:PsiDirectoryNode" />
-              <item name="en" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="Universes" type="b2602c69:ProjectViewProjectNode" />
-              <item name="Universes" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="main" type="462c0819:PsiDirectoryNode" />
-              <item name="java" type="462c0819:PsiDirectoryNode" />
-              <item name="universes" type="462c0819:PsiDirectoryNode" />
-              <item name="en" type="462c0819:PsiDirectoryNode" />
-              <item name="commands" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="Universes" type="b2602c69:ProjectViewProjectNode" />
-              <item name="Universes" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="main" type="462c0819:PsiDirectoryNode" />
-              <item name="java" type="462c0819:PsiDirectoryNode" />
-              <item name="universes" type="462c0819:PsiDirectoryNode" />
-              <item name="en" type="462c0819:PsiDirectoryNode" />
-              <item name="events" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="Universes" type="b2602c69:ProjectViewProjectNode" />
-              <item name="Universes" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="main" type="462c0819:PsiDirectoryNode" />
-              <item name="java" type="462c0819:PsiDirectoryNode" />
-              <item name="universes" type="462c0819:PsiDirectoryNode" />
-              <item name="en" type="462c0819:PsiDirectoryNode" />
-              <item name="files" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="Universes" type="b2602c69:ProjectViewProjectNode" />
-              <item name="Universes" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="main" type="462c0819:PsiDirectoryNode" />
-              <item name="java" type="462c0819:PsiDirectoryNode" />
-              <item name="universes" type="462c0819:PsiDirectoryNode" />
-              <item name="en" type="462c0819:PsiDirectoryNode" />
-              <item name="guis" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="Universes" type="b2602c69:ProjectViewProjectNode" />
-              <item name="Universes" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="main" type="462c0819:PsiDirectoryNode" />
-              <item name="java" type="462c0819:PsiDirectoryNode" />
-              <item name="universes" type="462c0819:PsiDirectoryNode" />
-              <item name="en" type="462c0819:PsiDirectoryNode" />
-              <item name="tasks" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="Universes" type="b2602c69:ProjectViewProjectNode" />
-              <item name="Universes" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="main" type="462c0819:PsiDirectoryNode" />
-              <item name="java" type="462c0819:PsiDirectoryNode" />
-              <item name="universes" type="462c0819:PsiDirectoryNode" />
-              <item name="en" type="462c0819:PsiDirectoryNode" />
-              <item name="utils" type="462c0819:PsiDirectoryNode" />
-            </path>
-          </expand>
-          <select />
-        </subPane>
-      </pane>
-      <pane id="PackagesPane" />
-    </panes>
-  </component>
   <component name="PropertiesComponent">
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$/../Welcome Spawn" />
@@ -406,41 +141,15 @@
       <option name="project" value="LOCAL" />
       <updated>1579563272442</updated>
     </task>
-    <option name="localTasksCounter" value="5" />
+    <task id="LOCAL-00005" summary="added seed to CreateCommand, added welcome spawn mechanics">
+      <created>1581464795270</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1581464795270</updated>
+    </task>
+    <option name="localTasksCounter" value="6" />
     <servers />
-  </component>
-  <component name="ToolWindowManager">
-    <frame x="67" y="25" width="1887" height="1575" extended-state="4" />
-    <editor active="true" />
-    <layout>
-      <window_info id="Image Layers" />
-      <window_info id="Designer" />
-      <window_info id="UI Designer" />
-      <window_info id="Capture Tool" />
-      <window_info id="Favorites" side_tool="true" />
-      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.34567228" />
-      <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
-      <window_info anchor="bottom" id="Version Control" />
-      <window_info anchor="bottom" id="Terminal" />
-      <window_info anchor="bottom" id="Event Log" side_tool="true" />
-      <window_info anchor="bottom" id="Messages" weight="0.32962447" />
-      <window_info anchor="bottom" id="Message" order="0" />
-      <window_info anchor="bottom" id="Find" order="1" />
-      <window_info anchor="bottom" id="Run" order="2" />
-      <window_info anchor="bottom" id="Debug" order="3" weight="0.4" />
-      <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
-      <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
-      <window_info anchor="bottom" id="TODO" order="6" />
-      <window_info anchor="right" id="Palette" />
-      <window_info anchor="right" id="PlantUML" />
-      <window_info anchor="right" id="Theme Preview" />
-      <window_info anchor="right" id="Maven" />
-      <window_info anchor="right" id="Capture Analysis" />
-      <window_info anchor="right" id="Palette&#9;" />
-      <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
-      <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
-      <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
-    </layout>
   </component>
   <component name="Vcs.Log.Tabs.Properties">
     <option name="TAB_STATES">
@@ -448,12 +157,6 @@
         <entry key="MAIN">
           <value>
             <State>
-              <option name="RECENTLY_FILTERED_USER_GROUPS">
-                <collection />
-              </option>
-              <option name="RECENTLY_FILTERED_BRANCH_GROUPS">
-                <collection />
-              </option>
               <option name="COLUMN_ORDER" />
             </State>
           </value>
@@ -479,148 +182,7 @@
     <MESSAGE value="Final version 2.0 commit" />
     <MESSAGE value="version 2.1 commit" />
     <MESSAGE value="version 2.1.1 commit" />
-    <option name="LAST_COMMIT_MESSAGE" value="version 2.1.1 commit" />
-  </component>
-  <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/src/main/java/net/whispwriting/universes/en/commands/ConfirmCommand.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="525">
-          <caret line="49" column="30" lean-forward="true" selection-start-line="49" selection-start-column="30" selection-end-line="49" selection-end-column="30" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/net/whispwriting/universes/en/commands/CreateCommand.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="2250">
-          <caret line="162" column="31" selection-start-line="162" selection-start-column="31" selection-end-line="162" selection-end-column="31" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/net/whispwriting/universes/en/commands/FirstJoinSpawnCommand.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="450">
-          <caret line="38" column="72" selection-start-line="38" selection-start-column="72" selection-end-line="38" selection-end-column="72" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/net/whispwriting/universes/Universes.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="495">
-          <caret line="48" column="12" selection-start-line="48" selection-start-column="12" selection-end-line="48" selection-end-column="12" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/net/whispwriting/universes/en/files/SpawnFile.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="90">
-          <caret line="8" column="5" selection-start-line="8" selection-start-column="5" selection-end-line="8" selection-end-column="5" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/net/whispwriting/universes/en/files/ConfigFile.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="225">
-          <caret line="19" column="57" selection-start-line="19" selection-start-column="57" selection-end-line="19" selection-end-column="57" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/net/whispwriting/universes/en/files/AbstractFile.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="30">
-          <caret line="2" column="7" selection-start-line="2" selection-start-column="7" selection-end-line="2" selection-end-column="7" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/net/whispwriting/universes/en/events/JoinEvent.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="825">
-          <caret line="55" column="1" lean-forward="true" selection-start-line="55" selection-start-column="1" selection-end-line="55" selection-end-column="1" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-  </component>
-  <component name="masterDetails">
-    <states>
-      <state key="ArtifactsStructureConfigurable.UI">
-        <settings>
-          <artifact-editor />
-          <last-edited>Universes</last-edited>
-          <splitter-proportions>
-            <option name="proportions">
-              <list>
-                <option value="0.2" />
-                <option value="0.5" />
-              </list>
-            </option>
-          </splitter-proportions>
-        </settings>
-      </state>
-      <state key="FacetStructureConfigurable.UI">
-        <settings>
-          <splitter-proportions>
-            <option name="proportions">
-              <list>
-                <option value="0.2" />
-              </list>
-            </option>
-          </splitter-proportions>
-        </settings>
-      </state>
-      <state key="GlobalLibrariesConfigurable.UI">
-        <settings>
-          <splitter-proportions>
-            <option name="proportions">
-              <list>
-                <option value="0.2" />
-              </list>
-            </option>
-          </splitter-proportions>
-        </settings>
-      </state>
-      <state key="JdkListConfigurable.UI">
-        <settings>
-          <splitter-proportions>
-            <option name="proportions">
-              <list>
-                <option value="0.2" />
-              </list>
-            </option>
-          </splitter-proportions>
-        </settings>
-      </state>
-      <state key="ModuleStructureConfigurable.UI">
-        <settings>
-          <last-edited>Universes</last-edited>
-          <splitter-proportions>
-            <option name="proportions">
-              <list>
-                <option value="0.2" />
-                <option value="0.6" />
-              </list>
-            </option>
-          </splitter-proportions>
-        </settings>
-      </state>
-      <state key="ProjectLibrariesConfigurable.UI">
-        <settings>
-          <splitter-proportions>
-            <option name="proportions">
-              <list>
-                <option value="0.2" />
-              </list>
-            </option>
-          </splitter-proportions>
-        </settings>
-      </state>
-    </states>
+    <MESSAGE value="added seed to CreateCommand, added welcome spawn mechanics" />
+    <option name="LAST_COMMIT_MESSAGE" value="added seed to CreateCommand, added welcome spawn mechanics" />
   </component>
 </project>
