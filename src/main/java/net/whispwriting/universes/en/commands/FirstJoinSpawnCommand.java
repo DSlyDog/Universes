@@ -23,7 +23,7 @@ public class FirstJoinSpawnCommand implements CommandExecutor {
             return true;
         }
         Player player = (Player) sender;
-        if (!player.hasPermission("WelcomeSpawn.setspawn")){
+        if (!player.hasPermission("Universes.usetspawn")){
             player.sendMessage(ChatColor.DARK_RED + "You do not have access to that command.");
             return true;
         }

@@ -1,6 +1,7 @@
 package net.whispwriting.universes.en.events;
 
 import net.whispwriting.universes.Universes;
+import net.whispwriting.universes.en.files.ConfigFile;
 import net.whispwriting.universes.en.files.PlayerSettingsFile;
 import net.whispwriting.universes.en.files.SpawnFile;
 import org.bukkit.Bukkit;
@@ -33,24 +34,27 @@ public class JoinEvent implements Listener {
     @EventHandler
     public void onFirstJoin(PlayerJoinEvent event){
         Player player = event.getPlayer();
-        if (!player.hasPlayedBefore()){
-            int x = spawnFile.get().getInt("x");
-            int y = spawnFile.get().getInt("y");
-            int z = spawnFile.get().getInt("z");
-            int pitch = spawnFile.get().getInt("pitch");
-            int yaw = spawnFile.get().getInt("yaw");
-            String worldStr = spawnFile.get().getString("world");
-            World world;
-            try {
-                world = Bukkit.getWorld(worldStr);
-            }catch(IllegalArgumentException e){
-                return;
+        plugin.config = new ConfigFile(plugin);
+        boolean useFirstJoin = plugin.config.get().getBoolean("use-first-join-spawn");
+        if (useFirstJoin)
+            if (!player.hasPlayedBefore()){
+                int x = spawnFile.get().getInt("x");
+                int y = spawnFile.get().getInt("y");
+                int z = spawnFile.get().getInt("z");
+                int pitch = spawnFile.get().getInt("pitch");
+                int yaw = spawnFile.get().getInt("yaw");
+                String worldStr = spawnFile.get().getString("world");
+                World world;
+                try {
+                    world = Bukkit.getWorld(worldStr);
+                }catch(IllegalArgumentException e){
+                    return;
+                }
+
+                Location loc = new Location(world, x, y, z, yaw, pitch);
+
+                player.teleport(loc);
             }
-
-            Location loc = new Location(world, x, y, z, yaw, pitch);
-
-            player.teleport(loc);
-        }
     }
 
 }

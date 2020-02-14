@@ -75,6 +75,7 @@ public final class Universes extends JavaPlugin {
             this.getCommand("universehelp").setExecutor(new HelpCommand());
             this.getCommand("ur").setExecutor(new ReloadCommand(this));
             this.getCommand("universekits").setExecutor(new KitCommand(this));
+            this.getCommand("usetspawn").setExecutor(new FirstJoinSpawnCommand(spawnFile));
 
             Bukkit.getPluginManager().registerEvents(new TeleportEvent(playerSettings, this, kitsFile), this);
             Bukkit.getPluginManager().registerEvents(new RespawnEvent(this), this);
