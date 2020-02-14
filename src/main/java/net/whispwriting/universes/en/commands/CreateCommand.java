@@ -86,14 +86,14 @@ public class CreateCommand implements CommandExecutor {
                             generatorNether.generateStructures(true);
                             generatorNether.setType(getWorldType(args[2], sender));
                             generatorNether.createWorld();
-                            world = generatorNether.getWorld();
-                            if (world != null) {
-                                world.setDifficulty(getDifficulty(args[3], sender));
-                                worlds.add(world.getName());
-                                x = world.getSpawnLocation().getX();
-                                y = world.getSpawnLocation().getY();
-                                z = world.getSpawnLocation().getZ();
-                                groupsFile.get().set(world.getName()+".group", args[0]);
+                            World worldNether = generatorNether.getWorld();
+                            if (worldNether != null) {
+                                worldNether.setDifficulty(getDifficulty(args[3], sender));
+                                worlds.add(worldNether.getName());
+                                x = worldNether.getSpawnLocation().getX();
+                                y = worldNether.getSpawnLocation().getY();
+                                z = worldNether.getSpawnLocation().getZ();
+                                groupsFile.get().set(worldNether.getName()+".group", args[0]);
                                 groupsFile.save();
                                 plugin.worldListFile.get().set("worlds", worlds);
                                 plugin.worlds.get().set("worlds." + args[0] + "_nether" + ".name", args[0] + "_nether");
