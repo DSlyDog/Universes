@@ -35,7 +35,7 @@ public class HelpCommand implements CommandExecutor {
             sender.sendMessage(ChatColor.GOLD + "/universeoverride " + ChatColor.YELLOW + "enable or disable overrides");
         }
         if (sender.hasPermission("Universes.usetspawn")){
-            sender.sendMessage(ChatColor.GOLD + "/usetspawn " + ChatColor.YELLOW + "set the spawn point for firsst time players");
+            sender.sendMessage(ChatColor.GOLD + "/usetspawn " + ChatColor.YELLOW + "set the spawn point for first time players");
         }
         if (sender.hasPermission("Universes.reload")){
             sender.sendMessage(ChatColor.GOLD + "/universesreload " + ChatColor.YELLOW + "reload the plugin config.");
