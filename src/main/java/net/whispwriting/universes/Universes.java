@@ -23,6 +23,7 @@ public final class Universes extends JavaPlugin {
     public static WorldListFile worldListFile;
     public PlayerSettingsFile playerSettings;
     public ConfigFile config;
+    private SpawnFile spawnFile = new SpawnFile(this);
     public net.whispwriting.universes.es.files.PlayerSettingsFile playerSettingsEs;
     public List<PlayersWhoCanConfirm> players = new ArrayList<>();
     public List<net.whispwriting.universes.es.utils.PlayersWhoCanConfirm> playersEs = new ArrayList<>();
@@ -45,6 +46,7 @@ public final class Universes extends JavaPlugin {
             config.createConfig();
             config.get().options().copyDefaults(true);
             config.save();
+            spawnFile.get().options().copyDefaults(true);
             worldListFile = new WorldListFile(this);
             worlds = new WorldSettingsFile(this);
             loadWorlds();
@@ -73,10 +75,11 @@ public final class Universes extends JavaPlugin {
             this.getCommand("universehelp").setExecutor(new HelpCommand());
             this.getCommand("ur").setExecutor(new ReloadCommand(this));
             this.getCommand("universekits").setExecutor(new KitCommand(this));
+            this.getCommand("usetspawn").setExecutor(new FirstJoinSpawnCommand(spawnFile));
 
             Bukkit.getPluginManager().registerEvents(new TeleportEvent(playerSettings, this, kitsFile), this);
             Bukkit.getPluginManager().registerEvents(new RespawnEvent(this), this);
-            Bukkit.getPluginManager().registerEvents(new JoinEvent(this), this);
+            Bukkit.getPluginManager().registerEvents(new JoinEvent(this, spawnFile), this);
             Bukkit.getPluginManager().registerEvents(new FlyEvent(this, playerSettings), this);
             Bukkit.getPluginManager().registerEvents(new PVPEvent(this), this);
             Bukkit.getPluginManager().registerEvents(new PlayerDeath(), this);
@@ -182,7 +185,7 @@ public final class Universes extends JavaPlugin {
             String world = loadedWorld.getName();
             String name = worlds.get().getString("worlds."+world+".name");
             if (name == null) {
-                System.out.println("name was null. Setting defaults.");
+                System.out.println("Name was null. Setting defaults.");
                 double x = worldSpawn.getX();
                 double y = worldSpawn.getY();
                 double z = worldSpawn.getZ();

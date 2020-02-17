@@ -17,10 +17,15 @@ public class ConfigFile extends AbstractFile{
         config.addDefault("per-world-kit-grouping", false);
         config.addDefault("save-inventory-on-death", false);
         config.addDefault("use-respawnWorld", false);
+        config.addDefault("use-first-join-spawn", false);
         Plugin[] plugins = Bukkit.getPluginManager().getPlugins();
         for (Plugin plugin : plugins){
             if (plugin.getName().equals("Universe-Nethers")){
                 config.addDefault("Universe-Nethers.nether-per-overworld", true);
+                config.addDefault("Universe-Nethers.return-players-to-previous-world", true);
+            }
+            if (plugin.getName().equals("Universe-Ends")){
+                config.addDefault("Universe-Ends.end-per-overworld", true);
             }
         }
     }
