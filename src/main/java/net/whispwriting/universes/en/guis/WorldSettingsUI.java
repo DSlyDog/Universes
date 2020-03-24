@@ -126,11 +126,15 @@ public class WorldSettingsUI {
             double x = player.getLocation().getX();
             double y = player.getLocation().getY();
             double z = player.getLocation().getZ();
+            double yaw = player.getLocation().getYaw();
+            double pitch = player.getLocation().getPitch();
 
             worldSettings.get().set("worlds."+worldName+".spawn.name", worldName);
             worldSettings.get().set("worlds."+worldName+".spawn.x", x);
             worldSettings.get().set("worlds."+worldName+".spawn.y", y);
             worldSettings.get().set("worlds."+worldName+".spawn.z", z);
+            worldSettings.get().set("worlds."+worldName+".spawn.yaw", yaw);
+            worldSettings.get().set("worlds."+worldName+".spawn.pitch", pitch);
             worldSettings.save();
             player.sendMessage(Utils.chat("&2Spawn point for world &a"+worldName+" &2has been set to where you stand."));
         }else if (clicked.getItemMeta().getDisplayName().equals(Utils.chat("&bAllow Animals"))){

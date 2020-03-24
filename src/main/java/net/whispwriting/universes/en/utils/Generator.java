@@ -33,7 +33,7 @@ public class Generator extends ChunkGenerator {
     }
 
     public void createWorld(){
-        createdWorld = Bukkit.createWorld(creator);
+        createdWorld = creator.createWorld();
         createdWorld.setAutoSave(true);
     }
 
