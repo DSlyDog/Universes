@@ -1,5 +1,5 @@
 name: Universes
-version: 3.0
+version: 3.2.2
 main: net.whispwriting.universes.Universes
 api-version: "1.14"
 prefix: Universes
@@ -62,6 +62,10 @@ commands:
     description: Sets the spawn point for first join users
     usage: /usetspawn
     aliases: usp
+  universespawn:
+    description: Teleports the user to the world spawn
+    usage: /universespawn
+    aliases: us
 
 permissions:
   Universes.override.gamemode:
@@ -111,6 +115,9 @@ permissions:
   Universes.usetspawn:
     description: allows using /usetspawn
     default: op
+  Universes.spawn:
+    description: allows using /universespawn
+    default: op
   Universes.*:
     description: Wildcard permission
     default: op
@@ -125,3 +132,4 @@ permissions:
       Universes.teleport: true
       Universes.reload: true
       Universes.usetspawn: true
+      Universe.spawn: true
