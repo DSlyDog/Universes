@@ -8,14 +8,15 @@ import net.whispwriting.universes.en.utils.PlayersWhoCanConfirm;
 import net.whispwriting.universes.en.commands.*;
 import net.whispwriting.universes.en.events.*;
 import net.whispwriting.universes.lang.LangSwap;
-import org.bukkit.Bukkit;
-import org.bukkit.Location;
-import org.bukkit.World;
+import org.bukkit.*;
+import org.bukkit.command.CommandSender;
 import org.bukkit.plugin.java.JavaPlugin;
 
 import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
+
+import static org.bukkit.Difficulty.*;
 
 public final class Universes extends JavaPlugin {
 
@@ -76,13 +77,14 @@ public final class Universes extends JavaPlugin {
             this.getCommand("ur").setExecutor(new ReloadCommand(this));
             this.getCommand("universekits").setExecutor(new KitCommand(this));
             this.getCommand("usetspawn").setExecutor(new FirstJoinSpawnCommand(spawnFile));
+            this.getCommand("universespawn").setExecutor(new SpawnCommand(this));
 
             Bukkit.getPluginManager().registerEvents(new TeleportEvent(playerSettings, this, kitsFile), this);
             Bukkit.getPluginManager().registerEvents(new RespawnEvent(this), this);
             Bukkit.getPluginManager().registerEvents(new JoinEvent(this, spawnFile), this);
             Bukkit.getPluginManager().registerEvents(new FlyEvent(this, playerSettings), this);
             Bukkit.getPluginManager().registerEvents(new PVPEvent(this), this);
-            Bukkit.getPluginManager().registerEvents(new PlayerDeath(), this);
+            Bukkit.getPluginManager().registerEvents(new TeleportHistoryEvent(this), this);
 
         /*}else if (lang.equals("es")){
             worldSettingsEs = new net.whispwriting.universes.es.files.WorldSettingsFile(this);
@@ -136,13 +138,26 @@ public final class Universes extends JavaPlugin {
         for (String world : worldList){
             File file = new File(Bukkit.getWorldContainer() + "/" + world + "/");
             if (file.exists()){
+                Generator generator = new Generator(this, world);
                 if (Bukkit.getWorld(world) == null){
-                    Generator generator = new Generator(this, world);
                     String type = worlds.get().getString("worlds."+world+".type");
                     World.Environment env = getTypeFromString(type);
                     generator.setEnvironment(env);
                     generator.createWorld();
                 }
+                String difficulty = worlds.get().getString("worlds."+world+".difficulty");
+                try{
+                    difficulty.equals("");
+                }catch(NullPointerException e) {
+                    difficulty = "easy";
+                    worlds.get().set("worlds." + world + ".difficulty", "easy");
+                    worlds.save();
+                }
+                World loadedWorld = generator.getWorld();
+                if (loadedWorld == null){
+                    loadedWorld = Bukkit.getWorld(world);
+                }
+                loadedWorld.setDifficulty(getDifficulty(difficulty));
             }
         }
         Bukkit.getScheduler().runTask(this, new SetSpawnFlagsTask());
@@ -180,6 +195,7 @@ public final class Universes extends JavaPlugin {
     private void createWorldConfig(){
         List<World> loadedWorlds = Bukkit.getWorlds();
         defaultWorld = loadedWorlds.get(0).getName();
+        List<String> worldList = worldListFile.get().getStringList("worlds");
         for (World loadedWorld : loadedWorlds) {
             Location worldSpawn = loadedWorld.getSpawnLocation();
             String world = loadedWorld.getName();
@@ -191,6 +207,7 @@ public final class Universes extends JavaPlugin {
                 double z = worldSpawn.getZ();
                 worlds.get().set("worlds." + world + ".name", world);
                 worlds.get().set("worlds." + world + ".type", getStringFromType(loadedWorld));
+                worlds.get().set("worlds." + world + ".difficulty", getStringDifficulty(loadedWorld.getDifficulty()));
                 worlds.get().set("worlds." + world + ".pvp", true);
                 worlds.get().set("worlds." + world + ".spawn.world", world);
                 worlds.get().set("worlds." + world + ".spawn.x", x);
@@ -204,9 +221,12 @@ public final class Universes extends JavaPlugin {
                 worlds.get().set("worlds." + world + ".allowFlight", true);
 
                 worlds.save();
-                worldListFile.save();
             }
+            if (!worldList.contains(loadedWorld.getName()))
+                worldList.add(loadedWorld.getName());
         }
+        worldListFile.get().set("worlds", worldList);
+        worldListFile.save();
     }
 
     private void createWorldConfigEs(){
@@ -276,6 +296,37 @@ public final class Universes extends JavaPlugin {
             return "nether";
         }else{
             return "end";
+        }
+    }
+
+    private Difficulty getDifficulty(String arg) {
+        arg = arg.toLowerCase();
+        switch (arg){
+            case "peaceful":
+                return PEACEFUL;
+            case "easy":
+                return EASY;
+            case "normal":
+                return NORMAL;
+            case "hard":
+                return HARD;
+            default:
+                return EASY;
+        }
+    }
+
+    private String getStringDifficulty(Difficulty arg) {
+        switch (arg){
+            case PEACEFUL:
+                return "peaceful";
+            case EASY:
+                return "easy";
+            case NORMAL:
+                return "normal";
+            case HARD:
+                return "hard";
+            default:
+                return "normal";
         }
     }
 }

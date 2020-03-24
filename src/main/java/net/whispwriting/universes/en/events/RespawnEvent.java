@@ -4,6 +4,7 @@ import net.whispwriting.universes.Universes;
 import net.whispwriting.universes.en.files.*;
 import net.whispwriting.universes.en.tasks.RespawnTask;
 import org.bukkit.Bukkit;
+import org.bukkit.GameMode;
 import org.bukkit.Location;
 import org.bukkit.World;
 import org.bukkit.entity.Player;
@@ -32,94 +33,92 @@ public class RespawnEvent implements Listener {
 
     @EventHandler(priority = EventPriority.MONITOR)
     public void onDeath(PlayerRespawnEvent event){
-        Location loc = event.getRespawnLocation();
         WorldSettingsFile worldSettings = new WorldSettingsFile(plugin);
         Player player = event.getPlayer();
-        String world = player.getLocation().getWorld().getName();
-        String respawnWorldString = worldSettings.get().getString("worlds."+world+".respawnWorld");
+        String fromWorld = player.getLocation().getWorld().getName();
+        String toWorld = event.getRespawnLocation().getWorld().getName();
+        String respawnWorldString = worldSettings.get().getString("worlds."+fromWorld+".respawnWorld");
 
 
         ConfigFile config = new ConfigFile(plugin);
         boolean perWorldInventoriesEnabled = config.get().getBoolean("per-world-inventories");
         boolean perWorldStatsEnabled = config.get().getBoolean(("per-world-stats"));
-        boolean saveInvOnDeath = config.get().getBoolean("save-inventory-on-death");
         if (perWorldInventoriesEnabled) {
             boolean inventoryGrouping = config.get().getBoolean("per-world-inventory-grouping");
             if (!inventoryGrouping) {
-                String uuid = player.getUniqueId().toString();
-                PlayerInventoryFile playerInventory = new PlayerInventoryFile(plugin, uuid, loc.getWorld().getName());
-                if (world.contains("_the_end")){
-                    float xp = event.getPlayer().getExp();
-                    int level = event.getPlayer().getLevel();
-                    double health = event.getPlayer().getHealth();
-                    int hunger = event.getPlayer().getFoodLevel();
-                    playerInventory.get().set("xp", xp);
-                    playerInventory.get().set("level", level);
-                    playerInventory.get().set("health", health);
-                    playerInventory.get().set("hunger", hunger);
-                    playerInventory.save();
-                    saveInventory(player, world);
-                }
-                if (saveInvOnDeath)
-                    saveInventory(player, world);
+                saveStats(event.getPlayer(), fromWorld);
+                saveInventory(player, fromWorld);
                 boolean useRespawnWorld = config.get().getBoolean(("use-respawnWorld"));
                 if (useRespawnWorld)
                     getInventory(player, respawnWorldString);
                 else
-                    getInventory(player, loc.getWorld().getName());
-                if (perWorldStatsEnabled) {
-                    float xp = (float) playerInventory.get().getDouble("xp");
-                    int level = playerInventory.get().getInt("level");
-                    double health = playerInventory.get().getDouble("health");
-                    int hunger = playerInventory.get().getInt("hunger");
-                    event.getPlayer().setExp(xp);
-                    event.getPlayer().setLevel(level);
-                    event.getPlayer().setHealth(health);
-                    event.getPlayer().setFoodLevel(hunger);
-                }
+                    getInventory(player, toWorld);
             }else{
                 PerWorldInventoryGroupsFile groupFile = new PerWorldInventoryGroupsFile(plugin);
                 boolean useRespawnWorld = config.get().getBoolean(("use-respawnWorld"));
-                String group;
-                String group2 = groupFile.get().getString(world + ".group");
+                String toGroup;
+                String fromGroup = groupFile.get().getString(fromWorld + ".group");
                 if (useRespawnWorld) {
-                    group = groupFile.get().getString(respawnWorldString + ".group");
+                    toGroup = groupFile.get().getString(respawnWorldString + ".group");
                 }else{
-                    group = groupFile.get().getString(loc.getWorld().getName() + ".group");
+                    toGroup = groupFile.get().getString(toWorld + ".group");
                 }
-                if (world.contains("_the_end")){
-                    float xp = event.getPlayer().getExp();
-                    int level = event.getPlayer().getLevel();
-                    double health = event.getPlayer().getHealth();
-                    int hunger = event.getPlayer().getFoodLevel();
-                    PlayerInventoryFile playerInventory = new PlayerInventoryFile(plugin, event.getPlayer().getUniqueId().toString(), group2);
-                    playerInventory.get().set("xp", xp);
-                    playerInventory.get().set("level", level);
-                    playerInventory.get().set("health", health);
-                    playerInventory.get().set("hunger", hunger);
-                    playerInventory.save();
-                    saveInventoryGroup(player, group2);
-                }
-                if (saveInvOnDeath)
-                    saveInventoryGroup(player, world);
-                getInventoryGroup(player, group);
-                String uuid = player.getUniqueId().toString();
-                PlayerInventoryFile playerInventory = new PlayerInventoryFile(plugin, uuid, group);
+                saveStats(event.getPlayer(), fromGroup);
+                saveInventoryGroup(player, fromGroup);
+                getInventoryGroup(player, toGroup);
                 if (perWorldStatsEnabled) {
-                    float xp = (float) playerInventory.get().getDouble("xp");
-                    int level = playerInventory.get().getInt("level");
-                    double health = playerInventory.get().getDouble("health");
-                    int hunger = playerInventory.get().getInt("hunger");
-                    event.getPlayer().setExp(xp);
-                    event.getPlayer().setLevel(level);
-                    event.getPlayer().setHealth(health);
-                    event.getPlayer().setFoodLevel(hunger);
+                    getStats(event.getPlayer(), toGroup);
                 }
             }
         }
+        PlayerSettingsFile playerSettings = new PlayerSettingsFile(plugin, player.getUniqueId().toString());
+        boolean gameModeOverride = playerSettings.get().getBoolean("gameModeOverride");
         boolean useRespawnWorld = config.get().getBoolean(("use-respawnWorld"));
-        if (useRespawnWorld)
-            Bukkit.getScheduler().runTaskLater(plugin, new RespawnTask(world, respawnWorldString, player), 1);
+        if (useRespawnWorld) {
+            if (perWorldStatsEnabled) { // move this to if (!inventoryGrouping) statement above
+                getStats(event.getPlayer(), respawnWorldString);
+            }
+            Bukkit.getScheduler().runTaskLater(plugin, new RespawnTask(toWorld, fromWorld, respawnWorldString, player, plugin, gameModeOverride), 5);
+        }
+        else {
+            if (perWorldStatsEnabled) {
+                getStats(event.getPlayer(), toWorld);
+            }
+            if (!gameModeOverride) {
+                String gameModeStr = worldSettings.get().getString("worlds." + toWorld + ".gameMode");
+                player.setGameMode(getGameModeValue(gameModeStr));
+            }
+        }
+    }
+
+    private void saveStats(Player player, String from){
+        PlayerInventoryFile playerInventory = new PlayerInventoryFile(plugin, player.getUniqueId().toString(), from);
+        float xp = player.getExp();
+        int level = player.getLevel();
+        double health = player.getHealth();
+        int hunger = player.getFoodLevel();
+        playerInventory.get().set("xp", xp/2);
+        playerInventory.get().set("level", level/2);
+        if (health == 0) {
+            playerInventory.get().set("health", 20);
+            playerInventory.get().set("hunger", 20);
+        }else{
+            playerInventory.get().set("health", health);
+            playerInventory.get().set("hunger", hunger);
+        }
+        playerInventory.save();
+    }
+
+    private void getStats(Player player, String to){
+        PlayerInventoryFile playerInventory = new PlayerInventoryFile(plugin, player.getUniqueId().toString(), to);
+        float xp = (float) playerInventory.get().getDouble("xp");
+        int level = playerInventory.get().getInt("level");
+        double health = playerInventory.get().getDouble("health");
+        int hunger = playerInventory.get().getInt("hunger");
+        player.setExp(xp);
+        player.setLevel(level);
+        player.setHealth(health);
+        player.setFoodLevel(hunger);
     }
 
     private void getInventory(Player player, String world) {
@@ -273,6 +272,21 @@ public class RespawnEvent implements Listener {
             return Base64Coder.encodeLines(outputStream.toByteArray());
         } catch (IOException e) {
             return null;
+        }
+    }
+
+    public GameMode getGameModeValue(String gm){
+        switch (gm){
+            case "survival":
+                return GameMode.SURVIVAL;
+            case "creative":
+                return GameMode.CREATIVE;
+            case "adventure":
+                return GameMode.ADVENTURE;
+            case "spectator":
+                return GameMode.SPECTATOR;
+            default:
+                return null;
         }
     }
 

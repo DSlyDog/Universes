@@ -16,6 +16,9 @@ public class HelpCommand implements CommandExecutor {
         if (sender.hasPermission("Universes.teleport")){
             sender.sendMessage(ChatColor.GOLD + "/universeteleport " + ChatColor.YELLOW + "teleport to other worlds");
         }
+        if (sender.hasPermission("Universes.spawn")){
+            sender.sendMessage(ChatColor.GOLD + "/universespawn " + ChatColor.YELLOW + "teleport to a world's spawn");
+        }
         if (sender.hasPermission("Universes.createworld")) {
             sender.sendMessage(ChatColor.GOLD + "/universecreate " + ChatColor.YELLOW + "create a new world");
         }

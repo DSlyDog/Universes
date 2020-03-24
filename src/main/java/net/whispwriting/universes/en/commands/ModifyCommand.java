@@ -33,7 +33,7 @@ public class ModifyCommand implements CommandExecutor {
     @Override
     public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
         if (sender.hasPermission("Universes.modify")){
-            if (args.length == 3 || args.length == 2 && args[1].equalsIgnoreCase("spawn")){
+            if (args.length == 3 || (args.length == 2 && args[1].equalsIgnoreCase("spawn"))){
                 World worldToModify = Bukkit.getWorld(args[0]);
                 if (worldToModify != null){
                     if (args[1].equalsIgnoreCase("pvp")){
@@ -62,6 +62,8 @@ public class ModifyCommand implements CommandExecutor {
                                 worldSettings.get().set("worlds."+args[0]+".spawn.x", loc.getX());
                                 worldSettings.get().set("worlds."+args[0]+".spawn.y", loc.getY());
                                 worldSettings.get().set("worlds."+args[0]+".spawn.z", loc.getZ());
+                                worldSettings.get().set("worlds."+args[0]+".spawn.yaw", loc.getYaw());
+                                worldSettings.get().set("worlds."+args[0]+".spawn.pitch", loc.getPitch());
                                 worldSettings.save();
                                 worldSettings.reload();
                                 player.sendMessage(ChatColor.GREEN + "The world spawn point has been moved to where you stand.");

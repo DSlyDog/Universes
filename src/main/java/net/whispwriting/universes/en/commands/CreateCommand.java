@@ -50,6 +50,7 @@ public class CreateCommand implements CommandExecutor {
                 plugin.worldListFile.get().set("worlds", worlds);
                 plugin.worlds.get().set("worlds." + args[0] + ".name", args[0]);
                 plugin.worlds.get().set("worlds." + args[0] + ".type", args[1]);
+                plugin.worlds.get().set("worlds." + args[0] + ".difficulty", args[3]);
                 plugin.worlds.get().set("worlds." + args[0] + ".pvp", true);
                 plugin.worlds.get().set("worlds." + args[0] + ".spawn.world", name);
                 plugin.worlds.get().set("worlds." + args[0] + ".spawn.x", x);
@@ -98,6 +99,7 @@ public class CreateCommand implements CommandExecutor {
                                 plugin.worldListFile.get().set("worlds", worlds);
                                 plugin.worlds.get().set("worlds." + args[0] + "_nether" + ".name", args[0] + "_nether");
                                 plugin.worlds.get().set("worlds." + args[0] + "_nether" + ".type", "nether");
+                                plugin.worlds.get().set("worlds." + args[0] + "_nether" + ".difficulty", args[3]);
                                 plugin.worlds.get().set("worlds." + args[0] + "_nether" + ".pvp", true);
                                 plugin.worlds.get().set("worlds." + args[0] + "_nether" + ".spawn.world", name);
                                 plugin.worlds.get().set("worlds." + args[0] + "_nether" + ".spawn.x", x);
@@ -139,8 +141,9 @@ public class CreateCommand implements CommandExecutor {
                                 groupsFile.get().set(world.getName()+".group", args[0]);
                                 groupsFile.save();
                                 plugin.worldListFile.get().set("worlds", worlds);
-                                plugin.worlds.get().set("worlds." + args[0] + "_the_end" + ".name", args[0] + "_nether");
-                                plugin.worlds.get().set("worlds." + args[0] + "_the_end" + ".type", "nether");
+                                plugin.worlds.get().set("worlds." + args[0] + "_the_end" + ".name", args[0] + "_the_end");
+                                plugin.worlds.get().set("worlds." + args[0] + "_the_end" + ".type", "end");
+                                plugin.worlds.get().set("worlds." + args[0] + "_the_end" + ".difficulty", args[3]);
                                 plugin.worlds.get().set("worlds." + args[0] + "_the_end" + ".pvp", true);
                                 plugin.worlds.get().set("worlds." + args[0] + "_the_end" + ".spawn.world", name);
                                 plugin.worlds.get().set("worlds." + args[0] + "_the_end" + ".spawn.x", x);
