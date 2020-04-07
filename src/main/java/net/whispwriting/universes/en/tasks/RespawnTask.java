@@ -6,10 +6,7 @@ import net.whispwriting.universes.en.files.ConfigFile;
 import net.whispwriting.universes.en.files.PlayerInventoryFile;
 import net.whispwriting.universes.en.files.PlayerSettingsFile;
 import net.whispwriting.universes.en.files.WorldSettingsFile;
-import org.bukkit.Bukkit;
-import org.bukkit.GameMode;
-import org.bukkit.Location;
-import org.bukkit.World;
+import org.bukkit.*;
 import org.bukkit.entity.Player;
 import sun.security.krb5.Config;
 
@@ -18,17 +15,18 @@ public class RespawnTask implements Runnable {
     private String to;
     private Player player;
     private Universes plugin;
-    private boolean gameModeOverride;
+    private boolean gameModeOverride, keepInventoy;
     private String from;
     private String respawnWorld;
 
-    public RespawnTask(String to, String from, String respawnWorld, Player p, Universes plugin, boolean gameModeOverride){
+    public RespawnTask(String to, String from, String respawnWorld, Player player, Universes plugin, boolean gameModeOverride, boolean keepInventory){
         this.to = to;
-        player = p;
+        this.player = player;
         this.plugin = plugin;
         this.gameModeOverride = gameModeOverride;
         this.from = from;
         this.respawnWorld = respawnWorld;
+        this.keepInventoy = keepInventory;
     }
 
     @Override
@@ -61,6 +59,11 @@ public class RespawnTask implements Runnable {
                 getStats(player, to);
             }
             teleport(to);
+        }
+
+        if (!keepInventoy){
+            player.getInventory().clear();
+            player.updateInventory();
         }
     }
 

@@ -71,8 +71,8 @@ public final class Universes extends JavaPlugin {
             this.getCommand("universemodify").setExecutor(new ModifyCommand(this, worlds, playerSettings));
             this.getCommand("universedelete").setExecutor(new DeleteCommand(this, worldListFile, worlds));
             this.getCommand("universeunload").setExecutor(new UnloadCommand(worldListFile));
-            this.getCommand("confirm").setExecutor(new ConfirmCommand(this, worldListFile, worlds));
-            this.getCommand("cancel").setExecutor(new CancelCommand(this));
+            this.getCommand("uconfirm").setExecutor(new ConfirmCommand(this, worldListFile, worlds));
+            this.getCommand("ucancel").setExecutor(new CancelCommand(this));
             this.getCommand("universehelp").setExecutor(new HelpCommand());
             this.getCommand("ur").setExecutor(new ReloadCommand(this));
             this.getCommand("universekits").setExecutor(new KitCommand(this));
@@ -81,7 +81,7 @@ public final class Universes extends JavaPlugin {
 
             Bukkit.getPluginManager().registerEvents(new TeleportEvent(playerSettings, this, kitsFile), this);
             Bukkit.getPluginManager().registerEvents(new RespawnEvent(this), this);
-            Bukkit.getPluginManager().registerEvents(new JoinEvent(this, spawnFile), this);
+            Bukkit.getPluginManager().registerEvents(new JoinEvent(this), this);
             Bukkit.getPluginManager().registerEvents(new FlyEvent(this, playerSettings), this);
             Bukkit.getPluginManager().registerEvents(new PVPEvent(this), this);
             Bukkit.getPluginManager().registerEvents(new TeleportHistoryEvent(this), this);

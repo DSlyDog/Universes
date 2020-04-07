@@ -41,12 +41,14 @@ commands:
     description: unloads a world
     usage: /universeunload
     aliases: uu
-  confirm:
+  uconfirm:
     description: confirms a deletion
-    usage: /confirm
-  cancel:
+    usage: /uconfirm
+    aliases: confirm
+  ucancel:
     description: cancels a deletion
-    usage: /cancel
+    usage: /ucancel
+    aliases: cancel
   universehelp:
     description: shows help page
     usage: /universehelp

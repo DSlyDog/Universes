@@ -3,10 +3,7 @@ package net.whispwriting.universes.en.events;
 import net.whispwriting.universes.Universes;
 import net.whispwriting.universes.en.files.*;
 import net.whispwriting.universes.en.tasks.RespawnTask;
-import org.bukkit.Bukkit;
-import org.bukkit.GameMode;
-import org.bukkit.Location;
-import org.bukkit.World;
+import org.bukkit.*;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.EventPriority;
@@ -22,6 +19,7 @@ import org.yaml.snakeyaml.external.biz.base64Coder.Base64Coder;
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
+import java.util.List;
 
 public class RespawnEvent implements Listener {
 
@@ -33,6 +31,7 @@ public class RespawnEvent implements Listener {
 
     @EventHandler(priority = EventPriority.MONITOR)
     public void onDeath(PlayerRespawnEvent event){
+
         WorldSettingsFile worldSettings = new WorldSettingsFile(plugin);
         Player player = event.getPlayer();
         String fromWorld = player.getLocation().getWorld().getName();
@@ -73,21 +72,16 @@ public class RespawnEvent implements Listener {
         }
         PlayerSettingsFile playerSettings = new PlayerSettingsFile(plugin, player.getUniqueId().toString());
         boolean gameModeOverride = playerSettings.get().getBoolean("gameModeOverride");
-        boolean useRespawnWorld = config.get().getBoolean(("use-respawnWorld"));
-        if (useRespawnWorld) {
-            if (perWorldStatsEnabled) { // move this to if (!inventoryGrouping) statement above
-                getStats(event.getPlayer(), respawnWorldString);
-            }
-            Bukkit.getScheduler().runTaskLater(plugin, new RespawnTask(toWorld, fromWorld, respawnWorldString, player, plugin, gameModeOverride), 5);
+        if (perWorldStatsEnabled) { // move this to if (!inventoryGrouping) statement above
+            getStats(event.getPlayer(), respawnWorldString);
         }
-        else {
-            if (perWorldStatsEnabled) {
-                getStats(event.getPlayer(), toWorld);
-            }
-            if (!gameModeOverride) {
-                String gameModeStr = worldSettings.get().getString("worlds." + toWorld + ".gameMode");
-                player.setGameMode(getGameModeValue(gameModeStr));
-            }
+        Bukkit.getScheduler().runTaskLater(plugin, new RespawnTask(toWorld, fromWorld, respawnWorldString, player, plugin, gameModeOverride, event.getPlayer().getWorld().getGameRuleDefault(GameRule.KEEP_INVENTORY).booleanValue()), 5);
+        if (perWorldStatsEnabled) {
+            getStats(event.getPlayer(), toWorld);
+        }
+        if (!gameModeOverride) {
+            String gameModeStr = worldSettings.get().getString("worlds." + toWorld + ".gameMode");
+            player.setGameMode(getGameModeValue(gameModeStr));
         }
     }
 

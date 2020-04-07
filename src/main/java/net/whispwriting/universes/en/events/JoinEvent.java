@@ -15,11 +15,9 @@ import org.bukkit.event.player.PlayerJoinEvent;
 public class JoinEvent implements Listener {
 
     private Universes plugin;
-    private SpawnFile spawnFile;
 
-    public JoinEvent(Universes plugin, SpawnFile spawnFile){
+    public JoinEvent(Universes plugin){
         this.plugin = plugin;
-        this.spawnFile = spawnFile;
     }
 
     @EventHandler
@@ -33,21 +31,22 @@ public class JoinEvent implements Listener {
 
     @EventHandler
     public void onFirstJoin(PlayerJoinEvent event){
-        Player player = event.getPlayer();
         plugin.config = new ConfigFile(plugin);
         boolean useFirstJoin = plugin.config.get().getBoolean("use-first-join-spawn");
-        if (useFirstJoin)
-            if (!player.hasPlayedBefore()){
-                int x = spawnFile.get().getInt("x");
-                int y = spawnFile.get().getInt("y");
-                int z = spawnFile.get().getInt("z");
-                int pitch = spawnFile.get().getInt("pitch");
-                int yaw = spawnFile.get().getInt("yaw");
+        if (useFirstJoin) {
+            SpawnFile spawnFile = new SpawnFile(plugin);
+            Player player = event.getPlayer();
+            if (!player.hasPlayedBefore()) {
+                double x = spawnFile.get().getDouble("x");
+                double y = spawnFile.get().getDouble("y");
+                double z = spawnFile.get().getDouble("z");
+                float pitch = (float) spawnFile.get().getDouble("pitch");
+                float yaw = (float) spawnFile.get().getDouble("yaw");
                 String worldStr = spawnFile.get().getString("world");
                 World world;
                 try {
                     world = Bukkit.getWorld(worldStr);
-                }catch(IllegalArgumentException e){
+                } catch (IllegalArgumentException e) {
                     return;
                 }
 
@@ -55,6 +54,7 @@ public class JoinEvent implements Listener {
 
                 player.teleport(loc);
             }
+        }
     }
 
 }

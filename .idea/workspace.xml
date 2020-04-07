@@ -7,9 +7,38 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="38ba52f2-7247-4a49-adc0-5d10dd507a8a" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_spigotmc_spigot_api_1_15_2_R0_1_SNAPSHOT.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__net_md_5_bungeecord_chat_1_13_SNAPSHOT.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/libraries/Maven__net_md_5_bungeecord_chat_1_15_SNAPSHOT.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_yaml_snakeyaml_1_23.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_yaml_snakeyaml_1_25.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/spigot_1_15_1.xml" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/net/whispwriting/universes/en/commands/HelpCommand.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/net/whispwriting/universes/en/commands/HelpCommand.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Universes.iml" beforeDir="false" afterPath="$PROJECT_DIR$/Universes.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/net/whispwriting/universes/Universes.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/net/whispwriting/universes/Universes.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/net/whispwriting/universes/en/events/JoinEvent.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/net/whispwriting/universes/en/events/JoinEvent.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/net/whispwriting/universes/en/events/RespawnEvent.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/net/whispwriting/universes/en/events/RespawnEvent.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/net/whispwriting/universes/en/tasks/RespawnTask.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/net/whispwriting/universes/en/tasks/RespawnTask.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/plugin.yml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/plugin.yml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/net/whispwriting/universes/Universes.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/net/whispwriting/universes/Universes.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/net/whispwriting/universes/en/commands/CreateCommand.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/net/whispwriting/universes/en/commands/CreateCommand.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/net/whispwriting/universes/en/commands/HelpCommand.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/net/whispwriting/universes/en/commands/HelpCommand.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/net/whispwriting/universes/en/commands/ImportCommand.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/net/whispwriting/universes/en/commands/ImportCommand.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/net/whispwriting/universes/en/commands/ModifyCommand.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/net/whispwriting/universes/en/commands/ModifyCommand.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/net/whispwriting/universes/en/commands/TeleportCommand.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/net/whispwriting/universes/en/commands/TeleportCommand.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/net/whispwriting/universes/en/events/JoinEvent.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/net/whispwriting/universes/en/events/JoinEvent.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/net/whispwriting/universes/en/files/ConfigFile.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/net/whispwriting/universes/en/files/ConfigFile.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/net/whispwriting/universes/en/files/EnderChestInventoryFile.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/net/whispwriting/universes/en/files/EnderChestInventoryFile.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/net/whispwriting/universes/en/files/KitsFile.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/net/whispwriting/universes/en/files/KitsFile.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/net/whispwriting/universes/en/files/LangFile.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/net/whispwriting/universes/en/files/LangFile.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/net/whispwriting/universes/en/files/PerWorldInventoryGroupsFile.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/net/whispwriting/universes/en/files/PerWorldInventoryGroupsFile.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/net/whispwriting/universes/en/files/PlayerInventoryFile.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/net/whispwriting/universes/en/files/PlayerInventoryFile.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/net/whispwriting/universes/en/files/PlayerSettingsFile.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/net/whispwriting/universes/en/files/PlayerSettingsFile.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/net/whispwriting/universes/en/files/WorldListFile.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/net/whispwriting/universes/en/files/WorldListFile.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/net/whispwriting/universes/en/files/WorldSettingsFile.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/net/whispwriting/universes/en/files/WorldSettingsFile.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/net/whispwriting/universes/en/guis/WorldSettingsUI.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/net/whispwriting/universes/en/guis/WorldSettingsUI.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/net/whispwriting/universes/en/tasks/RespawnTask.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/net/whispwriting/universes/en/tasks/RespawnTask.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/net/whispwriting/universes/en/utils/Generator.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/net/whispwriting/universes/en/utils/Generator.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/plugin.yml" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/plugin.yml" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -48,8 +77,8 @@
   <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
   <component name="PropertiesComponent">
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/../Welcome Spawn" />
-    <property name="project.structure.last.edited" value="Artifacts" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/../TimTheEnchanter" />
+    <property name="project.structure.last.edited" value="Libraries" />
     <property name="project.structure.proportion" value="0.15" />
     <property name="project.structure.side.proportion" value="0.2" />
     <property name="settings.editor.selected.configurable" value="preferences.lookFeel" />
@@ -180,7 +209,14 @@
       <option name="project" value="LOCAL" />
       <updated>1581652262209</updated>
     </task>
-    <option name="localTasksCounter" value="11" />
+    <task id="LOCAL-00011" summary="updated help command">
+      <created>1581904896599</created>
+      <option name="number" value="00011" />
+      <option name="presentableId" value="LOCAL-00011" />
+      <option name="project" value="LOCAL" />
+      <updated>1581904896599</updated>
+    </task>
+    <option name="localTasksCounter" value="12" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
