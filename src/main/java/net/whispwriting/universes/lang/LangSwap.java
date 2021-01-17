@@ -26,19 +26,19 @@ public class LangSwap {
             try{
                 conf.save(file);
             }catch(IOException e){
-                System.out.println("Could not save file");
+                pl.log.warning("Could not save file");
             }
             conf.set("canJoinFullWorlds", null);
             try{
                 conf.save(file);
             }catch(IOException e){
-                System.out.println("Could not save file");
+                pl.log.warning("Could not save file");
             }
             conf.set("flightOverride", null);
             try{
                 conf.save(file);
             }catch(IOException e){
-                System.out.println("Could not save file");
+                pl.log.warning("Could not save file");
             }
 
             conf.set("ignorarModoDeJuego", gameModeOverride);
@@ -48,7 +48,7 @@ public class LangSwap {
             try{
                 conf.save(file);
             }catch(IOException e){
-                System.out.println("Could not save file");
+                pl.log.warning("Could not save file");
             }
         }
         WorldSettingsFile worldSettingsEn = new WorldSettingsFile(pl);
@@ -121,19 +121,19 @@ public class LangSwap {
             try{
                 conf.save(file);
             }catch(IOException e){
-                System.out.println("Could not save file");
+                pl.log.warning("Could not save file");
             }
             conf.set("puedeUnirseConMundoLleno", null);
             try{
                 conf.save(file);
             }catch(IOException e){
-                System.out.println("Could not save file");
+                pl.log.warning("Could not save file");
             }
             conf.set("ignorarAjustesDeVuelo", null);
             try{
                 conf.save(file);
             }catch(IOException e){
-                System.out.println("Could not save file");
+                pl.log.warning("Could not save file");
             }
 
             conf.set("gameModeOverride", gameModeOverride);
@@ -143,7 +143,7 @@ public class LangSwap {
             try{
                 conf.save(file);
             }catch(IOException e){
-                System.out.println("Could not save file");
+                pl.log.warning("Could not save file");
             }
         }
         WorldSettingsFile worldSettingsEn = new WorldSettingsFile(pl);

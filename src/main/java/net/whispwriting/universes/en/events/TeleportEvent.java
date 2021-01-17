@@ -245,7 +245,7 @@ public class TeleportEvent implements Listener {
                 return;
             }
             if (mode == null){
-                System.out.println("[Universes] The GameMode, "+gameModeString+" is an invalid GameMode type for the world, " +to.getWorld().getName()+ ". Please change it to either survival, creative, adventure, or spectator.");
+                plugin.log.warning("[Universes] The GameMode, "+gameModeString+" is an invalid GameMode type for the world, " +to.getWorld().getName()+ ". Please change it to either survival, creative, adventure, or spectator.");
                 event.getPlayer().sendMessage(ChatColor.RED + "" + ChatColor.BOLD + "There was an error updating your gamemode on entering this world. As a result, you have been put into the default GameMode of Survival. Please report this to an operator and tell them to check the console.");
             }else{
                 event.getPlayer().setGameMode(mode);

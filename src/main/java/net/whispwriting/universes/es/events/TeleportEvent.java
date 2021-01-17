@@ -40,7 +40,7 @@ public class TeleportEvent implements Listener {
                 return;
             }
             if (mode == null){
-                System.out.println("[Universes] El Modo de Juego, "+gameModeString+" no es un Modo de Juego válido para el mundo, " +to.getWorld().getName()+ ". Por favor, cámbialo a supervivencia, creativo, aventura o espectador.");
+                plugin.log.warning("[Universes] El Modo de Juego, "+gameModeString+" no es un Modo de Juego válido para el mundo, " +to.getWorld().getName()+ ". Por favor, cámbialo a supervivencia, creativo, aventura o espectador.");
                 event.getPlayer().sendMessage(ChatColor.RED + "" + ChatColor.BOLD + "Se ha cometido un error actualizando el modo de juego al entrar a este mundo. Como consecuencia, se ha establecido tu Modo de Juego predeterminado a supervivencia. Por favor, reporta esto a un operador y dile que compruebe la consola.");
             }else{
                 event.getPlayer().setGameMode(mode);

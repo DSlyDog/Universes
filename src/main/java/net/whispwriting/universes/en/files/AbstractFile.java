@@ -33,7 +33,7 @@ public class AbstractFile {
         try{
             config.save(file);
         }catch(IOException e){
-            System.out.println("Could not save file");
+            plugin.log.warning("Could not save file");
         }
     }
     public FileConfiguration get(){

@@ -85,7 +85,7 @@ public class KitUI {
             if (!frequency.contains("m") && !frequency.contains("h") && !frequency.contains("d") && !frequency.contains("M")) {
                 player.closeInventory();
                 player.sendMessage(Utils.chat("&cThere was an error giving you a kit. Please report this to a staff member and tell them to look over the logs and console."));
-                System.out.println(Utils.chat("[Universes] &cAttempt to give a player kit " + kitName + " failed. The frequency number must be followed by an m, h, d, or M; minutes. hours, days, and months respectively.."));
+                plugin.log.warning(Utils.chat("[Universes] &cAttempt to give a player kit " + kitName + " failed. The frequency number must be followed by an m, h, d, or M; minutes. hours, days, and months respectively.."));
             } else {
                 PlayerSettingsFile playerSettings = new PlayerSettingsFile(plugin, player.getUniqueId().toString());
                 long timeUsed = playerSettings.get().getLong(kitName);
@@ -108,7 +108,7 @@ public class KitUI {
             Bukkit.getScheduler().runTask(plugin, new GiveItemTask(kitsFile, kitName, player));
         }else {
             player.sendMessage(Utils.chat("&cThere was an error giving you a kit. Please report this to a staff member and tell them to look over the logs and console."));
-            System.out.println(Utils.chat("[Universes] &cAttempt to give a player kit " + kitName + " failed. The usage type must be either \"timer\", \"uses\", or \"unlimited\"."));
+            plugin.log.warning(Utils.chat("[Universes] &cAttempt to give a player kit " + kitName + " failed. The usage type must be either \"timer\", \"uses\", or \"unlimited\"."));
         }
     }
 
@@ -168,7 +168,7 @@ public class KitUI {
                     }
                 }else{
                     player.sendMessage(Utils.chat("&cThere was an error giving you a kit. Please report this to a staff member and tell them to look over the logs and console."));
-                    System.out.println(Utils.chat("[Universes] &cAttempt to give a player kit " + kitName + " failed. The duration between kit uses exceeds one year."));
+                    plugin.log.warning(Utils.chat("[Universes] &cAttempt to give a player kit " + kitName + " failed. The duration between kit uses exceeds one year."));
                 }
             } catch (InputMismatchException e) {
                 player.sendMessage(ChatColor.DARK_AQUA + "/mute " + ChatColor.AQUA + "<playername> <duration:s:m:h:d:y>");
@@ -228,7 +228,7 @@ public class KitUI {
                     }
                 }else{
                     player.sendMessage(Utils.chat("&cThere was an error giving you a kit. Please report this to a staff member and tell them to look over the logs and console."));
-                    System.out.println(Utils.chat("[Universes] &cAttempt to give a player kit " + kitName + " failed. The duration between kit uses exceeds one year."));
+                    plugin.log.warning(Utils.chat("[Universes] &cAttempt to give a player kit " + kitName + " failed. The duration between kit uses exceeds one year."));
                 }
             } catch (InputMismatchException e) {
                 player.sendMessage(ChatColor.DARK_AQUA + "/mute " + ChatColor.AQUA + "<playername> <duration:s:m:h:d:y>");
@@ -288,7 +288,7 @@ public class KitUI {
                     }
                 }else{
                     player.sendMessage(Utils.chat("&cThere was an error giving you a kit. Please report this to a staff member and tell them to look over the logs and console."));
-                    System.out.println(Utils.chat("[Universes] &cAttempt to give a player kit " + kitName + " failed. The duration between kit uses exceeds one year."));
+                    plugin.log.warning(Utils.chat("[Universes] &cAttempt to give a player kit " + kitName + " failed. The duration between kit uses exceeds one year."));
                 }
             } catch (InputMismatchException e) {
                 player.sendMessage(ChatColor.DARK_AQUA + "/mute " + ChatColor.AQUA + "<playername> <duration:s:m:h:d:y>");
@@ -348,7 +348,7 @@ public class KitUI {
                     }
                 } else {
                     player.sendMessage(Utils.chat("&cThere was an error giving you a kit. Please report this to a staff member and tell them to look over the logs and console."));
-                    System.out.println(Utils.chat("[Universes] &cAttempt to give a player kit " + kitName + " failed. The duration between kit uses exceeds one year."));
+                    plugin.log.warning(Utils.chat("[Universes] &cAttempt to give a player kit " + kitName + " failed. The duration between kit uses exceeds one year."));
                 }
             } catch (InputMismatchException e) {
                 // do nothing

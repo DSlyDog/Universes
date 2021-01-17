@@ -15,6 +15,7 @@ import org.bukkit.plugin.java.JavaPlugin;
 import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.logging.Logger;
 
 import static org.bukkit.Difficulty.*;
 
@@ -33,9 +34,11 @@ public final class Universes extends JavaPlugin {
     public static net.whispwriting.universes.es.files.WorldListFile worldListFileEs;
     private KitsFile kitsFile = new KitsFile(this);
     private String defaultWorld;
+    public Logger log;
 
     @Override
     public void onEnable() {
+        log = getLogger();
         lang.createConfig();
         lang.get().options().copyDefaults(true);
         lang.save();
@@ -120,8 +123,8 @@ public final class Universes extends JavaPlugin {
             Bukkit.getPluginManager().registerEvents(new net.whispwriting.universes.es.events.FlyEvent(this, worldSettingsEs, playerSettingsEs), this);
             Bukkit.getPluginManager().registerEvents(new net.whispwriting.universes.es.events.PVPEvent(worldSettingsEs), this);
         }else{
-            System.out.println("[Universes] Plugin failed to load. Unsupported language. Please choose en or es.");
-            System.out.println("[Universes] Fallo al cargar el plugin. Lenguaje no soportado. Por favor, elige en o es.");
+            log.warning("[Universes] Plugin failed to load. Unsupported language. Please choose en or es.");
+            log.warning("[Universes] Fallo al cargar el plugin. Lenguaje no soportado. Por favor, elige en o es.");
             Bukkit.getServer().getPluginManager().disablePlugin(this);
         }*/
 
@@ -201,7 +204,7 @@ public final class Universes extends JavaPlugin {
             String world = loadedWorld.getName();
             String name = worlds.get().getString("worlds."+world+".name");
             if (name == null) {
-                System.out.println("Name was null. Setting defaults.");
+                log.warning("Name was null. Setting defaults.");
                 double x = worldSpawn.getX();
                 double y = worldSpawn.getY();
                 double z = worldSpawn.getZ();
@@ -232,13 +235,13 @@ public final class Universes extends JavaPlugin {
     private void createWorldConfigEs(){
         List<World> loadedWorlds = Bukkit.getWorlds();
         for (World loadedWorld : loadedWorlds) {
-            System.out.println(loadedWorld.getName());
+            log.info(loadedWorld.getName());
             Location worldSpawn = loadedWorld.getSpawnLocation();
             String world = loadedWorld.getName();
             String name = worldSettingsEs.get().getString("worlds."+world+".nombre");
-            System.out.println(name==null);
+            log.warning(String.valueOf(name==null));
             if (name == null) {
-                System.out.println("name was null. Setting defaults.");
+                log.warning("name was null. Setting defaults.");
                 double x = worldSpawn.getX();
                 double y = worldSpawn.getY();
                 double z = worldSpawn.getZ();

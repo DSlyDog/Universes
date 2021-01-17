@@ -54,11 +54,11 @@ public class KitCommand implements CommandExecutor {
                 player.openInventory(kitUI);
             }else{
                 player.sendMessage(Utils.chat("&cThere was an error opening the kits UI. Please report this to a staff member and tell them to look over the logs and console."));
-                System.out.println(Utils.chat("[Universes] &cAttempt to open Kits UI in world, "+worldName+", failed. There is a kit listed that has not yet been created."));
+                plugin.log.warning(Utils.chat("[Universes] &cAttempt to open Kits UI in world, "+worldName+", failed. There is a kit listed that has not yet been created."));
             }
         }else{
             player.sendMessage(Utils.chat("&cThere was an error opening the kits UI. Please report this to a staff member and tell them to look over the logs and console."));
-            System.out.println(Utils.chat("[Universes] &cAttempt to open Kits UI in world, "+worldName+", failed. You have exceeded the kits capacity. You may not create more than 54 kits per world."));
+            plugin.log.warning(Utils.chat("[Universes] &cAttempt to open Kits UI in world, "+worldName+", failed. You have exceeded the kits capacity. You may not create more than 54 kits per world."));
         }
         return true;
     }
